@@ -1,6 +1,7 @@
 package www.miztonapp.mx.utilerias;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,9 +13,17 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutCompat;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -25,13 +34,28 @@ import www.miztonapp.mx.R;
 /**
  * Created by EwanS on 17/08/2016.
  */
-public class Utils {
+public class Utils  {
 
     /**
      * Para el manejo de strings
      */
     public static Boolean isEquals(String string, String stringCompare){
         return new String(string).equals(stringCompare);
+    }
+
+    public static Toast crear_toast(Context context, String mensaje){
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+        View view = inflater.inflate( R.layout.custom_toast, null );
+        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.custom_toast_container);
+
+        TextView text = (TextView) linearLayout.findViewById(R.id.text);
+        text.setText(mensaje);
+
+        Toast toast = new Toast(context);
+        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(linearLayout);
+        return toast;
     }
 
 

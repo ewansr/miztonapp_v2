@@ -14,6 +14,6 @@ public class APIRoutes {
 //    }
 
     public static String resource_url( String resource ) {
-      return "http://104.236.201.168/royalcoder/cromwell_restful/" + resource;
+      return "http://104.236.201.168/API_mizton/" + resource;
     }
 }

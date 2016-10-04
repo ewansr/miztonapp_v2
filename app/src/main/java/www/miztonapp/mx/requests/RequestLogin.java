@@ -23,20 +23,19 @@ public abstract class RequestLogin extends AppCompatActivity {
 
                 @Override public void RequestCompleted(JSONObject response) {
                     try {
-//                        JSONObject status = response.getJSONObject( "logueo_valido" );
-//                        JSONObject message = response.getJSONObject("message");
 
+                        JSONObject usuario_response = null;
                         int valid = response.getInt( "logueo_valido" );
 
                         if ( valid != 1 ) {
-                            throw new mException( mExceptionCode.INVALID_VALUES, "Usuario o contraseña incorrectos" );
+                            throw new mException( mExceptionCode.INVALID_VALUES, response.getString( "message" ) );
                         }else{
-                            JSONObject usuario_response = response.getJSONObject( "master_usuarios" );
+                            usuario_response = response.getJSONObject( "master_usuarios" );
                         }
 
                         loginAutenticacionExitosa( new LoginModel(
-                                response.getInt( "Idusuario" ),
-                                response.getString( "Usuario")
+                               usuario_response.getInt( "Idusuario" ),
+                                usuario_response.getString( "Usuario")
                         ) );
 
                     } catch ( mException error ) {

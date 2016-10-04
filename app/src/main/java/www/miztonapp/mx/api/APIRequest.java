@@ -109,7 +109,7 @@ public abstract class APIRequest extends AsyncTask<String, Void, JSONObject> {
             }
 
             int responseCode = connection.getResponseCode();
-            hasErrors = ( responseCode != HttpURLConnection.HTTP_OK );  //Checar
+            hasErrors = ( responseCode != HttpURLConnection.HTTP_OK );
 
             // si la solicitud fue exitosa convertir el resultado en JSONObject
             if ( !hasErrors ) {
@@ -133,12 +133,10 @@ public abstract class APIRequest extends AsyncTask<String, Void, JSONObject> {
 
                 resultado = new JSONObject( response_text );
                 this.response = resultado;
-                hasErrors = false;  //Checar
-
             }
 
             // terminar la conexión
-           //connection.disconnect(); checar
+           connection.disconnect();
 
         } catch ( Exception error ) {
             hasErrors = true;
@@ -259,7 +257,7 @@ public abstract class APIRequest extends AsyncTask<String, Void, JSONObject> {
      * @return String
      */
     private String prepareUrl(String path ) {
-        String API_BASE_URL = "http://104.236.201.168/royalcoder/cromwell_restful/";
+        String API_BASE_URL = "http://104.236.201.168/API_mizton/";
         return API_BASE_URL + path;
     }
 

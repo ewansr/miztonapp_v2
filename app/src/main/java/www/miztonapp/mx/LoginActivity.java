@@ -54,14 +54,12 @@ public class LoginActivity extends RequestLogin implements View.OnClickListener,
 
             String str_usuario     = usuario.getText().toString();
             String str_contraseana = contrasena.getText().toString();
+
             try {
                 iniciar_sesion(str_usuario, str_contraseana);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-//            Intent i = new Intent(this, MainActivity.class);
-//                startActivity(i);
-
         }
 
     }
@@ -93,7 +91,9 @@ public class LoginActivity extends RequestLogin implements View.OnClickListener,
 
     @Override
     public void loginAutenticacionExitosa(LoginModel usuario) {
-
+        Utils.crear_toast(this, "Iniciando sesión...").show();
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
     @Override
