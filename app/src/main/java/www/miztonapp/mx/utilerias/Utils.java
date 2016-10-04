@@ -53,7 +53,7 @@ public class Utils  {
 
         Toast toast = new Toast(context);
         toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(linearLayout);
         return toast;
     }
