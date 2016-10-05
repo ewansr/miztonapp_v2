@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,10 +23,17 @@ import com.darsh.multipleimageselect.models.Image;
 
 import java.util.ArrayList;
 
+import www.miztonapp.mx.adapters.OrdenesRecyclerAdapter;
+import www.miztonapp.mx.api.mException;
+import www.miztonapp.mx.models.ModelOrdenesTrabajo;
+import www.miztonapp.mx.requests.RequestOrdenesTrabajo;
 import www.miztonapp.mx.utilerias.Utils;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends RequestOrdenesTrabajo
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+
+    RecyclerView recyclerView;
+    StaggeredGridLayoutManager staggeredGridLayoutManager;
 
     private static ArrayList<Image> lista_imagen = null;
     @Override
@@ -43,11 +52,11 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        Button ftp_test = (Button) findViewById(R.id.btnFtp);
-        Button seleccionar_imagen = (Button) findViewById(R.id.btnSelect);
-
-        ftp_test.setOnClickListener(this);
-        seleccionar_imagen.setOnClickListener(this);
+//        Button ftp_test = (Button) findViewById(R.id.btnFtp);
+//        Button seleccionar_imagen = (Button) findViewById(R.id.btnSelect);
+//
+//        ftp_test.setOnClickListener(this);
+//        seleccionar_imagen.setOnClickListener(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -57,16 +66,24 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        recyclerView = (RecyclerView) findViewById(R.id.rv);
+        recyclerView.setHasFixedSize(true);
+        staggeredGridLayoutManager = new StaggeredGridLayoutManager(1,1);
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+
+        consultar_ordenes(1,"","");
     }
 
     @Override
     public void onClick(View v){
-        if (v.getId() == R.id.btnFtp) {
-            Utils.subir_imagenes_ftp (this, lista_imagen);
-        }
-        if (v.getId() == R.id.btnSelect){
-            abrir_galeria();
-        }
+//        if (v.getId() == R.id.btnFtp) {
+//            Utils.subir_imagenes_ftp (this, lista_imagen);
+//        }
+//        if (v.getId() == R.id.btnSelect){
+//            abrir_galeria();
+//        }
     }
 
     public void abrir_galeria(){
@@ -142,5 +159,32 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void ordenBeforeLoad() {
+
+    }
+
+    @Override
+    public void ordenCargaExitosa(ArrayList<ModelOrdenesTrabajo> items) {
+
+        OrdenesRecyclerAdapter solicitudesAdapter = new OrdenesRecyclerAdapter( items, this );
+
+        int size = items.size();
+
+        if (recyclerView.getAdapter() == null){
+            recyclerView.setAdapter(solicitudesAdapter);
+        }else {
+            recyclerView.getAdapter().notifyItemInserted(items.size() - 1);
+            recyclerView.getAdapter().notifyItemRangeChanged(items.size() - 1, size);
+        }
+
+    }
+
+    @Override
+    public void ordenCargaErronea(mException error) {
+        android.app.AlertDialog alertDialog = Utils.crear_alerta(this, "Error al obtener ordenes de trabajo", error.getMessage());
+        alertDialog.show();
     }
 }

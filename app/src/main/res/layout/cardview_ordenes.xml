@@ -14,7 +14,8 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:layout_height="170dp">
+        android:layout_height="170dp"
+        android:id="@+id/cv">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -30,7 +31,7 @@
                 android:layout_marginRight="14dp"
                 android:layout_marginEnd="14dp"
                 android:id="@+id/textView11"
-                android:layout_alignTop="@+id/textView7"
+                android:layout_alignTop="@+id/cv_titulo"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
@@ -40,7 +41,7 @@
                 android:id="@+id/map"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_below="@+id/textView10"
+                android:layout_below="@+id/cv_direccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -50,16 +51,16 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textView8"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
-                android:layout_below="@+id/textView7"
-                android:layout_alignLeft="@+id/textView7"
-                android:layout_alignStart="@+id/textView7"
+                android:layout_below="@+id/cv_titulo"
+                android:layout_alignLeft="@+id/cv_titulo"
+                android:layout_alignStart="@+id/cv_titulo"
                 android:layout_marginTop="13dp" />
 
             <TextView
                 android:text="0012454871"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView9"
+                android:id="@+id/cv_detalle"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
                 android:layout_alignBaseline="@+id/textView8"
                 android:layout_alignBottom="@+id/textView8"
@@ -70,7 +71,7 @@
                 android:text="Calle 20 de Noviembre #523 San Andrés Tuxtla, Veracruz"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView10"
+                android:id="@+id/cv_direccion"
                 android:layout_above="@+id/btncomment"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
@@ -91,7 +92,7 @@
                 android:text="2949422460"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView7"
+                android:id="@+id/cv_titulo"
                 android:textAppearance="@android:style/TextAppearance.Material.Title"
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/btncomment"
