@@ -30,7 +30,7 @@ public abstract class RequestOrdenesTrabajo extends AppCompatActivity {
                 public void RequestCompleted(JSONObject response){
                     try {
                         JSONObject orden_response = null;
-                        int valid = orden_response.getInt("valid");
+                        int valid = response.getInt("valid");
 
                         if (valid != 1){
                             throw new mException(mExceptionCode.INVALID_VALUES, response.getString("message"));
