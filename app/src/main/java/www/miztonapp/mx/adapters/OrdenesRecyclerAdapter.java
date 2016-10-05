@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import www.miztonapp.mx.R;
@@ -15,24 +17,24 @@ import www.miztonapp.mx.models.ModelOrdenesTrabajo;
 /**
  * Created by Saulo on 31/08/2016.
  */
-public class OrdenesRecyclerAdapter extends RecyclerView.Adapter< OrdenesRecyclerAdapter.RentasViewHolder >{
-    private List<ModelOrdenesTrabajo> items_orden_trabajo;
+public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecyclerAdapter.ordenesViewHolder>{
+    private ArrayList<ModelOrdenesTrabajo> items_orden_trabajo;
     private Context context;
 
-    public OrdenesRecyclerAdapter(List < ModelOrdenesTrabajo > items_orden_trabajo, Context context ){
+    public OrdenesRecyclerAdapter(ArrayList< ModelOrdenesTrabajo > items_orden_trabajo, Context context ){
         this.items_orden_trabajo = items_orden_trabajo;
         this.context = context;
     }
 
     @Override
-    public RentasViewHolder onCreateViewHolder( ViewGroup parent, int viewType ) {
+    public ordenesViewHolder onCreateViewHolder(ViewGroup parent, int viewType ) {
         View v = LayoutInflater.from( parent.getContext() ).inflate( R.layout.cardview_ordenes, parent, false );
-        RentasViewHolder rentasHolder = new RentasViewHolder(v);
+        ordenesViewHolder rentasHolder = new ordenesViewHolder(v);
         return rentasHolder;
     }
 
     @Override
-    public void onBindViewHolder( RentasViewHolder holder, int position ) {
+    public void onBindViewHolder(ordenesViewHolder holder, int position ) {
         holder.cv_titulo.setText(items_orden_trabajo.get(position).folio_orden);
         holder.cv_detalle.setText(items_orden_trabajo.get(position).telefono_orden);
         holder.cv_direccion.setText(items_orden_trabajo.get(position).tipo_orden);
@@ -63,13 +65,13 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter< OrdenesRecycle
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    public class RentasViewHolder extends RecyclerView.ViewHolder{
+    public class ordenesViewHolder extends RecyclerView.ViewHolder{
         CardView cv;
         TextView cv_titulo;
         TextView cv_detalle;
         TextView cv_direccion;
 
-        RentasViewHolder(View itemView) {
+        ordenesViewHolder(View itemView) {
             super(itemView);
 
             cv          = (CardView)  itemView.findViewById( R.id.cv );
