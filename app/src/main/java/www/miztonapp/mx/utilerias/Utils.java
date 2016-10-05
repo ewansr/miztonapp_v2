@@ -14,6 +14,7 @@ import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,9 +26,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.darsh.multipleimageselect.models.Image;
+
+import net.gotev.uploadservice.UploadNotificationConfig;
+import net.gotev.uploadservice.ftp.FTPUploadRequest;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import www.miztonapp.mx.R;
 
@@ -35,6 +42,30 @@ import www.miztonapp.mx.R;
  * Created by EwanS on 17/08/2016.
  */
 public class Utils  {
+
+    /*
+     *@Context Parametro contexto de activity
+     */
+
+    public static void subir_imagenes_ftp( Context context, ArrayList<Image> lista_rutas) {
+        try {
+            int i = 0;
+            for (i = 0; i<lista_rutas.size(); i++){
+                String ruta_archivo = lista_rutas.get(i).path.toString();
+
+                String uploadId = new FTPUploadRequest(context, "104.236.201.168", 21)
+                                .setUsernameAndPassword("ewansr", "saul2007#")
+                                .addFileToUpload(ruta_archivo, "/html/images/")
+                                .setNotificationConfig(new UploadNotificationConfig())
+                                .setMaxRetries(4)
+                                .startUpload();
+            }
+        } catch (Exception exc) {
+            Log.e("AndroidUploadService", exc.getMessage(), exc);
+        }
+    }
+
+
 
     /**
      * Para el manejo de strings
