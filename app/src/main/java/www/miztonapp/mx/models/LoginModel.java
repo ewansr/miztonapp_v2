@@ -5,11 +5,13 @@ package www.miztonapp.mx.models;
  */
 
 public class LoginModel {
-    public int id;
-    public String nombre;
+    public static int id;
+    public static int idpersonal;
+    public static String nombre;
 
-    public LoginModel( int id, String nombre) {
+    public LoginModel( int id, String nombre, int idpersonal) {
         this.id = id;
         this.nombre = nombre;
+        this.idpersonal = idpersonal;
     }
 }

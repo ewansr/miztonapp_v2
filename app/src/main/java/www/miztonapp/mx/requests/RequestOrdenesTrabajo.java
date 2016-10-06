@@ -44,7 +44,10 @@ public abstract class RequestOrdenesTrabajo extends AppCompatActivity {
                             lista.add(new ModelOrdenesTrabajo (
                                     item.getString("Folio"),
                                     item.getString("Telefono"),
-                                    item.getString("TipoOS")
+                                    item.getString("TipoInstalacion"),
+                                    item.getString("TipoOS"),
+                                    item.getString("FechaCreacion"),
+                                    item.getString("Estatus")
                             ) );
                         }
 
