@@ -28,7 +28,8 @@
                 android:layout_width="match_parent"
                 android:elevation="1dp"
                 app:cardElevation="1dp"
-                android:layout_height="150dp">
+                android:layout_height="150dp"
+                android:id="@+id/cv_datos">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -43,7 +44,7 @@
                         <ImageButton
                             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                             app:srcCompat="@drawable/google_maps"
-                            android:id="@+id/btncomment"
+                            android:id="@+id/btn_type"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
@@ -59,7 +60,7 @@
                             android:id="@+id/cv_tipo_orden"
                             android:textAppearance="@android:style/TextAppearance.Material.Small"
                             android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/btncomment"
+                            android:layout_toRightOf="@+id/btn_type"
                             android:layout_alignParentRight="true"
                             android:layout_alignParentEnd="true"
                             android:layout_marginRight="10dp" />
@@ -74,7 +75,7 @@
                         <ImageButton
                             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                             app:srcCompat="@drawable/calendar_clock"
-                            android:id="@+id/btncomment"
+                            android:id="@+id/btn_date"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
@@ -90,7 +91,7 @@
                             android:id="@+id/cv_fecha"
                             android:textAppearance="@android:style/TextAppearance.Material.Small"
                             android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/btncomment"
+                            android:layout_toRightOf="@+id/btn_date"
                             android:layout_alignParentRight="true"
                             android:layout_alignParentEnd="true"
                             android:layout_marginRight="10dp" />
@@ -110,13 +111,13 @@
                             android:textAppearance="@android:style/TextAppearance.Material.Title"
                             android:textColor="@color/colorPrimaryDark"
                             android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/btncomment"
-                            android:layout_toEndOf="@+id/btncomment" />
+                            android:layout_toRightOf="@+id/btn_phone"
+                            android:layout_toEndOf="@+id/btn_phone" />
 
                         <ImageButton
                             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                             app:srcCompat="@drawable/phone_mat"
-                            android:id="@+id/btncomment"
+                            android:id="@+id/btn_phone"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
@@ -151,15 +152,15 @@
                             android:id="@+id/textView2"
                             android:textAppearance="@android:style/TextAppearance.Material.Menu"
                             android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/btncomment"
-                            android:layout_toEndOf="@+id/btncomment"
+                            android:layout_toRightOf="@+id/btn_camera"
+                            android:layout_toEndOf="@+id/btn_camera"
                             android:textColor="@color/secondary_text"
                             android:layout_marginRight="10dp" />
 
                         <ImageButton
                             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                             app:srcCompat="@drawable/briefcase_material"
-                            android:id="@+id/btncomment"
+                            android:id="@+id/btn_camera"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
@@ -201,7 +202,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_toLeftOf="@+id/btn_ubicacion"
                 android:layout_toStartOf="@+id/btn_ubicacion"
-                android:layout_below="@+id/cardView" />
+                android:layout_below="@+id/cv_datos" />
 
             <ImageButton
                 style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
@@ -212,7 +213,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_below="@+id/cardView" />
+                android:layout_below="@+id/cv_datos" />
 
             <TextView
                 android:text="LIQUIDADA"
@@ -237,7 +238,7 @@
                 android:layout_toLeftOf="@+id/btn_editar"
                 android:layout_toStartOf="@+id/btn_editar"
                 android:layout_alignParentBottom="true"
-                android:layout_below="@+id/cardView" />
+                android:layout_below="@+id/cv_datos" />
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

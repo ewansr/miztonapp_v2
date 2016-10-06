@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Environment;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -31,6 +32,7 @@ import com.darsh.multipleimageselect.models.Image;
 import net.gotev.uploadservice.UploadNotificationConfig;
 import net.gotev.uploadservice.ftp.FTPUploadRequest;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -47,15 +49,32 @@ public class Utils  {
      *@Context Parametro contexto de activity
      */
 
-    public static void subir_imagenes_ftp( Context context, ArrayList<Image> lista_rutas) {
+    public static void subir_imagenes_ftp( Context context, ArrayList<Image> lista_rutas, String nombre_archivo) {
         try {
             int i = 0;
             for (i = 0; i<lista_rutas.size(); i++){
                 String ruta_archivo = lista_rutas.get(i).path.toString();
 
+                File currentFile = new File(ruta_archivo);
+
+                String solo_ruta = currentFile.getParent();
+                String nombre_archivo_subir = solo_ruta +"/"+ nombre_archivo + "_" + Integer.toString(i)+".JPG";
+
+                File newFile     = new File(nombre_archivo_subir);
+
+                if(rename(currentFile, newFile)){
+                    //Success
+                    Log.i("renombrando archivo", "Success");
+                } else {
+                    //Fail
+                    Log.i("renombrando archivo", "Fail");
+                }
+
+
+
                 String uploadId = new FTPUploadRequest(context, "104.236.201.168", 21)
                                 .setUsernameAndPassword("ewansr", "saul2007#")
-                                .addFileToUpload(ruta_archivo, "/html/images/")
+                                .addFileToUpload(nombre_archivo_subir, "/html/images/")
                                 .setNotificationConfig(new UploadNotificationConfig())
                                 .setMaxRetries(4)
                                 .startUpload();
@@ -64,6 +83,12 @@ public class Utils  {
             Log.e("AndroidUploadService", exc.getMessage(), exc);
         }
     }
+
+
+    public static boolean rename(File from, File to) {
+        return from.getParentFile().exists() && from.exists() && from.renameTo(to);
+    }
+
 
 
 

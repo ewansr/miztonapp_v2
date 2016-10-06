@@ -33,6 +33,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
     private ArrayList<ModelOrdenesTrabajo> items_orden_trabajo;
     private static ArrayList<Image> lista_imagen = null;
     private final Context context;
+    private static String numero_telefono;
 
     public OrdenesRecyclerAdapter(ArrayList< ModelOrdenesTrabajo > items_orden_trabajo, Context context ){
         this.items_orden_trabajo = items_orden_trabajo;
@@ -54,6 +55,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         holder.cv_estatus.setText(items_orden_trabajo.get(position).estatus_orden);
         holder.cv_fecha.setText(items_orden_trabajo.get(position).fecha);
         holder.cv_tipo_orden.setText(items_orden_trabajo.get(position).tipo_orden);
+        holder.telefono = items_orden_trabajo.get(position).telefono_orden;
 
         if ( items_orden_trabajo.get(position).tipo_instalacion.equals("FO") ){
             holder.cv_image.setImageResource(R.drawable.fiber_icon_material);
@@ -99,6 +101,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         TextView cv_fecha;
         TextView cv_estatus;
         ImageView cv_image;
+        String telefono;
 
         ordenesViewHolder(View itemView) {
             super(itemView);
@@ -122,13 +125,14 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
             @Override
             public void onClick( View v ) {
                 if (v.getId() == R.id.btn_subir){
-                    abrir_galeria();
+                    abrir_galeria(telefono);
                 }
 
             }
         };
 
-        public void abrir_galeria(){
+        public void abrir_galeria(String telefono_param){
+            numero_telefono = telefono_param;
             Intent intent = new Intent(context, AlbumSelectActivity.class);
             intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 10);
             ((Activity)context).startActivityForResult(intent, Constants.REQUEST_CODE);
@@ -147,7 +151,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
                     .setCancelable(false)
                     .setPositiveButton("Subir", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            Utils.subir_imagenes_ftp(context,lista_imagen);
+                            Utils.subir_imagenes_ftp(context,lista_imagen, numero_telefono);
                         }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
