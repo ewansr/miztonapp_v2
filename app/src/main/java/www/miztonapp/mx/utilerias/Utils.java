@@ -129,7 +129,7 @@ public class Utils  {
             try {
                 ruta_absoluta_archivo = null;
                 FileOutputStream fos = new FileOutputStream(pictureFile);
-                image.compress(Bitmap.CompressFormat.JPEG, 70, fos);
+                image.compress(Bitmap.CompressFormat.JPEG, 50, fos);
                 fos.close();
                 ruta_absoluta_archivo = pictureFile.getAbsolutePath();
                 estatus = true;
