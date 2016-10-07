@@ -1,25 +1,20 @@
 package www.miztonapp.mx.utilerias;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
-import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -33,6 +28,8 @@ import net.gotev.uploadservice.UploadNotificationConfig;
 import net.gotev.uploadservice.ftp.FTPUploadRequest;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -48,36 +45,56 @@ public class Utils  {
     /*
      *@Context Parametro contexto de activity
      */
+    static String ruta_absoluta_archivo;
 
-    public static void subir_imagenes_ftp( Context context, ArrayList<Image> lista_rutas, String nombre_archivo) {
+    public static void subir_imagenes_ftp(final Context context, final ArrayList<Image> lista_rutas, final String nombre_archivo) {
+
+        // Solicitar la creción del directorio en el servidor FTP
+        final FTPUtils ftpUtils = new FTPUtils(context, nombre_archivo) {
+            @Override
+            public void procesoExitoso() {
+                autorizarCarga(context, lista_rutas, nombre_archivo);
+            }
+        };
+        ftpUtils.execute();
+    }
+
+    private static void autorizarCarga(Context context, ArrayList<Image> lista_rutas, String nombre_archivo){
         try {
             int i = 0;
             for (i = 0; i<lista_rutas.size(); i++){
                 String ruta_archivo = lista_rutas.get(i).path.toString();
 
-                File currentFile = new File(ruta_archivo);
+                Boolean fallo;
 
-                String solo_ruta = currentFile.getParent();
-                String nombre_archivo_subir = solo_ruta +"/"+ nombre_archivo + "_" + Integer.toString(i)+".JPG";
+                File archivo_origen = new File(ruta_archivo);
 
-                File newFile     = new File(nombre_archivo_subir);
-
-                if(rename(currentFile, newFile)){
-                    //Success
+                if(clonar_imagen(archivo_origen, nombre_archivo + "_"+Integer.toString(i)+".JPG", context)){
+                    fallo = false;
                     Log.i("renombrando archivo", "Success");
                 } else {
-                    //Fail
+                    fallo = true;
                     Log.i("renombrando archivo", "Fail");
+                    //Si no se pudo hacemos el ultimo intento
+                    //Tratando de copiar el archivo
                 }
 
 
-
-                String uploadId = new FTPUploadRequest(context, "104.236.201.168", 21)
-                                .setUsernameAndPassword("ewansr", "saul2007#")
-                                .addFileToUpload(nombre_archivo_subir, "/html/images/")
-                                .setNotificationConfig(new UploadNotificationConfig())
-                                .setMaxRetries(4)
-                                .startUpload();
+                //Si no hay falla
+                if (!fallo) {
+                    UploadNotificationConfig uploadNotificationConfig = new UploadNotificationConfig();
+                    uploadNotificationConfig.setTitle("Subiendo a Mizton Server");
+                    uploadNotificationConfig.setIcon(R.drawable.colection_material);
+                    uploadNotificationConfig.setErrorMessage("No se pudo cargar el archivo al servidor");
+                    uploadNotificationConfig.setCompletedMessage("Archivo subido correctamente.");
+                    uploadNotificationConfig.setRingToneEnabled(true);
+                    String uploadId = new FTPUploadRequest(context, "104.236.201.168", 21)
+                            .setUsernameAndPassword("ewansr", "saul2007#")
+                            .addFileToUpload(ruta_absoluta_archivo, "/html/images/" + nombre_archivo + "/")
+                            .setNotificationConfig(uploadNotificationConfig)
+                            .setMaxRetries(4)
+                            .startUpload();
+                }
             }
         } catch (Exception exc) {
             Log.e("AndroidUploadService", exc.getMessage(), exc);
@@ -85,8 +102,70 @@ public class Utils  {
     }
 
 
-    public static boolean rename(File from, File to) {
-        return from.getParentFile().exists() && from.exists() && from.renameTo(to);
+    public static boolean clonar_imagen(File origen, String nombre_archivo, Context context) {
+        Boolean exitoso = false;
+        String permission = "android.permission.WRITE_EXTERNAL_STORAGE";
+        int res = context.checkCallingOrSelfPermission(permission);
+
+        if (res == PackageManager.PERMISSION_GRANTED) {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            Bitmap bitmap = BitmapFactory.decodeFile(origen.getAbsolutePath(), options);
+//            selected_photo.setImageBitmap(bitmap);
+            exitoso = storeImage(bitmap, context, nombre_archivo);
+        }
+        return exitoso;
+    }
+
+    private static Boolean storeImage(Bitmap image, Context context, String nombre_archivo ) {
+        File pictureFile = getOutputMediaFile(context, nombre_archivo);
+        Boolean estatus = false;
+        if (pictureFile == null) {
+            estatus = false;
+            Log.d("Error imagen",
+                    "Error al crear el archivo, revisa los permisos de almacenamiento: ");// e.getMessage());
+        }else {
+            try {
+                ruta_absoluta_archivo = null;
+                FileOutputStream fos = new FileOutputStream(pictureFile);
+                image.compress(Bitmap.CompressFormat.JPEG, 70, fos);
+                fos.close();
+                ruta_absoluta_archivo = pictureFile.getAbsolutePath();
+                estatus = true;
+            } catch (FileNotFoundException e) {
+                estatus = false;
+                Log.d("Error imagen", "Archivo no encontrado: " + e.getMessage());
+            } catch (IOException e) {
+                estatus = false;
+                Log.d("Error imagen", "Error al acceder al archivo " + e.getMessage());
+            }
+        }
+        return estatus;
+    }
+
+    private static File getOutputMediaFile(Context context, String nombre_archivo){
+        // To be safe, you should check that the SDCard is mounted
+        // using Environment.getExternalStorageState() before doing this.
+        File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
+                + "/Android/data/"
+                + context.getApplicationContext().getPackageName()
+                + "/Files");
+
+        // This location works best if you want the created images to be shared
+        // between applications and persist after your app has been uninstalled.
+
+        // Create the storage directory if it does not exist
+        if (! mediaStorageDir.exists()){
+            if (! mediaStorageDir.mkdirs()){
+                return null;
+            }
+        }
+        // Create a media file name
+//        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
+        File mediaFile;
+        String mImageName=nombre_archivo;
+        mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
+        return mediaFile;
     }
 
 
