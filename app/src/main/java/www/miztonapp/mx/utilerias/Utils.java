@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -24,7 +25,9 @@ import android.widget.Toast;
 
 import com.darsh.multipleimageselect.models.Image;
 
+import net.gotev.uploadservice.Placeholders;
 import net.gotev.uploadservice.UploadNotificationConfig;
+import net.gotev.uploadservice.UploadService;
 import net.gotev.uploadservice.ftp.FTPUploadRequest;
 
 import java.io.File;
@@ -62,6 +65,9 @@ public class Utils  {
     private static void autorizarCarga(Context context, ArrayList<Image> lista_rutas, String nombre_archivo, String directorio_fecha, int iniciar_en){
         try {
             int i = 0;
+
+
+            Utils.crear_toast(context, "Inicializando carga de fotos...").show();
             for (i = 0; i<lista_rutas.size(); i++){
                 String ruta_archivo = lista_rutas.get(i).path.toString();
                 Boolean fallo;
@@ -83,17 +89,21 @@ public class Utils  {
 
                 //Si no hay falla
                 if (!fallo) {
+
+                    UploadService.UPLOAD_POOL_SIZE = 1;
                     UploadNotificationConfig uploadNotificationConfig = new UploadNotificationConfig();
                     uploadNotificationConfig.setTitle("Subiendo a Mizton Server");
+                    uploadNotificationConfig.setInProgressMessage("Transfiriendo ("+Integer.toString(i+1)+"/"+Integer.toString(lista_rutas.size())+") a "+ Placeholders.UPLOAD_RATE + " (" + Placeholders.PROGRESS + ")");
                     uploadNotificationConfig.setIcon(R.drawable.colection_material);
                     uploadNotificationConfig.setErrorMessage("No se pudo cargar el archivo al servidor");
-                    uploadNotificationConfig.setCompletedMessage("Archivo subido correctamente.");
+                    uploadNotificationConfig.setCompletedMessage("Archivo cargado.");
                     uploadNotificationConfig.setRingToneEnabled(true);
+
                     String uploadId = new FTPUploadRequest(context, "104.236.201.168", 21)
                             .setUsernameAndPassword("ewansr", "saul2007#")
                             .addFileToUpload(ruta_absoluta_archivo, "/html/images/" + directorio_fecha + "/" + nombre_archivo  + "/")
                             .setNotificationConfig(uploadNotificationConfig)
-                            .setMaxRetries(4)
+                            .setMaxRetries(10)
                             .startUpload();
                 }
             }
