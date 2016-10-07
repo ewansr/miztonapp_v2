@@ -47,29 +47,30 @@ public class Utils  {
      */
     static String ruta_absoluta_archivo;
 
-    public static void subir_imagenes_ftp(final Context context, final ArrayList<Image> lista_rutas, final String nombre_archivo) {
+    public static void subir_imagenes_ftp(final Context context, final ArrayList<Image> lista_rutas, final String nombre_archivo, final String fecha) {
 
         // Solicitar la creción del directorio en el servidor FTP
-        final FTPUtils ftpUtils = new FTPUtils(context, nombre_archivo) {
+        final FTPUtils ftpUtils = new FTPUtils(context, nombre_archivo, fecha) {
             @Override
-            public void procesoExitoso() {
-                autorizarCarga(context, lista_rutas, nombre_archivo);
+            public void procesoExitoso(int items_count) {
+                autorizarCarga(context, lista_rutas, nombre_archivo, fecha, items_count);
             }
         };
         ftpUtils.execute();
     }
 
-    private static void autorizarCarga(Context context, ArrayList<Image> lista_rutas, String nombre_archivo){
+    private static void autorizarCarga(Context context, ArrayList<Image> lista_rutas, String nombre_archivo, String directorio_fecha, int iniciar_en){
         try {
             int i = 0;
             for (i = 0; i<lista_rutas.size(); i++){
                 String ruta_archivo = lista_rutas.get(i).path.toString();
-
                 Boolean fallo;
-
                 File archivo_origen = new File(ruta_archivo);
+                int sufijo_contador = i + iniciar_en;
 
-                if(clonar_imagen(archivo_origen, nombre_archivo + "_"+Integer.toString(i)+".JPG", context)){
+                // se hace la siguiente operacion para no reemplazar los archivos ya existentes
+                //i+iniciar_en
+                if(clonar_imagen(archivo_origen, nombre_archivo + "_"+Integer.toString(sufijo_contador)+".JPG", context)){
                     fallo = false;
                     Log.i("renombrando archivo", "Success");
                 } else {
@@ -90,7 +91,7 @@ public class Utils  {
                     uploadNotificationConfig.setRingToneEnabled(true);
                     String uploadId = new FTPUploadRequest(context, "104.236.201.168", 21)
                             .setUsernameAndPassword("ewansr", "saul2007#")
-                            .addFileToUpload(ruta_absoluta_archivo, "/html/images/" + nombre_archivo + "/")
+                            .addFileToUpload(ruta_absoluta_archivo, "/html/images/" + directorio_fecha + "/" + nombre_archivo  + "/")
                             .setNotificationConfig(uploadNotificationConfig)
                             .setMaxRetries(4)
                             .startUpload();

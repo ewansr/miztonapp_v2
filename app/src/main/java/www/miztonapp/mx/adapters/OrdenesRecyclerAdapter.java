@@ -19,7 +19,13 @@ import com.darsh.multipleimageselect.activities.AlbumSelectActivity;
 import com.darsh.multipleimageselect.helpers.Constants;
 import com.darsh.multipleimageselect.models.Image;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
 import www.miztonapp.mx.R;
 import www.miztonapp.mx.models.ModelOrdenesTrabajo;
 import www.miztonapp.mx.utilerias.Utils;
@@ -34,6 +40,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
     private static ArrayList<Image> lista_imagen = null;
     private final Context context;
     private static String numero_telefono;
+    private static String fecha_orden;
 
     public OrdenesRecyclerAdapter(ArrayList< ModelOrdenesTrabajo > items_orden_trabajo, Context context ){
         this.items_orden_trabajo = items_orden_trabajo;
@@ -56,6 +63,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         holder.cv_fecha.setText(items_orden_trabajo.get(position).fecha);
         holder.cv_tipo_orden.setText(items_orden_trabajo.get(position).tipo_orden);
         holder.telefono = items_orden_trabajo.get(position).telefono_orden;
+        holder.fecha    = items_orden_trabajo.get(position).fecha;
 
         if ( items_orden_trabajo.get(position).tipo_instalacion.equals("FO") ){
             holder.cv_image.setImageResource(R.drawable.fiber_icon_material);
@@ -102,6 +110,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         TextView cv_estatus;
         ImageView cv_image;
         String telefono;
+        String fecha;
 
         ordenesViewHolder(View itemView) {
             super(itemView);
@@ -125,14 +134,16 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
             @Override
             public void onClick( View v ) {
                 if (v.getId() == R.id.btn_subir){
-                    abrir_galeria(telefono);
+                    abrir_galeria(telefono, fecha);
                 }
 
             }
         };
 
-        public void abrir_galeria(String telefono_param){
+        public void abrir_galeria(String telefono_param, String fecha_param){
             numero_telefono = telefono_param;
+            fecha_orden     = fecha_param;
+
             Intent intent = new Intent(context, AlbumSelectActivity.class);
             intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 10);
             ((Activity)context).startActivityForResult(intent, Constants.REQUEST_CODE);
@@ -151,7 +162,14 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
                     .setCancelable(false)
                     .setPositiveButton("Subir", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            Utils.subir_imagenes_ftp(context,lista_imagen, numero_telefono);
+                            Date date = null;
+                            DateFormat format = new SimpleDateFormat("yyyy mm dd", Locale.ENGLISH);
+                            try {
+                                date = format.parse(fecha_orden);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            Utils.subir_imagenes_ftp(context,lista_imagen, numero_telefono, fecha_orden.substring(0,10));
                         }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {

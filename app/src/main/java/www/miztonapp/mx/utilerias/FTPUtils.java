@@ -10,6 +10,7 @@ import android.util.Log;
 
 import java.io.IOException;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import www.miztonapp.mx.api.mException;
 import www.miztonapp.mx.api.mExceptionCode;
@@ -17,10 +18,13 @@ import www.miztonapp.mx.api.mExceptionCode;
 public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
     Context context;
     String nombre_directorio_crear;
+    String directorio_fecha;
+    int cuenta_archivos;
 
-    public FTPUtils(Context context, String nombre_directorio_crear){
+    public FTPUtils(Context context, String nombre_directorio_crear, String directorio_fecha){
         this.context = context;
         this.nombre_directorio_crear = nombre_directorio_crear;
+        this.directorio_fecha = directorio_fecha;
     }
 
     private static void showServerReply(FTPClient ftpClient){
@@ -40,12 +44,13 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
         String contrasena = "saul2007#";
         Boolean exitoso = false;
         FTPClient ftpclient = new FTPClient();
+
         try{
             ftpclient.connect(servidor_ftp, puerto);
             showServerReply(ftpclient);
             int codigo_respuesta = ftpclient.getReplyCode();
             if (!FTPReply.isPositiveCompletion(codigo_respuesta)){
-                Log.v("Operación fallida, codigo de respuesta -> ", Integer.toString(codigo_respuesta));
+                Log.v("Operación fallida-> ", Integer.toString(codigo_respuesta));
                 throw new mException(mExceptionCode.UNKNOWN, Integer.toString(codigo_respuesta));
             }
 
@@ -58,10 +63,17 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
 
             Boolean success = ftpclient.changeWorkingDirectory("html");
             success = ftpclient.changeWorkingDirectory("images");
+
             //SI es correcto el directorio al que quiero acceder
             if (!success){
-
                 throw new mException(mExceptionCode.UNKNOWN, "El recurso solicitado no existe en el servidor");
+            }
+
+            //Si no existe el directorio fecha hay que crearlo
+            success = ftpclient.changeWorkingDirectory(directorio_fecha);
+            if (!success){
+                ftpclient.makeDirectory(directorio_fecha);
+                success =ftpclient.changeWorkingDirectory(directorio_fecha);
             }
 
             //Antes de hacer el desmadre y crear la carpeta
@@ -73,6 +85,11 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
             if (returnCode == 550) {
                 exitoso = ftpclient.makeDirectory(nombre_directorio_crear);
             }
+
+            ftpclient.printWorkingDirectory();
+            FTPFile[] subFiles = ftpclient.listFiles();
+            cuenta_archivos = subFiles.length;
+
             ftpclient.logout();
             ftpclient.disconnect();
 
@@ -88,9 +105,9 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
     @Override
     protected void onPostExecute(Boolean resultado) {
         if (resultado){
-            procesoExitoso();
+            procesoExitoso(cuenta_archivos);
         }
     }
 
-    public abstract void procesoExitoso();
+    public abstract void procesoExitoso(int items_count);
 }
