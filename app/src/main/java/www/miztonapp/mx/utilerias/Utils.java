@@ -122,7 +122,6 @@ public class Utils  {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
             Bitmap bitmap = BitmapFactory.decodeFile(origen.getAbsolutePath(), options);
-//            selected_photo.setImageBitmap(bitmap);
             exitoso = storeImage(bitmap, context, nombre_archivo);
         }
         return exitoso;

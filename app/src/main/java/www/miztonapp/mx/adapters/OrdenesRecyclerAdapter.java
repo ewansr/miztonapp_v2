@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +29,7 @@ import java.util.Locale;
 
 import www.miztonapp.mx.R;
 import www.miztonapp.mx.models.ModelOrdenesTrabajo;
+import www.miztonapp.mx.utilerias.FTPUtils;
 import www.miztonapp.mx.utilerias.Utils;
 
 import static android.app.Activity.RESULT_OK;
@@ -70,10 +72,6 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         }else{
             holder.cv_image.setImageResource(R.drawable.ethernet_icon_material);
         }
-
-
-//        /holder.cv_direccion.setText(items_orden_trabajo.get(position).tipo_orden);
-
 
         //Se usa una dependencia para el cacheo de imagenes dentro de ImageView
 
@@ -134,15 +132,20 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
             @Override
             public void onClick( View v ) {
                 if (v.getId() == R.id.btn_subir){
-                    abrir_galeria(telefono, fecha);
+                    abrir_galeria();
                 }
 
             }
         };
 
-        public void abrir_galeria(String telefono_param, String fecha_param){
-            numero_telefono = telefono_param;
-            fecha_orden     = fecha_param;
+        public void abrir_galeria(){
+            numero_telefono = telefono;
+            fecha_orden     = fecha;
+
+//            int archivos_permitidos = FTPUtils.numArchivos("/html/images/"+fecha_orden+"/"+numero_telefono);
+
+
+
 
             Intent intent = new Intent(context, AlbumSelectActivity.class);
             intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 10);
@@ -150,8 +153,9 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         }
 
     }
+
     public  void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("MyAdapter", "onActivityResult");
+        Log.d("Adaptador Ordenes", "onActivityResult");
 
         if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             ArrayList<Image> images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
@@ -162,13 +166,6 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
                     .setCancelable(false)
                     .setPositiveButton("Subir", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            Date date = null;
-                            DateFormat format = new SimpleDateFormat("yyyy mm dd", Locale.ENGLISH);
-                            try {
-                                date = format.parse(fecha_orden);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
                             Utils.subir_imagenes_ftp(context,lista_imagen, numero_telefono, fecha_orden.substring(0,10));
                         }
                     })

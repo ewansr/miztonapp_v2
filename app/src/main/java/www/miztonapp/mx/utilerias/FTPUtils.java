@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.IOException;
+
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
@@ -16,10 +17,11 @@ import www.miztonapp.mx.api.mException;
 import www.miztonapp.mx.api.mExceptionCode;
 
 public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
-    Context context;
+    static Context context;
     String nombre_directorio_crear;
     String directorio_fecha;
-    int cuenta_archivos;
+    int no_archivos;
+
 
     public FTPUtils(Context context, String nombre_directorio_crear, String directorio_fecha){
         this.context = context;
@@ -27,7 +29,65 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
         this.directorio_fecha = directorio_fecha;
     }
 
-    private static void showServerReply(FTPClient ftpClient){
+    public static Boolean conectarFTP(FTPClient ftpclient, String servidor, int puerto, String usuario, String contrasena){
+        Boolean respuesta = false;
+        try {
+            ftpclient.connect(servidor, puerto);
+            obtenerRespuestaServidor(ftpclient);
+            int codigo_respuesta = ftpclient.getReplyCode();
+
+            if (!FTPReply.isPositiveCompletion(codigo_respuesta)) {
+                Log.v("Operación fallida-> ", Integer.toString(codigo_respuesta));
+                throw new mException(mExceptionCode.UNKNOWN, Integer.toString(codigo_respuesta));
+            }
+
+            respuesta = ftpclient.login(usuario, contrasena);
+            obtenerRespuestaServidor(ftpclient);
+            if (!respuesta) {
+                Log.v("Error", "No se obtuvo acceso al servidor");
+                throw new mException(mExceptionCode.UNKNOWN, "No se obtuvo acceso al servidor");
+            }
+
+            respuesta = true;
+
+        }catch (IOException e) {
+            respuesta = false;
+            Utils.crear_alerta(context, "Error", e.getMessage()).show();
+        } catch (mException e) {
+            respuesta = false;
+            Utils.crear_alerta(context, "Error", e.getMessage()).show();
+        }
+        return respuesta;
+    }
+
+
+    public static int numArchivos(String directorio_acceder){
+        FTPClient ftpClient = new FTPClient();
+        int no_archivos = 0;
+        conectarFTP(ftpClient,
+                    FTPServerConfig.direccion_ip,
+                    FTPServerConfig.puerto,
+                    FTPServerConfig.usuario,
+                    FTPServerConfig.contrasena);
+
+        try {
+            Boolean directorio_cambiado = ftpClient.changeWorkingDirectory(directorio_acceder);
+            if (directorio_cambiado) {
+                FTPFile[] subFiles = ftpClient.listFiles();
+                no_archivos = subFiles.length;
+            }
+        } catch (IOException e) {
+            no_archivos = 0;
+            Utils.crear_alerta(context, "Error", e.getMessage()).show();
+        }
+        return no_archivos;
+    }
+
+    /**
+     * Obtener la respuesta del servidor ftp
+     * @param ftpClient
+     */
+    private static void obtenerRespuestaServidor(FTPClient ftpClient){
         String[] replies = ftpClient.getReplyStrings();
         if (replies != null && replies.length > 0){
             for (String aReply: replies){
@@ -38,74 +98,66 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(String... params) {
-        String servidor_ftp = "104.236.201.168";
-        int puerto = 21;
-        String usuario = "ewansr";
-        String contrasena = "saul2007#";
-        Boolean exitoso = false;
+
+        String servidor_ftp = FTPServerConfig.direccion_ip;
+        int puerto = FTPServerConfig.puerto;
+        String usuario = FTPServerConfig.usuario;
+        String contrasena = FTPServerConfig.contrasena;
+
+        Boolean proceso_exitoso = false;
+
         FTPClient ftpclient = new FTPClient();
 
         try{
-            ftpclient.connect(servidor_ftp, puerto);
-            showServerReply(ftpclient);
-            int codigo_respuesta = ftpclient.getReplyCode();
-            if (!FTPReply.isPositiveCompletion(codigo_respuesta)){
-                Log.v("Operación fallida-> ", Integer.toString(codigo_respuesta));
-                throw new mException(mExceptionCode.UNKNOWN, Integer.toString(codigo_respuesta));
-            }
+            conectarFTP(ftpclient,
+                    servidor_ftp,
+                    puerto,
+                    usuario,
+                    contrasena);
 
-            exitoso = ftpclient.login(usuario, contrasena);
-            showServerReply(ftpclient);
-            if (!exitoso){
-                Log.v("Error","No se obtuvo acceso al servidor");
-                throw new mException(mExceptionCode.UNKNOWN, "No se obtuvo acceso al servidor");
-            }
-
-            Boolean success = ftpclient.changeWorkingDirectory("html");
-            success = ftpclient.changeWorkingDirectory("images");
+            Boolean directorio_cambiado ;
+            directorio_cambiado = ftpclient.changeWorkingDirectory("html");
+            directorio_cambiado = ftpclient.changeWorkingDirectory("images");
 
             //SI es correcto el directorio al que quiero acceder
-            if (!success){
+            if (!directorio_cambiado){
                 throw new mException(mExceptionCode.UNKNOWN, "El recurso solicitado no existe en el servidor");
             }
 
             //Si no existe el directorio fecha hay que crearlo
-            success = ftpclient.changeWorkingDirectory(directorio_fecha);
-            if (!success){
+            directorio_cambiado = ftpclient.changeWorkingDirectory(directorio_fecha);
+            if (!directorio_cambiado){
                 ftpclient.makeDirectory(directorio_fecha);
-                success =ftpclient.changeWorkingDirectory(directorio_fecha);
+                directorio_cambiado =ftpclient.changeWorkingDirectory(directorio_fecha);
             }
 
-            //Antes de hacer el desmadre y crear la carpeta
-            //verificar que existe o no.
+            //Crear la carpeta y verificar que existe o no.
             ftpclient.changeWorkingDirectory(nombre_directorio_crear);
             int returnCode = ftpclient.getReplyCode();
 
             //550 archivo/Directorio Inválido
             if (returnCode == 550) {
-                exitoso = ftpclient.makeDirectory(nombre_directorio_crear);
+                proceso_exitoso = ftpclient.makeDirectory(nombre_directorio_crear);
             }
 
-            ftpclient.printWorkingDirectory();
             FTPFile[] subFiles = ftpclient.listFiles();
-            cuenta_archivos = subFiles.length;
+            no_archivos = subFiles.length;
 
             ftpclient.logout();
             ftpclient.disconnect();
-
         } catch (mException e) {
             Utils.crear_alerta(context, "Error", e.getMessage()).show();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return exitoso;
+        return proceso_exitoso;
     }
 
     @Override
     protected void onPostExecute(Boolean resultado) {
         if (resultado){
-            procesoExitoso(cuenta_archivos);
+            procesoExitoso(no_archivos);
         }
     }
 

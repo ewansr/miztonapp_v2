@@ -94,6 +94,7 @@ public class LoginActivity extends RequestLogin implements View.OnClickListener,
         Utils.crear_toast(this, "Iniciando sesión...").show();
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+        overridePendingTransition(R.anim.left_in, R.anim.left_out);
     }
 
     @Override
