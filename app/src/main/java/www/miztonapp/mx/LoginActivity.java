@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 
+import mehdi.sakout.fancybuttons.FancyButton;
 import www.miztonapp.mx.api.mException;
 import www.miztonapp.mx.models.LoginModel;
 import www.miztonapp.mx.requests.RequestLogin;
@@ -34,16 +35,14 @@ public class LoginActivity extends RequestLogin implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button login_button = (Button) findViewById(R.id.btnLogin);
-        etiqueta_usuario = (TextView)  findViewById(R.id.tvusuario);
-        etiqueta_contrasena = (TextView)  findViewById(R.id.tvContrasena);
+        FancyButton login_button = (FancyButton) findViewById(R.id.btnLogin);
+//        etiqueta_usuario = (TextView)  findViewById(R.id.tvusuario);
+//        etiqueta_contrasena = (TextView)  findViewById(R.id.tvContrasena);
         usuario = (EditText) findViewById(R.id.edtUsuario);
         contrasena = (EditText) findViewById(R.id.edtContrasena);
 
         login_button.setOnClickListener(this);
         Utils.setStatusColor(this);
-        usuario.setOnTouchListener(this);
-        contrasena.setOnTouchListener(this);
 
     }
 

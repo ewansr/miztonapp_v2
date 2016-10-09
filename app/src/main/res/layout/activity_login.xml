@@ -3,6 +3,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
     android:background="@color/colorPrimary"
@@ -34,117 +36,100 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/imgLogo">
+        android:layout_below="@+id/imgLogo"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="35dp">
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="35dp"
+            android:layout_height="wrap_content">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <EditText
+                <com.github.florent37.materialtextfield.MaterialTextField
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:ems="10"
-                    android:layout_below="@+id/tvusuario"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:id="@+id/edtUsuario"
+                    app:mtf_image="@drawable/contacts"
+                    app:mtf_labelColor="@color/colorAccent"
+                    android:layout_marginTop="30dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:textColor="@color/primary_text"
-                    android:textColorHint="@color/secondary_text"
-                    android:hint="Usuario"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:ems="10"
-                    android:layout_below="@+id/tvContrasena"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:id="@+id/edtContrasena"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:id="@+id/materialTextField">
+
+                    <EditText
+                        android:layout_width="283dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:ems="10"
+                        android:id="@+id/edtUsuario"
+                        android:hint="Nombre de Usuario" />
+                </com.github.florent37.materialtextfield.MaterialTextField>
+
+                <com.github.florent37.materialtextfield.MaterialTextField
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:mtf_image="@drawable/key"
+                    app:mtf_labelColor="@color/colorAccent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="110dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:textColor="@color/primary_text"
-                    android:textColorHint="@color/secondary_text"
-                    android:hint="Contraseña"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:layout_marginBottom="50dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
+                    android:layout_marginRight="20dp">
 
-                <TextView
-                    android:text="Contraseña"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvContrasena"
-                    android:textColor="@color/colorAccent"
-                    android:layout_below="@+id/edtUsuario"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="5dp"
-                    android:visibility="visible"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
+                    <EditText
+                        android:layout_width="285dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:ems="10"
+                        android:id="@+id/edtContrasena"
+                        android:hint="Contraseña" />
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="38dp"
-                    android:text="Olvidaste tu contraseña"
-                    android:id="@+id/button2"
-                    android:background="@color/colorAccent"
-                    android:textColor="@color/textColor"
-                    android:layout_below="@+id/btnLogin"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_alignLeft="@+id/btnLogin"
-                    android:layout_alignStart="@+id/btnLogin"
-                    android:layout_alignRight="@+id/btnLogin"
-                    android:layout_alignEnd="@+id/btnLogin" />
+                </com.github.florent37.materialtextfield.MaterialTextField>
 
-                <TextView
-                    android:text="Usuario"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvusuario"
-                    android:textColor="@color/colorAccent"
-                    android:visibility="visible"
-                    android:layout_marginTop="10dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="38dp"
-                    android:text="Entrar"
+                <mehdi.sakout.fancybuttons.FancyButton
                     android:id="@+id/btnLogin"
-                    android:background="@color/colorAccent"
-                    android:textColor="@color/textColor"
-                    android:layout_marginTop="61dp"
-                    android:layout_below="@+id/tvContrasena"
-                    android:layout_alignRight="@+id/edtContrasena"
-                    android:layout_alignEnd="@+id/edtContrasena"
-                    android:layout_alignLeft="@+id/edtContrasena"
-                    android:layout_alignStart="@+id/edtContrasena" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    fancy:fb_borderColor="#FFFFFF"
+                    fancy:fb_borderWidth="1dp"
+                    fancy:fb_defaultColor="@color/colorAccent"
+                    fancy:fb_focusColor="@color/blue"
+                    fancy:fb_fontIconResource="&#xf04b;"
+                    fancy:fb_iconPosition="left"
+                    fancy:fb_radius="15dp"
+                    fancy:fb_text="Entrar"
+                    fancy:fb_textColor="#FFFFFF"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="200dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp" />
+
 
             </RelativeLayout>
+
         </android.support.v7.widget.CardView>
     </ScrollView>
 
