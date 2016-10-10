@@ -41,7 +41,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         // Total de páginas
-        return 1;
+        return 3;
     }
 
 
@@ -56,6 +56,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return "Ordenes de trabajo";
             case 1:
                 return "Resumen";
+            case 2:
+                return "Avisos";
 
         }
         return null;

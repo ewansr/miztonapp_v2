@@ -72,7 +72,7 @@ public class PlaceHolderFragmentOrdenes extends Fragment {
                 == Configuration.ORIENTATION_LANDSCAPE) {
             // If the screen is now in landscape mode, we can show the
             // dialog in-line with the list so we don't need this activity.
-            ((Activity)context).finish();
+//            ((Activity)context).finish();
 
         }
 
@@ -109,6 +109,8 @@ public class PlaceHolderFragmentOrdenes extends Fragment {
                 super.onScrolled( recyclerView, dx, dy );
             }
         });
+        yaCargado = false;
+        cargar_datos();
         return rootView;
 
 
@@ -123,14 +125,8 @@ public class PlaceHolderFragmentOrdenes extends Fragment {
 //        }
     }
 
-
-
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-
-        if (this.isVisible() || !yaCargado) {
+    public void cargar_datos(){
+        if (!yaCargado) {
             ordenes_trabajo = new RequestOrdenesTrabajo() {
 
 
@@ -172,6 +168,14 @@ public class PlaceHolderFragmentOrdenes extends Fragment {
                 ordenes_trabajo.consultar_ordenes(LoginModel.idpersonal, DateU.StartOfWeek(year, month, day), DateU.EndOfWeek(year, month, day));
             }
         }
+    }
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+
     }
 
 
