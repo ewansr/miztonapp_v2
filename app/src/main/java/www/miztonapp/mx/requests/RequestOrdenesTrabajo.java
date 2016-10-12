@@ -1,5 +1,6 @@
 package www.miztonapp.mx.requests;
 
+import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import org.json.JSONArray;
@@ -17,7 +18,7 @@ import www.miztonapp.mx.models.ModelOrdenesTrabajo;
  * Created by Saulo on 05/10/2016.
  */
 
-public abstract class RequestOrdenesTrabajo extends AppCompatActivity {
+public abstract class RequestOrdenesTrabajo  {
     public void consultar_ordenes(int idpersonal, String inicio, String termino){
         try{
             Request request = new Request(){
