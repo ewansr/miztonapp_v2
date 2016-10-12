@@ -6,15 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="www.miztonapp.mx.requests.RequestOrdenesTrabajo"
+    tools:context="www.miztonapp.mx.MainActivity"
     tools:showIn="@layout/app_bar_main"
     android:background="@color/background_light">
-    <android.support.v4.view.ViewPager
-        android:id="@+id/container"
+
+    <include
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_marginTop="100dp" />
-
+        layout="@layout/reciclerview"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

@@ -98,8 +98,6 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-
-
     public class ordenesViewHolder extends RecyclerView.ViewHolder{
         CardView cv;
         TextView cv_titulo;
