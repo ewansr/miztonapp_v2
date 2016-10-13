@@ -4,32 +4,40 @@
 
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:layout_height="wrap_content">
 
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
         android:id="@+id/cv"
+        app:cardElevation="0dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@android:color/transparent"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        app:cardElevation="1dp"
-        android:layout_height="190dp">
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:id="@+id/cv_fondo"
+            android:background="@drawable/cv_background_vi"
+            android:adjustViewBounds="false"
+            android:layout_height="160dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent">
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:elevation="1dp"
-                app:cardElevation="1dp"
+                app:cardElevation="0dp"
                 android:layout_height="150dp"
-                android:id="@+id/cv_datos">
+                android:id="@+id/cv_datos"
+                app:cardBackgroundColor="@android:color/transparent">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -74,27 +82,12 @@
 
                         <ImageButton
                             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                            app:srcCompat="@drawable/calendar_clock"
-                            android:id="@+id/btn_date"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp" />
-
-                        <TextView
-                            android:text="1989-02-09 00:00:00"
-                            android:layout_width="wrap_content"
+                            android:layout_width="48dp"
+                            app:srcCompat="@drawable/colection_material"
+                            android:id="@+id/btn_subir"
                             android:layout_height="wrap_content"
-                            android:id="@+id/cv_fecha"
-                            android:textAppearance="@android:style/TextAppearance.Material.Small"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/btn_date"
-                            android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginRight="10dp" />
+                            android:layout_alignBottom="@+id/cv_datos"
+                            android:layout_centerHorizontal="true" />
 
                     </RelativeLayout>
 
@@ -109,7 +102,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/cv_titulo"
                             android:textAppearance="@android:style/TextAppearance.Material.Title"
-                            android:textColor="@color/colorPrimaryDark"
+                            android:textColor="@color/background_accent"
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/btn_phone"
                             android:layout_toEndOf="@+id/btn_phone" />
@@ -126,18 +119,6 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginLeft="5dp" />
 
-                        <TextView
-                            android:text="Cobre"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="14dp"
-                            android:layout_marginEnd="14dp"
-                            android:id="@+id/cv_tipo"
-                            android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true"
-                            android:textColor="@color/colorAccent"
-                            android:layout_alignBottom="@+id/cv_titulo"
-                            android:textStyle="normal|bold" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -182,63 +163,66 @@
                             android:textColor="@color/secondary_text" />
 
                     </RelativeLayout>
+
+                    <TextView
+                        android:text="LIQUIDADA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cv_estatus"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="normal|bold"
+                        android:layout_marginRight="22dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="22dp" />
+
                 </RelativeLayout>
 
-                <ImageView
-                    android:layout_height="90dp"
-                    android:id="@+id/cv_image"
-                    android:layout_width="90dp"
+                <TextView
+                    android:text="1989-02-09"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cv_fecha"
+                    android:textAppearance="@android:style/TextAppearance.Material.Small"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/btn_date"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="0dp"
+                    android:textStyle="normal|bold"
+                    android:textColor="@color/icons"
+                    android:textSize="11sp"
+                    android:textAlignment="center"
                     android:layout_marginLeft="3dp"
-                    android:layout_marginTop="10dp"
-                    app:srcCompat="@drawable/ethernet_icon_material" />
+                    android:layout_marginTop="7dp" />
+
+                <TextView
+                    android:text="Cobre"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cv_tipo"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="normal|bold"
+                    android:layout_marginTop="90dp"
+                    android:layout_marginLeft="0dp"
+                    android:textAlignment="center" />
+
+                <ImageView
+                    android:layout_height="35dp"
+                    android:id="@+id/cv_image"
+                    android:layout_width="50dp"
+                    app:srcCompat="@drawable/ethernet_icon_material"
+                    android:layout_alignBottom="@+id/cv_datos"
+                    android:layout_toLeftOf="@+id/btn_subir"
+                    android:layout_toStartOf="@+id/btn_subir"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="7dp" />
+
             </android.support.v7.widget.CardView>
 
-            <ImageButton
-                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="48dp"
-                app:srcCompat="@drawable/colection_material"
-                android:id="@+id/btn_subir"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_toLeftOf="@+id/btn_ubicacion"
-                android:layout_toStartOf="@+id/btn_ubicacion"
-                android:layout_below="@+id/cv_datos" />
-
-            <ImageButton
-                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="48dp"
-                app:srcCompat="@drawable/tooltip_material"
-                android:id="@+id/btn_editar"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/cv_datos" />
-
-            <TextView
-                android:text="LIQUIDADA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="13dp"
-                android:layout_marginStart="13dp"
-                android:id="@+id/cv_estatus"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="normal|bold"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="11dp" />
-
-            <ImageButton
-                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="48dp"
-                app:srcCompat="@drawable/map_material"
-                android:id="@+id/btn_ubicacion"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/btn_editar"
-                android:layout_toStartOf="@+id/btn_editar"
-                android:layout_alignParentBottom="true"
-                android:layout_below="@+id/cv_datos" />
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

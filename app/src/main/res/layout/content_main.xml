@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="www.miztonapp.mx.MainActivity"
-    tools:showIn="@layout/app_bar_main"
-    android:background="@color/background_light">
+    tools:showIn="@layout/app_bar_main">
 
     <include
         android:layout_width="match_parent"
