@@ -4,13 +4,13 @@
     <item
         android:id="@+id/action_camera"
         android:orderInCategory="1"
-        android:showAsAction="always"
+        android:showAsAction="ifRoom"
         android:icon="@drawable/camera_material_light"
         android:title="Cámara"/>
     <item
         android:id="@+id/action_search"
         android:orderInCategory="2"
-        android:showAsAction="always"
+        android:showAsAction="ifRoom"
         android:icon="@android:drawable/ic_menu_search"
         android:title="Buscar"/>
     <item

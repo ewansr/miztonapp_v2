@@ -7,6 +7,7 @@ package www.miztonapp.mx;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -75,7 +76,11 @@ public class TabFragmentGeneral extends Fragment {
 
         recyclerView      = (RecyclerView) rootView.findViewById( R.id.rv );
         recyclerView.setHasFixedSize( true );
-        sgLayoutManager = new StaggeredGridLayoutManager( 1,1 );
+        int columnas_default = 1;
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+            columnas_default = 2;
+
+        sgLayoutManager = new StaggeredGridLayoutManager( columnas_default, 1 );
         recyclerView.setLayoutManager( sgLayoutManager );
 
         recyclerView.addOnScrollListener( new RecyclerView.OnScrollListener() {

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_marginTop="250dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="?attr/colorPrimary"
+                android:layout_height="250dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            app:srcCompat="@drawable/history"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginStart="12dp"
+                            android:id="@+id/img_historial" />
+
+                        <Button
+                            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                            android:text="Historial de instalacion"
+                            android:layout_width="match_parent"
+                            android:id="@+id/btn_historial"
+                            android:textSize="12sp"
+                            android:layout_height="match_parent"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/white"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_toRightOf="@+id/img_historial"
+                            android:layout_toEndOf="@+id/img_historial" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            app:srcCompat="@drawable/comentarios"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginStart="12dp"
+                            android:id="@+id/img_comentarios" />
+
+                        <Button
+                            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                            android:text="Ver comentarios"
+                            android:layout_width="match_parent"
+                            android:id="@+id/btn_comentarios"
+                            android:textSize="12sp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_toEndOf="@+id/img_comentarios"
+                            android:textAlignment="viewStart"
+                            android:layout_toRightOf="@+id/img_comentarios"
+                            android:textColor="@color/white" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            app:srcCompat="@drawable/central"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginStart="12dp"
+                            android:id="@+id/img_central" />
+
+                        <Button
+                            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                            android:text="Central"
+                            android:layout_width="match_parent"
+                            android:id="@+id/btn_central"
+                            android:textSize="12sp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_toEndOf="@+id/img_central"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/white"
+                            android:layout_toRightOf="@+id/img_central" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            app:srcCompat="@drawable/distrito_location"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginStart="12dp"
+                            android:id="@+id/img_distrito" />
+
+                        <Button
+                            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                            android:text="Distrito"
+                            android:layout_width="match_parent"
+                            android:id="@+id/btn_distrito"
+                            android:textSize="12sp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_toEndOf="@+id/img_distrito"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/white"
+                            android:layout_toRightOf="@+id/img_distrito" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            app:srcCompat="@drawable/terminal"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginStart="12dp"
+                            android:id="@+id/img_terminal" />
+
+                        <Button
+                            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                            android:text="Terminal"
+                            android:layout_width="match_parent"
+                            android:id="@+id/btn_distrito"
+                            android:textSize="12sp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_toEndOf="@+id/img_terminal"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/white"
+                            android:layout_toRightOf="@+id/img_terminal" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            app:srcCompat="@drawable/puerto"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginStart="12dp"
+                            android:id="@+id/img_puerto" />
+
+                        <Button
+                            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                            android:text="Puerto"
+                            android:layout_width="match_parent"
+                            android:id="@+id/btn_puerto"
+                            android:textSize="12sp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_toEndOf="@+id/img_puerto"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/white"
+                            android:layout_toRightOf="@+id/img_puerto" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginBottom="7dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="?attr/colorPrimary">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+
+                    <include
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        layout="@layout/activity_localizacion"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+                </RelativeLayout>
+
+                <TextView
+                    android:text="Direccion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/map_direccion"
+                    android:layout_marginTop="207dp"
+                    android:textStyle="normal|bold"
+                    android:layout_marginLeft="7dp"
+                    android:textColor="@color/white" />
+
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

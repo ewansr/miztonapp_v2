@@ -62,7 +62,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         holder.cv_detalle.setText(items_orden_trabajo.get(position).folio_orden);
         holder.cv_tipo.setText(items_orden_trabajo.get(position).tipo_instalacion);
         holder.cv_estatus.setText(items_orden_trabajo.get(position).estatus_orden);
-        holder.cv_fecha.setText(items_orden_trabajo.get(position).fecha);
+        holder.cv_fecha.setText(items_orden_trabajo.get(position).fecha.substring(0,10));
         holder.cv_tipo_orden.setText(items_orden_trabajo.get(position).tipo_orden);
         holder.telefono = items_orden_trabajo.get(position).telefono_orden;
         holder.fecha    = items_orden_trabajo.get(position).fecha;
