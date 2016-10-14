@@ -20,7 +20,7 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
     static Context context;
     String nombre_directorio_crear;
     String directorio_fecha;
-    int no_archivos;
+    public static int no_archivos;
 
 
     public FTPUtils(Context context, String nombre_directorio_crear, String directorio_fecha){
@@ -76,9 +76,10 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
                 FTPFile[] subFiles = ftpClient.listFiles();
                 no_archivos = subFiles.length;
             }
+            ftpClient.logout();
+            ftpClient.disconnect();
         } catch (IOException e) {
             no_archivos = 0;
-            Utils.crear_alerta(context, "Error", e.getMessage()).show();
         }
         return no_archivos;
     }
@@ -98,61 +99,62 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(String... params) {
+            String servidor_ftp = FTPServerConfig.direccion_ip;
+            int puerto = FTPServerConfig.puerto;
+            String usuario = FTPServerConfig.usuario;
+            String contrasena = FTPServerConfig.contrasena;
 
-        String servidor_ftp = FTPServerConfig.direccion_ip;
-        int puerto = FTPServerConfig.puerto;
-        String usuario = FTPServerConfig.usuario;
-        String contrasena = FTPServerConfig.contrasena;
+            Boolean proceso_exitoso = false;
 
-        Boolean proceso_exitoso = false;
+            FTPClient ftpclient = new FTPClient();
 
-        FTPClient ftpclient = new FTPClient();
+            try {
+                conectarFTP(ftpclient,
+                        servidor_ftp,
+                        puerto,
+                        usuario,
+                        contrasena);
 
-        try{
-            conectarFTP(ftpclient,
-                    servidor_ftp,
-                    puerto,
-                    usuario,
-                    contrasena);
+                Boolean directorio_cambiado;
+                directorio_cambiado = ftpclient.changeWorkingDirectory("html");
+                directorio_cambiado = ftpclient.changeWorkingDirectory("images");
 
-            Boolean directorio_cambiado ;
-            directorio_cambiado = ftpclient.changeWorkingDirectory("html");
-            directorio_cambiado = ftpclient.changeWorkingDirectory("images");
+                //SI es correcto el directorio al que quiero acceder
+                if (!directorio_cambiado) {
+                    throw new mException(mExceptionCode.UNKNOWN, "El recurso solicitado no existe en el servidor");
+                }
 
-            //SI es correcto el directorio al que quiero acceder
-            if (!directorio_cambiado){
-                throw new mException(mExceptionCode.UNKNOWN, "El recurso solicitado no existe en el servidor");
-            }
+                //Si no existe el directorio fecha hay que crearlo
+                directorio_cambiado = ftpclient.changeWorkingDirectory(directorio_fecha);
+                if (!directorio_cambiado) {
+                    ftpclient.makeDirectory(directorio_fecha);
+                    directorio_cambiado = ftpclient.changeWorkingDirectory(directorio_fecha);
+                }
 
-            //Si no existe el directorio fecha hay que crearlo
-            directorio_cambiado = ftpclient.changeWorkingDirectory(directorio_fecha);
-            if (!directorio_cambiado){
-                ftpclient.makeDirectory(directorio_fecha);
-                directorio_cambiado =ftpclient.changeWorkingDirectory(directorio_fecha);
-            }
+                //Crear la carpeta y verificar que existe o no.
+                ftpclient.changeWorkingDirectory(nombre_directorio_crear);
+                int returnCode = ftpclient.getReplyCode();
 
-            //Crear la carpeta y verificar que existe o no.
-            ftpclient.changeWorkingDirectory(nombre_directorio_crear);
-            int returnCode = ftpclient.getReplyCode();
+                //550 archivo/Directorio Inválido
+                if (returnCode == 250) {
+                    proceso_exitoso = true;
+                }
+                if (returnCode == 550) {
+                    proceso_exitoso = ftpclient.makeDirectory(nombre_directorio_crear);
+                }
 
-            //550 archivo/Directorio Inválido
-            if (returnCode == 250) {
-                proceso_exitoso = true;
-            }
-            if (returnCode == 550) {
-                proceso_exitoso = ftpclient.makeDirectory(nombre_directorio_crear);
-            }
+                FTPFile[] subFiles = ftpclient.listFiles();
+                no_archivos = subFiles.length;
 
-            FTPFile[] subFiles = ftpclient.listFiles();
-            no_archivos = subFiles.length;
+                ftpclient.logout();
+                ftpclient.disconnect();
 
-            ftpclient.logout();
-            ftpclient.disconnect();
         } catch (mException e) {
             Utils.crear_alerta(context, "Error", e.getMessage()).show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
         return proceso_exitoso;
     }

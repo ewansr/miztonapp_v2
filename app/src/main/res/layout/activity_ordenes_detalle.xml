@@ -76,7 +76,7 @@
                     android:layout_below="@+id/textView7"
                     android:layout_alignLeft="@+id/textView7"
                     android:layout_alignStart="@+id/textView7"
-                    android:layout_marginTop="7dp" />
+                    android:layout_marginTop="3dp" />
 
                 <TextView
                     android:text="Instalación:"
@@ -86,7 +86,7 @@
                     android:layout_below="@+id/textView5"
                     android:layout_alignLeft="@+id/textView5"
                     android:layout_alignStart="@+id/textView5"
-                    android:layout_marginTop="7dp" />
+                    android:layout_marginTop="3dp" />
 
                 <TextView
                     android:text="TextView"
@@ -107,9 +107,24 @@
                     android:layout_toEndOf="@+id/textView7"
                     android:id="@+id/tv_tipoinstalacion"
                     android:layout_marginLeft="3dp" />
+
+                <TextView
+                    android:text="2 Fotos cargadas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_cargas"
+                    android:layout_below="@+id/tv_fecha"
+                    android:layout_alignLeft="@+id/tv_fecha"
+                    android:layout_alignStart="@+id/tv_fecha"
+                    android:layout_marginTop="3dp"
+                    app:layout_anchorGravity="top|left"
+                    android:layout_gravity="bottom|right"
+                    android:textStyle="normal|bold" />
+
             </RelativeLayout>
 
         </android.support.design.widget.CollapsingToolbarLayout>
+
     </android.support.design.widget.AppBarLayout>
 
     <android.support.design.widget.FloatingActionButton

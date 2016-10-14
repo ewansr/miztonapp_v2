@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import www.miztonapp.mx.utilerias.FTPUtils;
 import www.miztonapp.mx.utilerias.Utils;
 
 public class activity_ordenes_detalle extends AppCompatActivity  implements OnMapReadyCallback{
@@ -80,12 +81,26 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
 
         TextView telefono         =(TextView) findViewById( R.id.tv_telefono );
         TextView tipo_instalacion =(TextView) findViewById( R.id.tv_tipo );
-        TextView fecha =(TextView) findViewById( R.id.tv_fecha );
+        TextView fecha            =(TextView) findViewById( R.id.tv_fecha );
+        final TextView no_cargas        =(TextView) findViewById( R.id.tv_cargas );
 
         telefono.setText(_telefono);
         tipo_instalacion.setText(_tipoinstalacion);
         fecha.setText(_fecha);
 
+        no_cargas.setText("0 Fotos cargadas");
+        FTPUtils ftpclient = new FTPUtils(context, _telefono, _fecha.substring(0,10)) {
+            @Override
+            public void procesoExitoso(int items_count) {
+                no_cargas.setText(items_count + " Fotos cargadas");
+            }
+
+            @Override
+            public void procesoErroneo() {
+
+            }
+        };
+        ftpclient.execute();
 
         map_direccion = (TextView) findViewById(R.id.map_direccion);
     }
