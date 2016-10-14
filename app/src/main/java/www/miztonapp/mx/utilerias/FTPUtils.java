@@ -52,10 +52,10 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
 
         }catch (IOException e) {
             respuesta = false;
-            Utils.crear_alerta(context, "Error", e.getMessage()).show();
+//            Utils.crear_alerta(context, "Error", e.getMessage()).show();
         } catch (mException e) {
             respuesta = false;
-            Utils.crear_alerta(context, "Error", e.getMessage()).show();
+//            Utils.crear_alerta(context, "Error", e.getMessage()).show();
         }
         return respuesta;
     }
@@ -136,6 +136,9 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
             int returnCode = ftpclient.getReplyCode();
 
             //550 archivo/Directorio Inválido
+            if (returnCode == 250) {
+                proceso_exitoso = true;
+            }
             if (returnCode == 550) {
                 proceso_exitoso = ftpclient.makeDirectory(nombre_directorio_crear);
             }
@@ -162,4 +165,6 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
     }
 
     public abstract void procesoExitoso(int items_count);
+    public abstract void procesoErroneo();
+
 }

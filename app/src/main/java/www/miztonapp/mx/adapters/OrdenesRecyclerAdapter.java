@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import www.miztonapp.mx.R;
+import www.miztonapp.mx.activity_ordenes_detalle;
 import www.miztonapp.mx.models.ModelOrdenesTrabajo;
 import www.miztonapp.mx.utilerias.FTPUtils;
 import www.miztonapp.mx.utilerias.Utils;
@@ -66,6 +68,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         holder.cv_tipo_orden.setText(items_orden_trabajo.get(position).tipo_orden);
         holder.telefono = items_orden_trabajo.get(position).telefono_orden;
         holder.fecha    = items_orden_trabajo.get(position).fecha;
+        holder.tipo_instalacion    = items_orden_trabajo.get(position).tipo_instalacion;
 
         if ( items_orden_trabajo.get(position).tipo_instalacion.equals("FO") ){
             holder.cv_image.setImageResource(R.drawable.fiber_icon_material);
@@ -107,8 +110,10 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         TextView cv_fecha;
         TextView cv_estatus;
         ImageView cv_image;
+        Button btn_detalle;
         String telefono;
         String fecha;
+        String tipo_instalacion;
 
         ordenesViewHolder(View itemView) {
             super(itemView);
@@ -121,8 +126,10 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
             cv_fecha        = ( TextView )  itemView.findViewById( R.id.cv_fecha );
             cv_estatus      = ( TextView )  itemView.findViewById( R.id.cv_estatus );
             cv_image        = ( ImageView ) itemView.findViewById( R.id.cv_image );
+            btn_detalle     = ( Button )    itemView.findViewById( R.id.btn_detalle );
 
             ImageButton subir_imagen = (ImageButton) itemView.findViewById(R.id.btn_subir);
+            btn_detalle.setOnClickListener(clickListener);
             subir_imagen.setOnClickListener(clickListener);
             itemView.setOnClickListener( clickListener );
         }
@@ -134,17 +141,28 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
                 if (v.getId() == R.id.btn_subir){
                     abrir_galeria();
                 }
+                if (v.getId() == R.id.btn_detalle){
+                    abrir_detalle(context);
+                }
+
 
             }
         };
+
+        public void abrir_detalle(Context context){
+            Intent i = new Intent(context, activity_ordenes_detalle.class);
+            i.putExtra("telefono", telefono);
+            i.putExtra("fecha", fecha);
+            i.putExtra("tipo_instalacion", tipo_instalacion);
+
+            context.startActivity(i);
+        }
 
         public void abrir_galeria(){
             numero_telefono = telefono;
             fecha_orden     = fecha;
 
 //            int archivos_permitidos = FTPUtils.numArchivos("/html/images/"+fecha_orden+"/"+numero_telefono);
-
-
 
 
             Intent intent = new Intent(context, AlbumSelectActivity.class);

@@ -49,14 +49,27 @@ public class Utils  {
      *@Context Parametro contexto de activity
      */
     static String ruta_absoluta_archivo;
+    private static ProgressDialog progressDialog;
 
     public static void subir_imagenes_ftp(final Context context, final ArrayList<Image> lista_rutas, final String nombre_archivo, final String fecha) {
-
+        progressDialog = new ProgressDialog( context );
+        progressDialog.setMessage( "Procesando imagenes... Espere" );
+        progressDialog.show();
         // Solicitar la creción del directorio en el servidor FTP
         final FTPUtils ftpUtils = new FTPUtils(context, nombre_archivo, fecha) {
             @Override
             public void procesoExitoso(int items_count) {
                 autorizarCarga(context, lista_rutas, nombre_archivo, fecha, items_count);
+                if (progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void procesoErroneo() {
+                if (progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                }
             }
         };
         ftpUtils.execute();
@@ -72,7 +85,7 @@ public class Utils  {
                 String ruta_archivo = lista_rutas.get(i).path.toString();
                 Boolean fallo;
                 File archivo_origen = new File(ruta_archivo);
-                int sufijo_contador = i + iniciar_en;
+                int sufijo_contador = i + iniciar_en+1;
 
                 // se hace la siguiente operacion para no reemplazar los archivos ya existentes
                 //i+iniciar_en
