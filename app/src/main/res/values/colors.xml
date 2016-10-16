@@ -17,15 +17,15 @@
 
 
 
-  <item name="blue" type="color">#33b5e5</item>
-  <item name="green" type="color">#FF99CC00</item>
+  <item name="blue" type="color">#3F51B5</item>
+  <item name="green" type="color">#4CAF50</item>
   <item name="orange" type="color">#f7b14f</item>
-  <item name="red" type="color">#FFFF4444</item>
-  <item name="darkblue" type="color">#FF0099CC</item>
-  <item name="darkpurple" type="color">#FF9933CC</item>
+  <item name="red" type="color">#F44336</item>
+  <item name="darkblue" type="color">#2196F3</item>
+  <item name="darkpurple" type="color">#9C27B0</item>
   <item name="darkgreen" type="color">#FF669900</item>
-  <item name="darkorange" type="color">#FFFF8800</item>
-  <item name="darkred" type="color">#FFCC0000</item>
+  <item name="darkorange" type="color">#FF5722</item>
+  <item name="darkred" type="color">#E91E63</item>
 
 
 

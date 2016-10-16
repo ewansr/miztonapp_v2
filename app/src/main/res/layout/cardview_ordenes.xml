@@ -164,7 +164,7 @@
                             android:text="DETALLE"
                             android:layout_width="wrap_content"
                             android:layout_height="35dp"
-                            android:id="@+id/btn_detalle"
+                            android:id="@+id/btn_cambiar"
                             android:textSize="12sp"
                             android:layout_below="@+id/btn_subir"
                             android:layout_alignParentRight="true"
@@ -187,8 +187,8 @@
                             android:id="@+id/btn_comentar"
                             android:textSize="12sp"
                             android:layout_alignParentTop="true"
-                            android:layout_toLeftOf="@+id/btn_detalle"
-                            android:layout_toStartOf="@+id/btn_detalle"
+                            android:layout_toLeftOf="@+id/btn_cambiar"
+                            android:layout_toStartOf="@+id/btn_cambiar"
                             android:layout_height="35dp" />
 
                     </RelativeLayout>

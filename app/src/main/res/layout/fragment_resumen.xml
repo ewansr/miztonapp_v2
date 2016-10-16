@@ -2,18 +2,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="www.miztonapp.mx.ResumenFragment">
+    tools:context="www.miztonapp.mx.ResumenFragment"
+    android:background="@color/colorPrimary">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/layout_chart"
+        android:layout_height="match_parent"
         android:layout_margin="20dp">
 
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/chart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="470dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:text="Resumen de Instalaciones"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tv_titulo"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:textStyle="normal|bold"
+                            android:textSize="18sp"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:textAlignment="center"
+                            android:layout_marginTop="7dp" />
+
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/chart"
+                            android:layout_width="match_parent"
+                            android:layout_height="240dp"
+                            android:layout_marginTop="30dp" />
+
+                    </RelativeLayout>
+                </android.support.v7.widget.CardView>
+            </RelativeLayout>
+        </ScrollView>
+
     </RelativeLayout>
 
 </FrameLayout>

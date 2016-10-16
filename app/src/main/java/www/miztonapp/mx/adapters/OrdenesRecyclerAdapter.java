@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -21,17 +20,11 @@ import com.darsh.multipleimageselect.activities.AlbumSelectActivity;
 import com.darsh.multipleimageselect.helpers.Constants;
 import com.darsh.multipleimageselect.models.Image;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 import www.miztonapp.mx.R;
 import www.miztonapp.mx.activity_ordenes_detalle;
 import www.miztonapp.mx.models.ModelOrdenesTrabajo;
-import www.miztonapp.mx.utilerias.FTPUtils;
 import www.miztonapp.mx.utilerias.Utils;
 
 import static android.app.Activity.RESULT_OK;
@@ -126,7 +119,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
             cv_fecha        = ( TextView )  itemView.findViewById( R.id.cv_fecha );
             cv_estatus      = ( TextView )  itemView.findViewById( R.id.cv_estatus );
             cv_image        = ( ImageView ) itemView.findViewById( R.id.cv_image );
-            btn_detalle     = ( Button )    itemView.findViewById( R.id.btn_detalle );
+            btn_detalle     = ( Button )    itemView.findViewById( R.id.btn_cambiar);
 
             ImageButton subir_imagen = (ImageButton) itemView.findViewById(R.id.btn_subir);
             btn_detalle.setOnClickListener(clickListener);
@@ -141,7 +134,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
                 if (v.getId() == R.id.btn_subir){
                     abrir_galeria();
                 }
-                if (v.getId() == R.id.btn_detalle){
+                if (v.getId() == R.id.btn_cambiar){
                     abrir_detalle(context);
                 }
 

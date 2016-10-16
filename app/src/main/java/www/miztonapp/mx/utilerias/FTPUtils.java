@@ -143,6 +143,14 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
                     proceso_exitoso = ftpclient.makeDirectory(nombre_directorio_crear);
                 }
 
+                ftpclient.sendSiteCommand("chmod"+ "755" + "/var/www/html/images/"+directorio_fecha);
+                obtenerRespuestaServidor(ftpclient);
+                int codigo_respuesta = ftpclient.getReplyCode();
+
+                if (!FTPReply.isPositiveCompletion(codigo_respuesta)) {
+                    Log.v("Operación fallida-> ", Integer.toString(codigo_respuesta));
+                }
+
                 FTPFile[] subFiles = ftpclient.listFiles();
                 no_archivos = subFiles.length;
 

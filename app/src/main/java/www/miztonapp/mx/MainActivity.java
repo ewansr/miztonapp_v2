@@ -89,7 +89,11 @@ public class MainActivity extends AppCompatActivity
         TabFragmentGeneral fragmento_ordenes = new TabFragmentGeneral();
         fragmento_ordenes.initTabFragmentGeneral(MainActivity.this);
         adapter.addFragment(fragmento_ordenes, "Ordenes");
-        adapter.addFragment(new ResumenFragment(), "Resumen");
+
+        ResumenFragment resumenFragment = new ResumenFragment();
+        resumenFragment.initTabFragmentGeneral(MainActivity.this);
+        adapter.addFragment(resumenFragment, "Resumen");
+
         adapter.addFragment(new TabFragmentGeneral(), "Foro");
         viewPager.setAdapter(adapter);
     }

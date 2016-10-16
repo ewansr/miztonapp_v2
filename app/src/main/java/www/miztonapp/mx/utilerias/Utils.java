@@ -29,6 +29,7 @@ import net.gotev.uploadservice.Placeholders;
 import net.gotev.uploadservice.UploadNotificationConfig;
 import net.gotev.uploadservice.UploadService;
 import net.gotev.uploadservice.ftp.FTPUploadRequest;
+import net.gotev.uploadservice.ftp.UnixPermissions;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -112,9 +113,11 @@ public class Utils  {
                     uploadNotificationConfig.setCompletedMessage("Archivo cargado.");
                     uploadNotificationConfig.setRingToneEnabled(true);
 
+                    UnixPermissions unixPermissions = new UnixPermissions("755");
+
                     String uploadId = new FTPUploadRequest(context, "104.236.201.168", 21)
                             .setUsernameAndPassword("ewansr", "saul2007#")
-                            .addFileToUpload(ruta_absoluta_archivo, "/html/images/" + directorio_fecha + "/" + nombre_archivo  + "/")
+                            .addFileToUpload(ruta_absoluta_archivo, "/html/images/" + directorio_fecha + "/" + nombre_archivo  + "/", unixPermissions)
                             .setNotificationConfig(uploadNotificationConfig)
                             .setMaxRetries(10)
                             .startUpload();
