@@ -176,7 +176,6 @@
                             app:srcCompat="@drawable/colection_material"
                             android:id="@+id/btn_subir"
                             android:layout_height="wrap_content"
-                            android:layout_alignBottom="@+id/cv_datos"
                             android:layout_centerHorizontal="true"
                             android:visibility="gone" />
 

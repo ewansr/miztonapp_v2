@@ -51,7 +51,7 @@
         <activity
             android:name=".activity_ordenes_detalle"
             android:label="@string/title_activity_ordenes_detalle"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppThemeDialog" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
