@@ -4,6 +4,7 @@ package www.miztonapp.mx.utilerias;
  * Created by Saulo on 06/10/2016.
  */
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -21,6 +22,7 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
     String nombre_directorio_crear;
     String directorio_fecha;
     public static int no_archivos;
+    private static ProgressDialog progressDialog;
 
 
     public FTPUtils(Context context, String nombre_directorio_crear, String directorio_fecha){
@@ -60,28 +62,12 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
         return respuesta;
     }
 
-
-    public static int numArchivos(String directorio_acceder){
-        FTPClient ftpClient = new FTPClient();
-        int no_archivos = 0;
-        conectarFTP(ftpClient,
-                    FTPServerConfig.direccion_ip,
-                    FTPServerConfig.puerto,
-                    FTPServerConfig.usuario,
-                    FTPServerConfig.contrasena);
-
+    private static void aplicarPermisos(FTPClient ftpClient, String permisos, String directorio_archivo){
         try {
-            Boolean directorio_cambiado = ftpClient.changeWorkingDirectory(directorio_acceder);
-            if (directorio_cambiado) {
-                FTPFile[] subFiles = ftpClient.listFiles();
-                no_archivos = subFiles.length;
-            }
-            ftpClient.logout();
-            ftpClient.disconnect();
+            ftpClient.sendSiteCommand("chmod "+ permisos + " " + directorio_archivo);
         } catch (IOException e) {
-            no_archivos = 0;
+            e.printStackTrace();
         }
-        return no_archivos;
     }
 
     /**
@@ -128,7 +114,9 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
                 directorio_cambiado = ftpclient.changeWorkingDirectory(directorio_fecha);
                 if (!directorio_cambiado) {
                     ftpclient.makeDirectory(directorio_fecha);
+                    aplicarPermisos(ftpclient, "775", directorio_fecha);
                     directorio_cambiado = ftpclient.changeWorkingDirectory(directorio_fecha);
+                    int returnCode = ftpclient.getReplyCode();
                 }
 
                 //Crear la carpeta y verificar que existe o no.
@@ -139,12 +127,14 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
                 if (returnCode == 250) {
                     proceso_exitoso = true;
                 }
+
                 if (returnCode == 550) {
                     proceso_exitoso = ftpclient.makeDirectory(nombre_directorio_crear);
+                    aplicarPermisos(ftpclient, "775", nombre_directorio_crear);
                 }
 
-                ftpclient.sendSiteCommand("chmod"+ "755" + "/var/www/html/images/"+directorio_fecha);
                 obtenerRespuestaServidor(ftpclient);
+
                 int codigo_respuesta = ftpclient.getReplyCode();
 
                 if (!FTPReply.isPositiveCompletion(codigo_respuesta)) {
@@ -172,6 +162,14 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
         if (resultado){
             procesoExitoso(no_archivos);
         }
+        if (progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    protected void onPreExecute() {
+        progressDialog = ProgressDialog.show(context, "","Calculando espacio disponible para esta órden... por favor espere",true);
     }
 
     public abstract void procesoExitoso(int items_count);

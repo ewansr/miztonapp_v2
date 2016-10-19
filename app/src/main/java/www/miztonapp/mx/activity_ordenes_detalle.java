@@ -146,9 +146,25 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
     }
 
     public void abrir_galeria(){
-        Intent intent = new Intent(this, AlbumSelectActivity.class);
-        intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 15);
-        startActivityForResult(intent, Constants.REQUEST_CODE);
+
+
+            final Intent intent = new Intent(this, AlbumSelectActivity.class);
+            FTPUtils ftpclient = new FTPUtils(context, _telefono, _fecha.substring(0, 10)) {
+                @Override
+                public void procesoExitoso(int items_count) {
+                    if (items_count < 15) {
+                        intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 15 - items_count);
+                        startActivityForResult(intent, Constants.REQUEST_CODE);
+                    }else {Utils.crear_toast(context, "Has subido el máximo no. de imágenes permitido (" + Integer.toString(items_count) +")").show();}
+                }
+
+                @Override
+                public void procesoErroneo() {
+
+                }
+            };
+            ftpclient.execute();
+
     }
 
     @Override
