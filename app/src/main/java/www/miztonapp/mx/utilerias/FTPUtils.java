@@ -127,7 +127,11 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
                                 cambio_dir = ftpclient.changeWorkingDirectory(directorio_crear[i]);
                                 //Comprobamos que no hubo pedos
                                 int returnCode = ftpclient.getReplyCode();
-                            }
+                                if (returnCode == 250) {
+                                    proceso_exitoso = true;
+                                }
+                            }else{proceso_exitoso = true;}
+
                         }
 
                     }

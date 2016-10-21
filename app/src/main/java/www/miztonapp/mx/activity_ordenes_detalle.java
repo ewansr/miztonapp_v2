@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import www.miztonapp.mx.models.LoginModel;
 import www.miztonapp.mx.utilerias.FTPServerConfig;
 import www.miztonapp.mx.utilerias.FTPUtils;
 import www.miztonapp.mx.utilerias.Utils;
@@ -92,21 +93,21 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
         no_cargas.setText("0 Fotos cargadas");
 
         FTPServerConfig.ruta_crear_ftp[0] = _fecha.substring(0,10);
-        FTPServerConfig.ruta_crear_ftp[1] = _telefono;
-        FTPServerConfig.ruta_crear_ftp[2] = "juancho";
+        FTPServerConfig.ruta_crear_ftp[2] = _telefono;
+        FTPServerConfig.ruta_crear_ftp[1] = LoginModel.nombre_completo;
 
-        FTPUtils ftpclient = new FTPUtils(context, FTPServerConfig.ruta_crear_ftp ) {
-            @Override
-            public void procesoExitoso(int items_count) {
-                no_cargas.setText(items_count + " Fotos cargadas");
-            }
-
-            @Override
-            public void procesoErroneo() {
-
-            }
-        };
-        ftpclient.execute();
+//        FTPUtils ftpclient = new FTPUtils(context, FTPServerConfig.ruta_crear_ftp ) {
+//            @Override
+//            public void procesoExitoso(int items_count) {
+//                no_cargas.setText(items_count + " Fotos cargadas");
+//            }
+//
+//            @Override
+//            public void procesoErroneo() {
+//
+//            }
+//        };
+//        ftpclient.execute();
 
         map_direccion = (TextView) findViewById(R.id.map_direccion);
     }
@@ -152,12 +153,10 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
     }
 
     public void abrir_galeria(){
-
-
         final Intent intent = new Intent(this, AlbumSelectActivity.class);
         FTPServerConfig.ruta_crear_ftp[0] = _fecha.substring(0,10);
         FTPServerConfig.ruta_crear_ftp[2] = _telefono;
-        FTPServerConfig.ruta_crear_ftp[1] = "juancho";
+        FTPServerConfig.ruta_crear_ftp[1] = LoginModel.nombre_completo;
         FTPUtils ftpclient = new FTPUtils(context, FTPServerConfig.ruta_crear_ftp) {
             @Override
             public void procesoExitoso(int items_count) {

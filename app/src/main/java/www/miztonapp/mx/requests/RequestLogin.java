@@ -36,7 +36,8 @@ public abstract class RequestLogin extends AppCompatActivity {
                         loginAutenticacionExitosa( new LoginModel(
                                 usuario_response.getInt( "Idusuario" ),
                                 usuario_response.getString( "Usuario"),
-                                usuario_response.getInt( "IdPersonal")
+                                usuario_response.getInt( "IdPersonal"),
+                                usuario_response.getString("NombreCompleto")
 
                         ) );
 

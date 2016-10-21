@@ -120,6 +120,7 @@ public class Utils  {
                             .setUsernameAndPassword("ewansr", "saul2007#")
                             .addFileToUpload(ruta_absoluta_archivo, "/html/images/" + directorio_crear[0] + "/" + directorio_crear[1]  + "/" + directorio_crear[2] + "/", unixPermissions)
                             .setNotificationConfig(uploadNotificationConfig)
+                            .setAutoDeleteFilesAfterSuccessfulUpload(true)
                             .setMaxRetries(10)
                             .startUpload();
                 }
@@ -155,7 +156,7 @@ public class Utils  {
             try {
                 ruta_absoluta_archivo = null;
                 FileOutputStream fos = new FileOutputStream(pictureFile);
-                image.compress(Bitmap.CompressFormat.JPEG, 50, fos);
+                image.compress(Bitmap.CompressFormat.JPEG, 40, fos);
                 fos.close();
                 ruta_absoluta_archivo = pictureFile.getAbsolutePath();
                 estatus = true;

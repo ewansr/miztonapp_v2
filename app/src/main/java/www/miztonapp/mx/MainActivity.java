@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+
     private void setupViewPager(ViewPager viewPager) {
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
         TabFragmentGeneral fragmento_ordenes = new TabFragmentGeneral();
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            moveTaskToBack (true);
         }
     }
 
