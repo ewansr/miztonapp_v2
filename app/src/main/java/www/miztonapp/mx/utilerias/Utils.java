@@ -52,15 +52,16 @@ public class Utils  {
     static String ruta_absoluta_archivo;
     private static ProgressDialog progressDialog;
 
-    public static void subir_imagenes_ftp(final Context context, final ArrayList<Image> lista_rutas, final String nombre_archivo, final String fecha) {
+    public static void subir_imagenes_ftp(final Context context, final ArrayList<Image> lista_rutas, String[] directorio_crear) {
         progressDialog = new ProgressDialog( context );
         progressDialog.setMessage( "Procesando imagenes... Espere" );
         progressDialog.show();
         // Solicitar la creción del directorio en el servidor FTP
-        final FTPUtils ftpUtils = new FTPUtils(context, nombre_archivo, fecha) {
+
+        final FTPUtils ftpUtils = new FTPUtils(context, directorio_crear) {
             @Override
             public void procesoExitoso(int items_count) {
-                autorizarCarga(context, lista_rutas, nombre_archivo, fecha, items_count);
+                autorizarCarga(context, lista_rutas, directorio_crear, items_count);
                 if (progressDialog.isShowing()){
                     progressDialog.dismiss();
                 }
@@ -76,7 +77,7 @@ public class Utils  {
         ftpUtils.execute();
     }
 
-    private static void autorizarCarga(Context context, ArrayList<Image> lista_rutas, String nombre_archivo, String directorio_fecha, int iniciar_en){
+    private static void autorizarCarga(Context context, ArrayList<Image> lista_rutas, String[] directorio_crear, int iniciar_en){
         try {
             int i = 0;
 
@@ -90,7 +91,7 @@ public class Utils  {
 
                 // se hace la siguiente operacion para no reemplazar los archivos ya existentes
                 //i+iniciar_en
-                if(clonar_imagen(archivo_origen, nombre_archivo + "_"+Integer.toString(sufijo_contador)+".JPG", context)){
+                if(clonar_imagen(archivo_origen, directorio_crear[2] + "_"+Integer.toString(sufijo_contador)+".JPG", context)){
                     fallo = false;
                     Log.i("renombrando archivo", "Success");
                 } else {
@@ -117,7 +118,7 @@ public class Utils  {
 
                     String uploadId = new FTPUploadRequest(context, "104.236.201.168", 21)
                             .setUsernameAndPassword("ewansr", "saul2007#")
-                            .addFileToUpload(ruta_absoluta_archivo, "/html/images/" + directorio_fecha + "/" + nombre_archivo  + "/", unixPermissions)
+                            .addFileToUpload(ruta_absoluta_archivo, "/html/images/" + directorio_crear[0] + "/" + directorio_crear[1]  + "/" + directorio_crear[2] + "/", unixPermissions)
                             .setNotificationConfig(uploadNotificationConfig)
                             .setMaxRetries(10)
                             .startUpload();

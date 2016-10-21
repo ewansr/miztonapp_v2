@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import www.miztonapp.mx.utilerias.FTPServerConfig;
 import www.miztonapp.mx.utilerias.FTPUtils;
 import www.miztonapp.mx.utilerias.Utils;
 
@@ -89,7 +90,12 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
         fecha.setText(_fecha);
 
         no_cargas.setText("0 Fotos cargadas");
-        FTPUtils ftpclient = new FTPUtils(context, _telefono, _fecha.substring(0,10)) {
+
+        FTPServerConfig.ruta_crear_ftp[0] = _fecha.substring(0,10);
+        FTPServerConfig.ruta_crear_ftp[1] = _telefono;
+        FTPServerConfig.ruta_crear_ftp[2] = "juancho";
+
+        FTPUtils ftpclient = new FTPUtils(context, FTPServerConfig.ruta_crear_ftp ) {
             @Override
             public void procesoExitoso(int items_count) {
                 no_cargas.setText(items_count + " Fotos cargadas");
@@ -148,22 +154,25 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
     public void abrir_galeria(){
 
 
-            final Intent intent = new Intent(this, AlbumSelectActivity.class);
-            FTPUtils ftpclient = new FTPUtils(context, _telefono, _fecha.substring(0, 10)) {
-                @Override
-                public void procesoExitoso(int items_count) {
-                    if (items_count < 15) {
-                        intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 15 - items_count);
-                        startActivityForResult(intent, Constants.REQUEST_CODE);
-                    }else {Utils.crear_toast(context, "Has subido el máximo no. de imágenes permitido (" + Integer.toString(items_count) +")").show();}
-                }
+        final Intent intent = new Intent(this, AlbumSelectActivity.class);
+        FTPServerConfig.ruta_crear_ftp[0] = _fecha.substring(0,10);
+        FTPServerConfig.ruta_crear_ftp[2] = _telefono;
+        FTPServerConfig.ruta_crear_ftp[1] = "juancho";
+        FTPUtils ftpclient = new FTPUtils(context, FTPServerConfig.ruta_crear_ftp) {
+            @Override
+            public void procesoExitoso(int items_count) {
+                if (items_count < 15) {
+                    intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 15 - items_count);
+                    startActivityForResult(intent, Constants.REQUEST_CODE);
+                }else {Utils.crear_toast(context, "Has subido el máximo no. de imágenes permitido (" + Integer.toString(items_count) +")").show();}
+            }
 
-                @Override
-                public void procesoErroneo() {
+            @Override
+            public void procesoErroneo() {
 
-                }
-            };
-            ftpclient.execute();
+            }
+        };
+        ftpclient.execute();
 
     }
 
@@ -180,7 +189,7 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
                     .setCancelable(false)
                     .setPositiveButton("Subir", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            Utils.subir_imagenes_ftp(context, lista_imagen, _telefono, _fecha.substring(0,10));
+                            Utils.subir_imagenes_ftp(context, lista_imagen, FTPServerConfig.ruta_crear_ftp);
                         }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {

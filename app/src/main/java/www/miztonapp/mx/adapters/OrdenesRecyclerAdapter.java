@@ -165,30 +165,30 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
 
     }
 
-    public  void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("Adaptador Ordenes", "onActivityResult");
-
-        if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            ArrayList<Image> images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
-            lista_imagen = images;
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setMessage("¿Estas seguro que deseas subir esas imagenes?")
-                    .setCancelable(false)
-                    .setPositiveButton("Subir", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            Utils.subir_imagenes_ftp(context,lista_imagen, numero_telefono, fecha_orden.substring(0,10));
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
-    }
+//    public  void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        Log.d("Adaptador Ordenes", "onActivityResult");
+//
+//        if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+//            ArrayList<Image> images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
+//            lista_imagen = images;
+//
+//            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//            builder.setMessage("¿Estas seguro que deseas subir esas imagenes?")
+//                    .setCancelable(false)
+//                    .setPositiveButton("Subir", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            Utils.subir_imagenes_ftp(context,lista_imagen, numero_telefono, fecha_orden.substring(0,10));
+//                        }
+//                    })
+//                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            dialog.cancel();
+//                        }
+//                    });
+//            AlertDialog alert = builder.create();
+//            alert.show();
+//        }
+//    }
 
 
 }
