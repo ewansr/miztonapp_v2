@@ -31,7 +31,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/imageView3"
+                android:id="@+id/cv_image"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_height="100dp"

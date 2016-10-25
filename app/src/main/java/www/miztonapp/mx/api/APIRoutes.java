@@ -3,7 +3,7 @@ package www.miztonapp.mx.api;
 /**
  * Clase de rutas
  *
- * @author edmsamuel
+ * @author saul
  */
 public class APIRoutes {
 //    public static String misMenus = "/mis-menus";

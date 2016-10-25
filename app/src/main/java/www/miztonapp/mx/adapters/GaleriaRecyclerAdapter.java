@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.darsh.multipleimageselect.models.Image;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -42,11 +44,11 @@ public class GaleriaRecyclerAdapter extends RecyclerView.Adapter<GaleriaRecycler
 
         //Se usa una dependencia para el cacheo de imagenes dentro de ImageView
 
-//        Picasso.with( context )
-//                .load(items_galeria.get( position ).equipo_img)
-//                .error( R.drawable.crane_express )
-//                .placeholder( R.drawable.crane_express )
-//                .into( holder.cv_image );
+        Picasso.with( context )
+                .load(items_galeria.get( position ).ruta_imagen)
+                .error( R.drawable.picture_ftp )
+                .placeholder( R.drawable.picture_ftp )
+                .into( holder.cv_image );
 
 
         int[] androidColors = context.getResources().getIntArray(R.array.androidcolors);
@@ -67,9 +69,11 @@ public class GaleriaRecyclerAdapter extends RecyclerView.Adapter<GaleriaRecycler
 
     public class ordenesViewHolder extends RecyclerView.ViewHolder{
         CardView cv;
+        ImageView cv_image;
         ordenesViewHolder(View itemView) {
             super(itemView);
             cv = ( CardView )  itemView.findViewById( R.id.cv );
+            cv_image = (ImageView) itemView.findViewById( R.id.cv_image );
             itemView.setOnClickListener( clickListener );
         }
 

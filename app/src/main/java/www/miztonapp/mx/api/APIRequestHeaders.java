@@ -3,7 +3,7 @@ package www.miztonapp.mx.api;
 import java.util.ArrayList;
 
 /**
- * @author edmsamuel 22/06/16.
+ * @author saul 22/06/16.
  */
 public class APIRequestHeaders {
 

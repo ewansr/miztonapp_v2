@@ -3,7 +3,7 @@ package www.miztonapp.mx.api;
 import org.json.JSONObject;
 
 /**
- * Created by Sam on 09/07/16.
+ * Created by saul on 09/07/16.
  */
 public class Request extends APIRequest {
 

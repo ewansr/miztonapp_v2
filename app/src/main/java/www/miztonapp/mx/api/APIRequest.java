@@ -15,7 +15,7 @@ import java.net.URL;
 /**
  * Clase para solicitudes HTTP
  *
- * @author edmsamuel 20/06/16.
+ * @author saul 20/06/16.
  */
 public abstract class APIRequest extends AsyncTask<String, Void, JSONObject> {
     private Boolean hasErrors;
