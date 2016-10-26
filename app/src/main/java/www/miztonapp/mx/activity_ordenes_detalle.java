@@ -1,16 +1,11 @@
 package www.miztonapp.mx;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +17,8 @@ import android.widget.TextView;
 import com.darsh.multipleimageselect.activities.AlbumSelectActivity;
 import com.darsh.multipleimageselect.helpers.Constants;
 import com.darsh.multipleimageselect.models.Image;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -29,7 +26,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.vision.text.Text;
+
+import org.apache.commons.net.ftp.FTPFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,6 +46,7 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
     private static String _telefono;
     private static String _tipoinstalacion;
     private static Context context;
+    private static FTPFile[] lista_archivos;
 
 
     @Override
@@ -59,17 +58,6 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
         setContentView(R.layout.activity_ordenes_detalle);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//        ActionBar actionBar = getActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               abrir_galeria();
-            }
-        });
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -96,18 +84,40 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
         FTPServerConfig.ruta_crear_ftp[2] = _telefono;
         FTPServerConfig.ruta_crear_ftp[1] = LoginModel.nombre_completo;
 
-//        FTPUtils ftpclient = new FTPUtils(context, FTPServerConfig.ruta_crear_ftp ) {
-//            @Override
-//            public void procesoExitoso(int items_count) {
-//                no_cargas.setText(items_count + " Fotos cargadas");
-//            }
-//
-//            @Override
-//            public void procesoErroneo() {
-//
-//            }
-//        };
-//        ftpclient.execute();
+        FloatingActionMenu fam_opciones = (FloatingActionMenu) findViewById(R.id.menu);
+        fam_opciones.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener(){
+            @Override
+            public void onMenuToggle(boolean opened) {
+                FTPUtils ftpclient = new FTPUtils(context, FTPServerConfig.ruta_crear_ftp ) {
+                    @Override
+                    public void procesoExitoso(FTPFile[] archivos_imagen) {
+                        lista_archivos = archivos_imagen.clone();
+                    }
+
+                    @Override
+                    public void procesoErroneo() {
+
+                    }
+                };
+                ftpclient.execute();
+            }
+        });
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.menu_subir);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                abrir_galeria();
+            }
+        });
+
+        FloatingActionButton fab_galeria = (FloatingActionButton) findViewById(R.id.menu_detalle);
+        fab_galeria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                abrir_galeria_ftp();
+            }
+        });
 
         map_direccion = (TextView) findViewById(R.id.map_direccion);
     }
@@ -152,27 +162,30 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
         }
     }
 
+    public void abrir_galeria_ftp(){
+        final Intent intent = new Intent(this, GaleriaActivity.class);
+        FTPServerConfig.ruta_crear_ftp[0] = _fecha.substring(0,10);
+        FTPServerConfig.ruta_crear_ftp[2] = _telefono;
+        FTPServerConfig.ruta_crear_ftp[1] = LoginModel.nombre_completo;
+        intent.putExtra("FTPFile", lista_archivos);
+        intent.putExtra("telefono", FTPServerConfig.ruta_crear_ftp[2]);
+        intent.putExtra("fecha", FTPServerConfig.ruta_crear_ftp[0]);
+        intent.putExtra("usuario", FTPServerConfig.ruta_crear_ftp[1]);
+        startActivity(intent);
+    }
+
     public void abrir_galeria(){
         final Intent intent = new Intent(this, AlbumSelectActivity.class);
         FTPServerConfig.ruta_crear_ftp[0] = _fecha.substring(0,10);
         FTPServerConfig.ruta_crear_ftp[2] = _telefono;
         FTPServerConfig.ruta_crear_ftp[1] = LoginModel.nombre_completo;
-        FTPUtils ftpclient = new FTPUtils(context, FTPServerConfig.ruta_crear_ftp) {
-            @Override
-            public void procesoExitoso(int items_count) {
-                if (items_count < 15) {
-                    intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 15 - items_count);
-                    startActivityForResult(intent, Constants.REQUEST_CODE);
-                }else {Utils.crear_toast(context, "Has subido el máximo no. de imágenes permitido (" + Integer.toString(items_count) +")").show();}
-            }
 
-            @Override
-            public void procesoErroneo() {
-
-            }
-        };
-        ftpclient.execute();
-
+        if (lista_archivos.length < 15) {
+            intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 15 - lista_archivos.length);
+            startActivityForResult(intent, Constants.REQUEST_CODE);
+        }else {
+            Utils.crear_toast(context, "Has subido el máximo no. de imágenes permitido (" + Integer.toString(lista_archivos.length) +")").show();
+        }
     }
 
     @Override

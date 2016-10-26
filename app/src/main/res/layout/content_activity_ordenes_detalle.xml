@@ -8,8 +8,19 @@
     tools:context="www.miztonapp.mx.activity_ordenes_detalle"
     tools:showIn="@layout/activity_ordenes_detalle">
 
-    <include
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/cardview_detalle" />
+        android:layout_height="wrap_content">
+
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/cardview_detalle" />
+
+
+    </RelativeLayout>
+
+
 </android.support.v4.widget.NestedScrollView>

@@ -131,14 +131,12 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         public View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick( View v ) {
-                if (v.getId() == R.id.btn_subir){
-                    abrir_galeria();
-                }
-                if (v.getId() == R.id.btn_cambiar){
-                    abrir_detalle(context);
-                }
-
-
+            if (v.getId() == R.id.btn_subir){
+                abrir_galeria();
+            }
+            if (v.getId() == R.id.btn_cambiar){
+                abrir_detalle(context);
+            }
             }
         };
 

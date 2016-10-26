@@ -22,7 +22,7 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
     static String[] directorio_crear;
 //    String nombre_directorio_crear;
 //    String directorio_fecha;
-    public static int no_archivos;
+    private static FTPFile[] lista_archivos;
     private static ProgressDialog progressDialog;
 
 
@@ -177,7 +177,7 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
 //                }
 
                 FTPFile[] subFiles = ftpclient.listFiles();
-                no_archivos = subFiles.length;
+                lista_archivos  = subFiles;
 
                 ftpclient.logout();
                 ftpclient.disconnect();
@@ -193,7 +193,7 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
     @Override
     protected void onPostExecute(Boolean resultado) {
         if (resultado){
-            procesoExitoso(no_archivos);
+            procesoExitoso(lista_archivos);
         }
         if (progressDialog.isShowing()) {
             progressDialog.dismiss();
@@ -205,7 +205,7 @@ public abstract class FTPUtils extends AsyncTask<String, Void, Boolean> {
         progressDialog = ProgressDialog.show(context, "","Calculando espacio disponible para esta órden... por favor espere",true);
     }
 
-    public abstract void procesoExitoso(int items_count);
+    public abstract void procesoExitoso(FTPFile[] archivos_imagen);
     public abstract void procesoErroneo();
 
 }

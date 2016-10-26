@@ -6,7 +6,6 @@ package www.miztonapp.mx;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,7 +22,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import www.miztonapp.mx.adapters.OrdenesRecyclerAdapter;
 import www.miztonapp.mx.api.Request;

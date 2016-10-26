@@ -81,14 +81,12 @@ public class GaleriaRecyclerAdapter extends RecyclerView.Adapter<GaleriaRecycler
         public View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick( View v ) {
-                if (v.getId() == R.id.btn_subir){
+            if (v.getId() == R.id.btn_subir){
 //                    abrir_galeria();
-                }
-                if (v.getId() == R.id.btn_cambiar){
+            }
+            if (v.getId() == R.id.btn_cambiar){
 //                    abrir_detalle(context);
-                }
-
-
+            }
             }
         };
     }

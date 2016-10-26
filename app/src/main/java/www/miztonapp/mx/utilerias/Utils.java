@@ -31,6 +31,8 @@ import net.gotev.uploadservice.UploadService;
 import net.gotev.uploadservice.ftp.FTPUploadRequest;
 import net.gotev.uploadservice.ftp.UnixPermissions;
 
+import org.apache.commons.net.ftp.FTPFile;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -60,8 +62,8 @@ public class Utils  {
 
         final FTPUtils ftpUtils = new FTPUtils(context, directorio_crear) {
             @Override
-            public void procesoExitoso(int items_count) {
-                autorizarCarga(context, lista_rutas, directorio_crear, items_count);
+            public void procesoExitoso(FTPFile[] archivos_imagen) {
+                autorizarCarga(context, lista_rutas, directorio_crear, archivos_imagen.length);
                 if (progressDialog.isShowing()){
                     progressDialog.dismiss();
                 }
