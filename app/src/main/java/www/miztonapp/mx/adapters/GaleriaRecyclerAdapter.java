@@ -49,7 +49,7 @@ public class GaleriaRecyclerAdapter extends RecyclerView.Adapter<GaleriaRecycler
                 .error( R.drawable.briefcase_material )
                 .resize(50, 50)
                 .noFade()
-                .placeholder( R.drawable.picture_ftp )
+                .placeholder( R.drawable.progress_animation )
                 .into( holder.cv_image );
 
 
