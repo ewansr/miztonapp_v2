@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:id="@+id/cv"
         app:cardElevation="2dp"
-        app:cardBackgroundColor="@android:color/transparent"
+        app:cardBackgroundColor="@android:color/holo_red_dark"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -31,11 +31,13 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/cv_image"
+                android:id="@+id/cv_image_galeria"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_height="100dp"
-                android:layout_above="@+id/btn_cambiar" />
+                android:layout_above="@+id/btn_cambiar"
+                android:scaleType="centerCrop"
+                android:layout_margin="7dp" />
 
             <Button
                 style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
@@ -46,7 +48,9 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:textColorLink="@color/white"
+                android:textColor="@color/white" />
 
             <Button
                 style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
@@ -57,7 +61,9 @@
                 android:layout_alignParentBottom="true"
                 android:layout_toLeftOf="@+id/btn_cambiar"
                 android:layout_toStartOf="@+id/btn_cambiar"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:textColorLink="@color/white"
+                android:textColor="@color/white" />
 
         </RelativeLayout>
 

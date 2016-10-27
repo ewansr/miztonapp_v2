@@ -4,32 +4,32 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:icon="@drawable/nav_dropbox"
+            android:title="Solicitar Material" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:icon="@drawable/nav_calendar_text"
+            android:title="Agenda diaria" />
+        <item
+            android:id="@+id/nav_send"
+            android:icon="@drawable/nav_file_find"
+            android:title="Buscar teléfonos" />
         <item
             android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:icon="@drawable/nav_help_circle"
+            android:title="Ayuda técnica" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="FTTH">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_gallery"
+                android:icon="@drawable/nav_laptop_chromebook"
+                android:title="Aprovisionamiento" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_share"
+                android:icon="@drawable/nav_file_document"
+                android:title="Sábanas distritos" />
         </menu>
     </item>
 

@@ -52,16 +52,18 @@ public class GaleriaActivity extends AppCompatActivity {
         usuario = getIntent().getStringExtra("usuario");
         fecha = getIntent().getStringExtra("fecha");
 
-        GaleriaRecyclerAdapter adaptador_galeria = new GaleriaRecyclerAdapter(construirAdaptador(ftpFile),GaleriaActivity.this);
+//        usuario.replace(" ", "_");
 
+        GaleriaRecyclerAdapter adaptador_galeria = new GaleriaRecyclerAdapter(construirAdaptador(ftpFile),GaleriaActivity.this);
+        recyclerView.setAdapter(adaptador_galeria);
     }
 
     private ArrayList<ModelGaleria> construirAdaptador(FTPFile[] archivos){
-        ArrayList<ModelGaleria> items = null;
+        ArrayList<ModelGaleria> items = new ArrayList<ModelGaleria>();
         for(int i=0; i<archivos.length; i++){
-            String ruta = FTPServerConfig.ruta_base_imagenes + fecha + "/" +
+            String ruta = "http://"+FTPServerConfig.ruta_base_imagenes + fecha + "/" +
                     usuario + "/" + telefono + "/" + archivos[i].getName();
-            items.add(0, new ModelGaleria(telefono, ruta));
+            items.add(new ModelGaleria(telefono, ruta));
         }
         return items;
     }

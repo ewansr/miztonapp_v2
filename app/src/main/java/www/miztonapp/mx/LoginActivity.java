@@ -15,6 +15,7 @@ import android.widget.TextView;
 import org.json.JSONException;
 
 import mehdi.sakout.fancybuttons.FancyButton;
+import www.miztonapp.mx.SQL.SQLiteDBDataSource;
 import www.miztonapp.mx.api.mException;
 import www.miztonapp.mx.models.LoginModel;
 import www.miztonapp.mx.requests.RequestLogin;
@@ -32,18 +33,21 @@ public class LoginActivity extends RequestLogin implements View.OnClickListener,
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        SQLiteDBDataSource dataSource = new SQLiteDBDataSource(this);
+        if (Utils.usuario_iniciado(this)){
+            iniciar_actividad_principal(Utils.obtener_usuario(this));
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         FancyButton login_button = (FancyButton) findViewById(R.id.btnLogin);
-//        etiqueta_usuario = (TextView)  findViewById(R.id.tvusuario);
-//        etiqueta_contrasena = (TextView)  findViewById(R.id.tvContrasena);
         usuario = (EditText) findViewById(R.id.edtUsuario);
         contrasena = (EditText) findViewById(R.id.edtContrasena);
 
         login_button.setOnClickListener(this);
         Utils.setStatusColor(this);
-
     }
 
 
@@ -90,10 +94,8 @@ public class LoginActivity extends RequestLogin implements View.OnClickListener,
 
     @Override
     public void loginAutenticacionExitosa(LoginModel usuario) {
-        Utils.crear_toast(this, "Iniciando sesión...").show();
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-        overridePendingTransition(R.anim.left_in, R.anim.left_out);
+        Utils.guardar_usuario(this, usuario );
+        iniciar_actividad_principal(usuario);
     }
 
     @Override
@@ -101,4 +103,13 @@ public class LoginActivity extends RequestLogin implements View.OnClickListener,
         android.app.AlertDialog alertDialog = Utils.crear_alerta(this, "Error al iniciar sesión", error.getMessage());
         alertDialog.show();
     }
+
+    public void iniciar_actividad_principal(LoginModel usuario){
+        Utils.crear_toast(this, "Iniciando sesión...").show();
+        Intent i = new Intent(this, MainActivity.class);
+        i.putExtras(Utils.usuario_to_bundle(usuario) );
+        startActivity(i);
+        overridePendingTransition(R.anim.left_in, R.anim.left_out);
+    }
+
 }

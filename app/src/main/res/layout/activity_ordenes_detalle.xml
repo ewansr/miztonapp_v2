@@ -121,7 +121,8 @@
                     android:layout_marginTop="3dp"
                     app:layout_anchorGravity="top|left"
                     android:layout_gravity="bottom|right"
-                    android:textStyle="normal|bold" />
+                    android:textStyle="normal|bold"
+                    android:visibility="gone"/>
 
 
 
@@ -180,13 +181,6 @@
         menu_colorNormal="@color/colorAccent"
         menu_colorPressed="?attr/colorAccent">
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_conteo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/tooltip_image_24"
-            fab:fab_size="mini"
-            fab:fab_label="Imagenes subidas" />
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_subir"
             android:layout_width="wrap_content"

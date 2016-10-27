@@ -9,7 +9,7 @@ public class FTPServerConfig {
     public static String usuario      = "ewansr";
     public static String contrasena   = "saul2007#";
     public static int puerto          = 21;
-    public static String ruta_base_imagenes          = "html/images/";
+    public static String ruta_base_imagenes          = direccion_ip+"/images/";
     public static String[] ruta_crear_ftp = {"Fecha","Nombre","Numero"};
 
 }

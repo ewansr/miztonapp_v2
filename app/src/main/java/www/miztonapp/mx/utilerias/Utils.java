@@ -6,10 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -42,6 +45,11 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import www.miztonapp.mx.R;
+import www.miztonapp.mx.SQL.SQLiteDBConfig;
+import www.miztonapp.mx.SQL.SQLiteDbHelper;
+import www.miztonapp.mx.models.LoginModel;
+
+import static www.miztonapp.mx.SQL.SQLiteDBConfig.TABLA_USUARIO;
 
 /**
  * Created by EwanS on 17/08/2016.
@@ -323,6 +331,60 @@ public class Utils  {
                 img.setImageBitmap(bmp);
             }
         }
+    }
+
+
+    public static LoginModel obtener_usuario(Context context) {
+        SQLiteDbHelper cranex_db_helper = new SQLiteDbHelper(context);
+        SQLiteDatabase cranex_db = cranex_db_helper.getWritableDatabase();
+        LoginModel usuario = new LoginModel(-1, "", -1, "");
+
+        if ( cranex_db == null ) {
+            return usuario;
+        }
+
+        Cursor cursor_usuario = cranex_db.rawQuery( "SELECT * FROM " + TABLA_USUARIO, null );
+        while( cursor_usuario.moveToNext() ) {
+            usuario = new LoginModel(
+                    cursor_usuario.getInt( cursor_usuario.getColumnIndex(SQLiteDBConfig.cols_user.ID_QUOTES) ),
+                    cursor_usuario.getString( cursor_usuario.getColumnIndex(SQLiteDBConfig.cols_user.USUARIO) ),
+                    cursor_usuario.getInt( cursor_usuario.getColumnIndex(SQLiteDBConfig.cols_user.IDPERSONAL) ),
+                    cursor_usuario.getString( cursor_usuario.getColumnIndex(SQLiteDBConfig.cols_user.NOMBRE) )
+            );
+        }
+
+        cursor_usuario.close();
+        cranex_db.close();
+        return usuario;
+    }
+
+    public static void guardar_usuario( Context context, LoginModel usuario ) {
+        SQLiteDbHelper cranex_db_helper = new SQLiteDbHelper(context);
+        SQLiteDatabase cranex_db = cranex_db_helper.getWritableDatabase();
+
+        cranex_db.execSQL(
+                "UPDATE " + TABLA_USUARIO + " SET " +
+                        SQLiteDBConfig.cols_user.ID_QUOTES + " = " + Integer.toString( usuario.id ) + "," +
+                        SQLiteDBConfig.cols_user.USUARIO + " = '" + usuario.nombre + "', " +
+                        SQLiteDBConfig.cols_user.NOMBRE + " = '" + usuario.nombre_completo + "', " +
+                        SQLiteDBConfig.cols_user.IDPERSONAL+" = '" + usuario.idpersonal + "'"
+        );
+
+        cranex_db.close();
+    }
+
+    public static boolean usuario_iniciado(Context context) {
+        LoginModel usuario = obtener_usuario(context);
+        return usuario.id > -1;
+    }
+
+    public static Bundle usuario_to_bundle(LoginModel usuario ) {
+        Bundle bundle = new Bundle();
+        bundle.putInt( "usuario_id", usuario.id );
+        bundle.putString( "usuario_nombre", usuario.nombre );
+        bundle.putString( "usuario_nombre_completo", usuario.nombre_completo );
+        bundle.putInt( "usuario_idpersonal", usuario.idpersonal );
+        return bundle;
     }
 }
 

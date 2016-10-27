@@ -80,26 +80,29 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
 
         no_cargas.setText("0 Fotos cargadas");
 
+        String usuario = LoginModel.nombre_completo;
         FTPServerConfig.ruta_crear_ftp[0] = _fecha.substring(0,10);
         FTPServerConfig.ruta_crear_ftp[2] = _telefono;
-        FTPServerConfig.ruta_crear_ftp[1] = LoginModel.nombre_completo;
+        FTPServerConfig.ruta_crear_ftp[1] = usuario;;
 
         FloatingActionMenu fam_opciones = (FloatingActionMenu) findViewById(R.id.menu);
         fam_opciones.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener(){
             @Override
             public void onMenuToggle(boolean opened) {
-                FTPUtils ftpclient = new FTPUtils(context, FTPServerConfig.ruta_crear_ftp ) {
-                    @Override
-                    public void procesoExitoso(FTPFile[] archivos_imagen) {
-                        lista_archivos = archivos_imagen.clone();
-                    }
+                if (opened) {
+                    FTPUtils ftpclient = new FTPUtils(context, FTPServerConfig.ruta_crear_ftp) {
+                        @Override
+                        public void procesoExitoso(FTPFile[] archivos_imagen) {
+                            lista_archivos = archivos_imagen.clone();
+                        }
 
-                    @Override
-                    public void procesoErroneo() {
+                        @Override
+                        public void procesoErroneo() {
 
-                    }
-                };
-                ftpclient.execute();
+                        }
+                    };
+                    ftpclient.execute();
+                }
             }
         });
 
@@ -164,9 +167,10 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
 
     public void abrir_galeria_ftp(){
         final Intent intent = new Intent(this, GaleriaActivity.class);
+        String usuario = LoginModel.nombre_completo;
         FTPServerConfig.ruta_crear_ftp[0] = _fecha.substring(0,10);
         FTPServerConfig.ruta_crear_ftp[2] = _telefono;
-        FTPServerConfig.ruta_crear_ftp[1] = LoginModel.nombre_completo;
+        FTPServerConfig.ruta_crear_ftp[1] = usuario;
         intent.putExtra("FTPFile", lista_archivos);
         intent.putExtra("telefono", FTPServerConfig.ruta_crear_ftp[2]);
         intent.putExtra("fecha", FTPServerConfig.ruta_crear_ftp[0]);
@@ -176,9 +180,10 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
 
     public void abrir_galeria(){
         final Intent intent = new Intent(this, AlbumSelectActivity.class);
+        String usuario = LoginModel.nombre_completo;
         FTPServerConfig.ruta_crear_ftp[0] = _fecha.substring(0,10);
         FTPServerConfig.ruta_crear_ftp[2] = _telefono;
-        FTPServerConfig.ruta_crear_ftp[1] = LoginModel.nombre_completo;
+        FTPServerConfig.ruta_crear_ftp[1] = usuario;;
 
         if (lista_archivos.length < 15) {
             intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 15 - lista_archivos.length);

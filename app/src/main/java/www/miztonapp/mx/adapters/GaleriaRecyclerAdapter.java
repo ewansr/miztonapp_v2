@@ -45,8 +45,10 @@ public class GaleriaRecyclerAdapter extends RecyclerView.Adapter<GaleriaRecycler
         //Se usa una dependencia para el cacheo de imagenes dentro de ImageView
 
         Picasso.with( context )
-                .load(items_galeria.get( position ).ruta_imagen)
-                .error( R.drawable.picture_ftp )
+                .load(items_galeria.get( position ).ruta_imagen.replace(" ", "%20"))
+                .error( R.drawable.briefcase_material )
+                .resize(50, 50)
+                .noFade()
                 .placeholder( R.drawable.picture_ftp )
                 .into( holder.cv_image );
 
@@ -73,7 +75,7 @@ public class GaleriaRecyclerAdapter extends RecyclerView.Adapter<GaleriaRecycler
         ordenesViewHolder(View itemView) {
             super(itemView);
             cv = ( CardView )  itemView.findViewById( R.id.cv );
-            cv_image = (ImageView) itemView.findViewById( R.id.cv_image );
+            cv_image = (ImageView) itemView.findViewById( R.id.cv_image_galeria );
             itemView.setOnClickListener( clickListener );
         }
 

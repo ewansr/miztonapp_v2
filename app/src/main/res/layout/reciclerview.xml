@@ -10,6 +10,6 @@
         android:layout_marginLeft="0dp"
         android:layout_marginTop="5dp"
         android:paddingTop="7dp"
-        android:background="?attr/colorPrimary" />
+        android:background="@android:color/transparent" />
 
 </android.support.v4.widget.SwipeRefreshLayout>
