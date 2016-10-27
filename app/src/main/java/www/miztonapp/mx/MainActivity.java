@@ -2,6 +2,7 @@ package www.miztonapp.mx;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -18,8 +19,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+
+import java.io.File;
 
 import www.miztonapp.mx.adapters.OrdenesRecyclerAdapter;
+import www.miztonapp.mx.utilerias.Utils;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -48,6 +53,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        Bundle bundle = getIntent().getExtras();
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -55,6 +62,9 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+//        TextView tv_tecnico_drawer = (TextView) findViewById(R.id.tv_nombre_tecnico);
+//        tv_tecnico_drawer.setText(bundle.getString("usuario_nombre_completo"));
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -132,18 +142,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
         if (id == R.id.action_camera){
-//            File destination = new File(Environment
-//                    .getExternalStorageDirectory(), "122222" + ".jpg");
-//
-//            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//            intent.putExtra(MediaStore.EXTRA_OUTPUT,
-//                    Uri.fromFile(destination));
-//            startActivityForResult(intent, 2);
-
+//            Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+//            startActivityForResult(intent, 0);
+        }
+        if (id == R.id.action_session){
+            Utils.limpiar_usuario(this);
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

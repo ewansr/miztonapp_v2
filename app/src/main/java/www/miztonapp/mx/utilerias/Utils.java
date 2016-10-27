@@ -373,6 +373,22 @@ public class Utils  {
         cranex_db.close();
     }
 
+
+    public static void limpiar_usuario( Context context ) {
+        SQLiteDbHelper cranex_db_helper = new SQLiteDbHelper(context);
+        SQLiteDatabase cranex_db = cranex_db_helper.getWritableDatabase();
+
+        cranex_db.execSQL(
+                "UPDATE " + TABLA_USUARIO + " SET " +
+                        SQLiteDBConfig.cols_user.ID_QUOTES + " = " + -1 + "," +
+                        SQLiteDBConfig.cols_user.USUARIO + " = '', " +
+                        SQLiteDBConfig.cols_user.NOMBRE + " = '', " +
+                        SQLiteDBConfig.cols_user.IDPERSONAL+" = '" + -1 + "'"
+        );
+
+        cranex_db.close();
+    }
+
     public static boolean usuario_iniciado(Context context) {
         LoginModel usuario = obtener_usuario(context);
         return usuario.id > -1;

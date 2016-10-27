@@ -15,13 +15,8 @@
         android:title="Buscar"/>
     <item
         android:id="@+id/action_session"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         android:showAsAction="ifRoom"
         android:icon="@android:drawable/ic_menu_search"
         android:title="Cerrar Sesión"/>
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="3"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
 </menu>
