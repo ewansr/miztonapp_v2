@@ -1,6 +1,7 @@
 package www.miztonapp.mx.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,12 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.load.model.ImageVideoWrapperEncoder;
 import com.darsh.multipleimageselect.models.Image;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+import www.miztonapp.mx.ImagenActivity;
 import www.miztonapp.mx.R;
 import www.miztonapp.mx.models.ModelGaleria;
 
@@ -52,6 +55,7 @@ public class GaleriaRecyclerAdapter extends RecyclerView.Adapter<GaleriaRecycler
                 .placeholder( R.drawable.progress_animation )
                 .into( holder.cv_image );
 
+        holder.url_imagen = items_galeria.get(position).ruta_imagen.replace(" ", "%20");
 
         int[] androidColors = context.getResources().getIntArray(R.array.androidcolors);
         Random rnd = new Random();
@@ -72,17 +76,25 @@ public class GaleriaRecyclerAdapter extends RecyclerView.Adapter<GaleriaRecycler
     public class ordenesViewHolder extends RecyclerView.ViewHolder{
         CardView cv;
         ImageView cv_image;
+        public String url_imagen;
+
         ordenesViewHolder(View itemView) {
             super(itemView);
             cv = ( CardView )  itemView.findViewById( R.id.cv );
             cv_image = (ImageView) itemView.findViewById( R.id.cv_image_galeria );
             itemView.setOnClickListener( clickListener );
+            url_imagen = null;
         }
-
 
         public View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick( View v ) {
+            if (v.getId() == R.id.rl_cv){
+                Intent intent = new Intent(context, ImagenActivity.class);
+                intent.putExtra("url_imagen", url_imagen);
+                context.startActivity(intent);
+            }
+
             if (v.getId() == R.id.btn_subir){
 //                    abrir_galeria();
             }

@@ -171,7 +171,7 @@
         fab:menu_labels_position="left"
         fab:menu_openDirection="up"
         fab:menu_backgroundColor="@color/white_semi"
-        fab:menu_fab_label="your_label_here"
+        fab:menu_fab_label="Opciones"
         fab:menu_fab_show_animation="@anim/fab_scale_up"
         fab:menu_fab_hide_animation="@anim/fab_scale_down"
         android:layout_centerVertical="true"

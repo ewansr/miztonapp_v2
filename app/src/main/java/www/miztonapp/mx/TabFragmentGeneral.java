@@ -109,7 +109,8 @@ public class TabFragmentGeneral extends Fragment {
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
 
-        consultar_ordenes(LoginModel.idpersonal, DateU.StartOfWeek(year, month, day), DateU.EndOfWeek(year, month, day), v);
+        LoginModel usuario = Utils.obtener_usuario(context);
+        consultar_ordenes(usuario.idpersonal, DateU.StartOfWeek(year, month, day), DateU.EndOfWeek(year, month, day), v);
     }
 
     public void consultar_ordenes(int idpersonal, String inicio, String termino, View v){

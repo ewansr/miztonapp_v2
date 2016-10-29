@@ -68,7 +68,8 @@
         <activity
             android:name=".LocalizacionActivity"
             android:label="@string/title_activity_localizacion" />
-        <activity android:name=".GaleriaActivity"></activity>
+        <activity android:name=".GaleriaActivity" />
+        <activity android:name=".ImagenActivity"></activity>
     </application>
 
 </manifest>
