@@ -183,7 +183,7 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
         String usuario = LoginModel.nombre_completo;
         FTPServerConfig.ruta_crear_ftp[0] = _fecha.substring(0,10);
         FTPServerConfig.ruta_crear_ftp[2] = _telefono;
-        FTPServerConfig.ruta_crear_ftp[1] = usuario;;
+        FTPServerConfig.ruta_crear_ftp[1] = usuario;
 
         if (lista_archivos.length < 15) {
             intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 15 - lista_archivos.length);

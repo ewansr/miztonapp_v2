@@ -11,12 +11,35 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="www.miztonapp.mx.ImagenActivity">
 
-    <ImageView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srcCompat="@android:drawable/ic_menu_report_image"
-        android:id="@+id/imagen_evidencia"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:text="Subir Fotografía"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_sustituir"
+                android:layout_below="@+id/imagen_evidencia"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                style="@style/Widget.AppCompat.Button.Colored" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                app:srcCompat="@android:drawable/ic_menu_report_image"
+                android:id="@+id/imagen_evidencia"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_height="350dp" />
+        </RelativeLayout>
+    </ScrollView>
+
 </RelativeLayout>

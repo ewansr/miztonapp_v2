@@ -59,7 +59,7 @@ public class Utils  {
     /*
      *@Context Parametro contexto de activity
      */
-    static String ruta_absoluta_archivo;
+    public static String ruta_absoluta_archivo;
     private static ProgressDialog progressDialog;
 
     public static void subir_imagenes_ftp(final Context context, final ArrayList<Image> lista_rutas, String[] directorio_crear) {
