@@ -138,6 +138,7 @@ public class TabFragmentGeneral extends Fragment {
                         for ( int i = 0; i < items.length() ; i++) {
                             JSONObject item = items.getJSONObject(i);
                             lista.add(new ModelOrdenesTrabajo (
+                                    item.getString("row_number"),
                                     item.getString("Folio"),
                                     item.getString("Telefono"),
                                     item.getString("TipoInstalacion"),

@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity
         resumenFragment.initTabFragmentGeneral(MainActivity.this);
         adapter.addFragment(resumenFragment, "Resumen");
 
-        adapter.addFragment(new TabFragmentGeneral(), "Foro");
+        adapter.addFragment(new TabFragmentGeneral(), "Bolsa de Trabajo");
         viewPager.setAdapter(adapter);
     }
 

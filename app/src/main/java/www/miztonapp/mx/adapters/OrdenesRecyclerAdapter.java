@@ -62,6 +62,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         holder.telefono = items_orden_trabajo.get(position).telefono_orden;
         holder.fecha    = items_orden_trabajo.get(position).fecha;
         holder.tipo_instalacion    = items_orden_trabajo.get(position).tipo_instalacion;
+        holder.tv_rowcount.setText( items_orden_trabajo.get(position).contador_filas );
 
         if ( items_orden_trabajo.get(position).tipo_instalacion.equals("FO") ){
             holder.cv_image.setImageResource(R.drawable.fiber_icon_material);
@@ -102,6 +103,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         TextView cv_tipo;
         TextView cv_fecha;
         TextView cv_estatus;
+        TextView tv_rowcount;
         ImageView cv_image;
         Button btn_detalle;
         String telefono;
@@ -119,6 +121,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
             cv_fecha        = ( TextView )  itemView.findViewById( R.id.cv_fecha );
             cv_estatus      = ( TextView )  itemView.findViewById( R.id.cv_estatus );
             cv_image        = ( ImageView ) itemView.findViewById( R.id.cv_image );
+            tv_rowcount     = ( TextView )  itemView.findViewById( R.id.tv_rowcount );
             btn_detalle     = ( Button )    itemView.findViewById( R.id.btn_cambiar);
 
             ImageButton subir_imagen = (ImageButton) itemView.findViewById(R.id.btn_subir);
