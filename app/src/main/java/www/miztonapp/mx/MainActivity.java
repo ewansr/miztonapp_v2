@@ -2,37 +2,29 @@ package www.miztonapp.mx;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.design.widget.FloatingActionButton;
+
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
 
-import java.io.File;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 
-import www.miztonapp.mx.adapters.OrdenesRecyclerAdapter;
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 import www.miztonapp.mx.utilerias.Utils;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-    RecyclerView recyclerView;
-    StaggeredGridLayoutManager staggeredGridLayoutManager;
-    SwipeRefreshLayout swipeRefreshLayout;
-    private OrdenesRecyclerAdapter solicitudesAdapter;
     private ViewPager viewPager;
 
     @Override
@@ -43,19 +35,45 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_add);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.menu_subir);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//               Intent i = new Intent(MainActivity.this, activity_ordenes_detalle.class);
-//               startActivity(i);
+                Intent i = new Intent(MainActivity.this, RegistroFibraOpticaActivity.class);
+                startActivity(i);
             }
         });
 
+//        FloatingActionMenu fab = (FloatingActionMenu) findViewById(R.id.fab_add);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////               Intent i = new Intent(MainActivity.this, RegistroOrdenActivity.class);
+////                startActivity(i);
+//            }
+//        });
+
+        new MaterialTapTargetPrompt.Builder(MainActivity.this)
+                .setTarget(findViewById(R.id.fab_add_invisible))
+                .setPrimaryText("Registra tu primero orden de trabajo")
+                .setSecondaryText("Toque suavemente para desplegar las opciones.")
+                .setOnHidePromptListener(new MaterialTapTargetPrompt.OnHidePromptListener()
+                {
+                    @Override
+                    public void onHidePrompt(MotionEvent event, boolean tappedTarget)
+                    {
+                        //Do something such as storing a value so that this prompt is never shown again
+                    }
+
+                    @Override
+                    public void onHidePromptComplete()
+                    {
+
+                    }
+                })
+                .show();
+
         Bundle bundle = getIntent().getExtras();
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -63,8 +81,6 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-//        TextView tv_tecnico_drawer = (TextView) findViewById(R.id.tv_nombre_tecnico);
-//        tv_tecnico_drawer.setText(bundle.getString("usuario_nombre_completo"));
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

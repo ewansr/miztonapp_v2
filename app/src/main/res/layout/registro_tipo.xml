@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.redbooth.WelcomePageLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+    <RadioButton
+        android:text="Instalación de F.O."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rb_fo"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/rb_cobre"
+        android:layout_alignStart="@+id/rb_cobre"
+        android:layout_marginBottom="209dp"
+        android:checked="false" />
+
+    <TextView
+        android:text="Selecciona el tipo de orden a registrar:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_titulo"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_marginBottom="39dp"
+        android:layout_above="@+id/rb_cobre"
+        android:layout_centerHorizontal="true" />
+
+    <RadioButton
+        android:text="Instalación de Cobre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rb_cobre"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_above="@+id/rb_fo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="21dp"
+        android:checked="true" />
+</com.redbooth.WelcomePageLayout>

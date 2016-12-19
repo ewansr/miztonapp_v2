@@ -70,8 +70,15 @@
             android:label="@string/title_activity_localizacion" />
         <activity android:name=".GaleriaActivity" />
         <activity
-            android:theme="@style/AppThemeDialog"
-            android:name=".ImagenActivity" />
+            android:name=".ImagenActivity"
+            android:theme="@style/AppThemeDialog" />
+        <activity android:name=".RegistroOrdenActivity">
+            android:label="Datos de Orden"
+            android:theme="@style/AppThemeDialog" />
+        </activity>
+        <activity
+            android:name=".RegistroFibraOpticaActivity"
+            android:label="Registro de órden de F.O" />
     </application>
 
 </manifest>

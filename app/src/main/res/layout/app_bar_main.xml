@@ -39,8 +39,6 @@
 
         <include layout="@layout/content_main" />
 
-
-
     </android.support.v4.view.ViewPager>
 
     <android.support.design.widget.FloatingActionButton
@@ -48,15 +46,77 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         fab:fabSize="mini"
-        fab:srcCompat="@drawable/fab_add"
-        android:id="@+id/fab_add"
-        app:layout_anchor="@+id/pager"
+        fab:srcCompat="@android:drawable/ic_input_add"
+        android:id="@+id/fab_add_invisible"
+        app:layout_anchor="@+id/fab_add"
         app:layout_anchorGravity="bottom|right"
-        android:layout_gravity="top|center_horizontal"
-        android:layout_marginBottom="40dp"
-        android:layout_marginRight="30dp">
+        android:layout_gravity="top|left"
+        android:layout_marginBottom="23dp"
+        android:layout_marginRight="17dp"
+        android:visibility="invisible" />
 
-    </android.support.design.widget.FloatingActionButton>
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fab_add"
+        android:layout_width="match_parent"
+        fab:menu_fab_size="normal"
+        fab:menu_showShadow="true"
+        fab:menu_shadowColor="#66000000"
+        fab:menu_shadowRadius="4dp"
+        fab:menu_shadowXOffset="1dp"
+        fab:menu_shadowYOffset="3dp"
+        fab:menu_colorNormal="@color/colorAccent"
+        fab:menu_colorPressed="@color/colorAccent"
+        fab:menu_colorRipple="@color/colorPrimaryDark"
+        fab:menu_animationDelayPerItem="50"
+        fab:menu_icon="@drawable/fab_add"
+        fab:menu_buttonSpacing="0dp"
+        fab:menu_labels_margin="0dp"
+        fab:menu_labels_showAnimation="@anim/fab_scale_up"
+        fab:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+        fab:menu_labels_paddingTop="4dp"
+        fab:menu_labels_paddingRight="8dp"
+        fab:menu_labels_paddingBottom="4dp"
+        fab:menu_labels_paddingLeft="8dp"
+        fab:menu_labels_padding="8dp"
+        fab:menu_labels_textColor="#FFFFFF"
+        fab:menu_labels_textSize="14sp"
+        fab:menu_labels_cornerRadius="3dp"
+        fab:menu_labels_colorNormal="@color/colorPrimaryDark"
+        fab:menu_labels_colorPressed="@color/colorAccent"
+        fab:menu_labels_colorRipple="@color/colorPrimaryDark"
+        fab:menu_labels_showShadow="true"
+        fab:menu_labels_singleLine="false"
+        fab:menu_labels_ellipsize="none"
+        fab:menu_labels_maxLines="-1"
+        fab:menu_labels_position="left"
+        fab:menu_openDirection="up"
+        fab:menu_backgroundColor="@color/white_semi"
+        fab:menu_fab_label="Opciones"
+        fab:menu_fab_show_animation="@anim/fab_scale_up"
+        fab:menu_fab_hide_animation="@anim/fab_scale_down"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_height="match_parent"
+        menu_colorNormal="@color/colorAccent"
+        menu_colorPressed="?attr/colorAccent">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_subir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/phone"
+            fab:fab_size="mini"
+            fab:fab_label="Cobre" />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_detalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/phone"
+            fab:fab_size="mini"
+            fab:fab_label="Fibra Óptica" />
+
+    </com.github.clans.fab.FloatingActionMenu>
 
 
 </android.support.design.widget.CoordinatorLayout>
