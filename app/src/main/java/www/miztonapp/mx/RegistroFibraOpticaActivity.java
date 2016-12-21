@@ -66,6 +66,7 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
     }
 
     private Boolean validaCampos(){
+        edtFolio.validate();
         return edtFolio.isValid("\\d\\d\\d\\d\\d\\d\\d\\d\\d");
     }
 }
