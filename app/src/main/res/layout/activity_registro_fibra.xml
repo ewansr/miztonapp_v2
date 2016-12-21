@@ -38,26 +38,17 @@
                 android:layout_marginTop="21dp"
                 android:id="@+id/tv_estatus" />
 
-            <TextView
-                android:text="Tipo de Órden:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="29dp"
-                android:id="@+id/tv_tipo_orden"
-                android:layout_below="@+id/tv_estatus"
-                android:layout_alignLeft="@+id/tv_estatus"
-                android:layout_alignStart="@+id/tv_estatus" />
-
-            <Spinner
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/sp_estatus"
                 android:layout_below="@+id/tv_estatus"
                 android:layout_marginRight="10dp"
                 android:layout_alignLeft="@+id/tv_estatus"
-                android:layout_alignStart="@+id/tv_estatus" />
+                android:layout_alignStart="@+id/tv_estatus"
+                android:hint="Selecciona Estatus" />
 
-            <Spinner
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_tipo_orden"
@@ -67,7 +58,7 @@
                 android:layout_alignRight="@+id/sp_estatus"
                 android:layout_alignEnd="@+id/sp_estatus" />
 
-            <Spinner
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_contratista"
@@ -259,6 +250,15 @@
                     android:layout_alignParentTop="true" />
 
             </RelativeLayout>
+
+            <TextView
+                android:text="Tipo de Órden:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_tipo_orden"
+                android:layout_below="@+id/sp_estatus"
+                android:layout_alignLeft="@+id/sp_estatus"
+                android:layout_alignStart="@+id/sp_estatus" />
 
         </RelativeLayout>
     </ScrollView>

@@ -50,4 +50,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'uk.co.samuelwall:material-tap-target-prompt:1.6.3'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile ('com.weiwangcn.betterspinner:library-material:1.1.0') {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.rengwuxian.materialedittext', module: 'library'
+    }
 }
