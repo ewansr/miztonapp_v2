@@ -44,6 +44,8 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
         edtPuerto.addValidator(new RegexpValidator("Formato inválido '1-9'", "\\d"));
 
         btnGuardar = (Button) findViewById(R.id.btnGuardar);
+        btnGuardar.setOnClickListener(this);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,  ESTATUS);
         MaterialBetterSpinner textView = (MaterialBetterSpinner) findViewById(R.id.sp_estatus);
         textView.setAdapter(adapter);
@@ -53,8 +55,12 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btnGuardar){
-            if (validaCampos()) {
-                Utils.crear_alerta(this,"no se puede guardar","Campos con formato inválidos o vacios");
+            try {
+                if (!validaCampos()) {
+                    throw new Exception("Error de captura de datos, verifica que no tengas formatos inválidos o campos vacios");
+                }
+            }catch (Exception e){
+                Utils.crear_alerta(this, "Error", e.getMessage()).show();
             }
         }
     }
