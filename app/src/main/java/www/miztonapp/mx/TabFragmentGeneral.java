@@ -190,8 +190,8 @@ public class TabFragmentGeneral extends Fragment {
         if (_recyclerView.getAdapter() == null){
             _recyclerView.setAdapter(solicitudesAdapter);
         }else {
-            _recyclerView.getAdapter().notifyItemInserted(items.size() - 1);
-            _recyclerView.getAdapter().notifyItemRangeChanged(items.size() - 1, size);
+            _recyclerView.getAdapter().notifyItemInserted(items.size() );
+            _recyclerView.getAdapter().notifyItemRangeChanged(0, size);
         }
 
         SwipeRefreshLayout _swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeRefresh);
@@ -205,5 +205,6 @@ public class TabFragmentGeneral extends Fragment {
 
     public void ordenCargaErronea(mException error) {
         Utils.showMessage("Aviso", error.getMessage(), context);
+
     }
 }

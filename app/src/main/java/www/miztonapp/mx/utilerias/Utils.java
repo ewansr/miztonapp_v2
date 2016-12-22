@@ -337,7 +337,7 @@ public class Utils  {
     public static LoginModel obtener_usuario(Context context) {
         SQLiteDbHelper cranex_db_helper = new SQLiteDbHelper(context);
         SQLiteDatabase cranex_db = cranex_db_helper.getWritableDatabase();
-        LoginModel usuario = new LoginModel(-1, "", -1, "");
+        LoginModel usuario = new LoginModel(-1, "", -1, "","");
 
         if ( cranex_db == null ) {
             return usuario;
@@ -349,7 +349,9 @@ public class Utils  {
                     cursor_usuario.getInt( cursor_usuario.getColumnIndex(SQLiteDBConfig.cols_user.ID_QUOTES) ),
                     cursor_usuario.getString( cursor_usuario.getColumnIndex(SQLiteDBConfig.cols_user.USUARIO) ),
                     cursor_usuario.getInt( cursor_usuario.getColumnIndex(SQLiteDBConfig.cols_user.IDPERSONAL) ),
-                    cursor_usuario.getString( cursor_usuario.getColumnIndex(SQLiteDBConfig.cols_user.NOMBRE) )
+                    cursor_usuario.getString( cursor_usuario.getColumnIndex(SQLiteDBConfig.cols_user.NOMBRE) ),
+                    cursor_usuario.getString( cursor_usuario.getColumnIndex(SQLiteDBConfig.cols_user.FOLIO_TELMEX) )
+
             );
         }
 
@@ -367,6 +369,7 @@ public class Utils  {
                         SQLiteDBConfig.cols_user.ID_QUOTES + " = " + Integer.toString( usuario.id ) + "," +
                         SQLiteDBConfig.cols_user.USUARIO + " = '" + usuario.nombre + "', " +
                         SQLiteDBConfig.cols_user.NOMBRE + " = '" + usuario.nombre_completo + "', " +
+                        SQLiteDBConfig.cols_user.FOLIO_TELMEX + " = '" + usuario.folio_telmex + "', " +
                         SQLiteDBConfig.cols_user.IDPERSONAL+" = '" + usuario.idpersonal + "'"
         );
 
@@ -383,6 +386,7 @@ public class Utils  {
                         SQLiteDBConfig.cols_user.ID_QUOTES + " = " + -1 + "," +
                         SQLiteDBConfig.cols_user.USUARIO + " = '', " +
                         SQLiteDBConfig.cols_user.NOMBRE + " = '', " +
+                        SQLiteDBConfig.cols_user.FOLIO_TELMEX + " = '', " +
                         SQLiteDBConfig.cols_user.IDPERSONAL+" = '" + -1 + "'"
         );
 
@@ -400,6 +404,8 @@ public class Utils  {
         bundle.putString( "usuario_nombre", usuario.nombre );
         bundle.putString( "usuario_nombre_completo", usuario.nombre_completo );
         bundle.putInt( "usuario_idpersonal", usuario.idpersonal );
+        bundle.putString( "usuario_foliotelmex", usuario.folio_telmex );
+
         return bundle;
     }
 }

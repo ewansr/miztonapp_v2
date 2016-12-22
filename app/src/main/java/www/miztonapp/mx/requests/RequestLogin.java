@@ -37,7 +37,8 @@ public abstract class RequestLogin extends AppCompatActivity {
                                 usuario_response.getInt( "Idusuario" ),
                                 usuario_response.getString( "Usuario"),
                                 usuario_response.getInt( "IdPersonal"),
-                                usuario_response.getString("NombreCompleto")
+                                usuario_response.getString("NombreCompleto"),
+                                usuario_response.getString("FolioTelmex")
 
                         ) );
 
