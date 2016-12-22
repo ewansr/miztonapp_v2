@@ -22,6 +22,7 @@ import com.darsh.multipleimageselect.models.Image;
 
 import java.util.ArrayList;
 
+import mehdi.sakout.fancybuttons.FancyButton;
 import www.miztonapp.mx.R;
 import www.miztonapp.mx.activity_ordenes_detalle;
 import www.miztonapp.mx.models.ModelOrdenesTrabajo;
@@ -105,7 +106,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         TextView cv_estatus;
         TextView tv_rowcount;
         ImageView cv_image;
-        Button btn_detalle;
+        FancyButton btn_detalle;
         String telefono;
         String fecha;
         String tipo_instalacion;
@@ -122,7 +123,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
             cv_estatus      = ( TextView )  itemView.findViewById( R.id.cv_estatus );
             cv_image        = ( ImageView ) itemView.findViewById( R.id.cv_image );
             tv_rowcount     = ( TextView )  itemView.findViewById( R.id.tv_rowcount );
-            btn_detalle     = ( Button )    itemView.findViewById( R.id.btn_cambiar);
+            btn_detalle     = (FancyButton)    itemView.findViewById( R.id.btn_cambiar);
 
             ImageButton subir_imagen = (ImageButton) itemView.findViewById(R.id.btn_subir);
             btn_detalle.setOnClickListener(clickListener);

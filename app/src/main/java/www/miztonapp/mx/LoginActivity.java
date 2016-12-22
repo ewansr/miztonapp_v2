@@ -1,14 +1,9 @@
 package www.miztonapp.mx;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -42,7 +37,7 @@ public class LoginActivity extends RequestLogin implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        FancyButton login_button = (FancyButton) findViewById(R.id.btnLogin);
+        FancyButton login_button = (FancyButton) findViewById(R.id.btn_material);
         usuario = (EditText) findViewById(R.id.edtUsuario);
         contrasena = (EditText) findViewById(R.id.edtContrasena);
 
@@ -53,7 +48,7 @@ public class LoginActivity extends RequestLogin implements View.OnClickListener,
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.btnLogin){
+        if (view.getId() == R.id.btn_material){
 
             String str_usuario     = usuario.getText().toString();
             String str_contraseana = contrasena.getText().toString();

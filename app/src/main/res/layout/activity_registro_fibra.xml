@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     tools:context="www.miztonapp.mx.MainActivity">
 
@@ -240,15 +240,29 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true">
 
-                <Button
-                    android:text="Guardar >"
-                    android:layout_height="match_parent"
-                    android:id="@+id/btnGuardar"
-                    android:background="@color/colorAccent"
-                    android:textColor="@color/white"
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:id="@+id/btn_guardar"
                     android:layout_width="match_parent"
-                    android:layout_alignParentTop="true" />
+                    android:layout_height="match_parent"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="3dp"
+                    fancy:fb_borderColor="#FFFFFF"
+                    fancy:fb_borderWidth="1dp"
+                    fancy:fb_defaultColor="@color/darkred"
+                    fancy:fb_focusColor="@color/blue"
+                    fancy:fb_fontIconResource="&#xf0c7;"
+                    fancy:fb_iconPosition="left"
+                    fancy:fb_radius="7dp"
+                    fancy:fb_text="Guardar"
+                    fancy:fb_textColor="#FFFFFF"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true">
 
+                </mehdi.sakout.fancybuttons.FancyButton>
             </RelativeLayout>
 
             <TextView
