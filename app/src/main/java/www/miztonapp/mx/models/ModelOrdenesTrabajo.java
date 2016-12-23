@@ -12,8 +12,17 @@ public class ModelOrdenesTrabajo {
     public String fecha;
     public String tipo_instalacion;
     public String estatus_orden;
+    public String comentarios;
+    public String garantia;
+    public String central;
+    public String distrito;
+    public String terminal;
+    public String puerto;
 
-    public ModelOrdenesTrabajo(String contador_filas, String folio_orden,String telefono_orden, String tipo_instalacion, String tipo_orden, String fecha, String estatus_orden){
+    public ModelOrdenesTrabajo(String contador_filas, String folio_orden,String telefono_orden,
+                               String tipo_instalacion, String tipo_orden, String fecha,
+                               String estatus_orden, String comentarios, String garantia, String central,
+                               String distrito, String terminal, String puerto){
         this.contador_filas     = contador_filas;
         this.folio_orden        = folio_orden;
         this.telefono_orden     = telefono_orden;
@@ -21,6 +30,12 @@ public class ModelOrdenesTrabajo {
         this.tipo_orden         = tipo_orden;
         this.fecha              = fecha;
         this.estatus_orden      = estatus_orden;
+        this.comentarios        = comentarios;
+        this.garantia           = garantia;
+        this.central            = central;
+        this.distrito           = distrito;
+        this.terminal           = terminal;
+        this.puerto             = puerto;
     }
 
 }

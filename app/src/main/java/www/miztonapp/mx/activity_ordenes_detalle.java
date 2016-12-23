@@ -45,6 +45,7 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
     private static String _fecha;
     private static String _telefono;
     private static String _tipoinstalacion;
+    private static String _tipoorden;
     private static Context context;
     private static FTPFile[] lista_archivos;
 
@@ -68,15 +69,18 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
         _telefono = extras_datos.getString("telefono");
         _fecha = extras_datos.getString("fecha");
         _tipoinstalacion = extras_datos.getString("tipo_instalacion");
+        _tipoorden = extras_datos.getString("tipo_orden");
 
         TextView telefono         =(TextView) findViewById( R.id.tv_telefono );
         TextView tipo_instalacion =(TextView) findViewById( R.id.tv_tipo );
         TextView fecha            =(TextView) findViewById( R.id.tv_fecha );
+        TextView tipo_orden       =(TextView) findViewById( R.id.tv_tipoinstalacion );
         final TextView no_cargas        =(TextView) findViewById( R.id.tv_cargas );
 
         telefono.setText(_telefono);
         tipo_instalacion.setText(_tipoinstalacion);
         fecha.setText(_fecha);
+        tipo_orden.setText(_tipoorden);
 
         no_cargas.setText("0 Fotos cargadas");
 

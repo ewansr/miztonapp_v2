@@ -1,6 +1,8 @@
 package www.miztonapp.mx;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -93,7 +95,7 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
             public void tOrdenCargaErronea(mException error) {
                 Utils.crear_alerta(RegistroFibraOpticaActivity.this, "Error al obtener el set de datos", error.getMessage()).show();
             }
-        }; catalogo_tipos_orden.getTiposOrden("Cobre");
+        }; catalogo_tipos_orden.getTiposOrden("FO");
 
         spContratistas = (MaterialBetterSpinner) findViewById(R.id.sp_contratista);
 
@@ -218,6 +220,9 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
                         .setCancelable(false)
                         .setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                Intent returnIntent = new Intent();
+                                returnIntent.putExtra("result", "mrok");
+                                setResult(Activity.RESULT_OK,returnIntent);
                                 finish();
                             }
                         });

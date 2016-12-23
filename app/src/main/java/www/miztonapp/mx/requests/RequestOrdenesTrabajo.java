@@ -50,7 +50,13 @@ public abstract class RequestOrdenesTrabajo  {
                                     item.getString("TipoInstalacion"),
                                     item.getString("TipoOS"),
                                     item.getString("FechaCreacion"),
-                                    item.getString("Estatus")
+                                    item.getString("Estatus"),
+                                    item.getString("Comentarios"),
+                                    item.getString("EstatusGarantia"),
+                                    item.getString("Central"),
+                                    item.getString("Distrito"),
+                                    item.getString("Terminal"),
+                                    item.getString("Puerto")
                             ) );
                         }
 

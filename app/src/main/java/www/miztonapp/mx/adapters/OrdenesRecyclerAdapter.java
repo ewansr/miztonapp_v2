@@ -45,6 +45,12 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         this.context = context;
     }
 
+    public void swap(ArrayList<ModelOrdenesTrabajo> datas){
+        items_orden_trabajo.clear();
+        items_orden_trabajo.addAll(datas);
+        notifyDataSetChanged();
+    }
+
     @Override
     public ordenesViewHolder onCreateViewHolder(ViewGroup parent, int viewType ) {
         View v = LayoutInflater.from( parent.getContext() ).inflate( R.layout.cardview_ordenes, parent, false );
@@ -63,6 +69,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         holder.telefono = items_orden_trabajo.get(position).telefono_orden;
         holder.fecha    = items_orden_trabajo.get(position).fecha;
         holder.tipo_instalacion    = items_orden_trabajo.get(position).tipo_instalacion;
+        holder.tipo_orden = items_orden_trabajo.get(position).tipo_orden;
         holder.tv_rowcount.setText( items_orden_trabajo.get(position).contador_filas );
 
         if ( items_orden_trabajo.get(position).tipo_instalacion.equals("FO") ){
@@ -110,6 +117,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         String telefono;
         String fecha;
         String tipo_instalacion;
+        String tipo_orden;
 
         ordenesViewHolder(View itemView) {
             super(itemView);
@@ -149,6 +157,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
             i.putExtra("telefono", telefono);
             i.putExtra("fecha", fecha);
             i.putExtra("tipo_instalacion", tipo_instalacion);
+            i.putExtra("tipo_orden", tipo_orden);
 
             context.startActivity(i);
         }

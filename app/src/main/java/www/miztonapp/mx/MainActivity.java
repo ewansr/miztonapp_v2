@@ -1,11 +1,14 @@
 package www.miztonapp.mx;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -18,6 +21,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.darsh.multipleimageselect.helpers.Constants;
 import com.github.clans.fab.FloatingActionButton;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1 ;
     private ViewPager viewPager;
+    TabFragmentGeneral fragmento_ordenes;
+    PagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +63,12 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.menu_subir);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.menu_fo);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, RegistroFibraOpticaActivity.class);
-                startActivity(i);
+                startActivityForResult(i, Constants.REQUEST_CODE);
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
             }
         });
@@ -76,7 +82,7 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onHidePrompt(MotionEvent event, boolean tappedTarget)
                     {
-                        //Do something such as storing a value so that this prompt is never shown again
+
                     }
 
                     @Override
@@ -95,12 +101,10 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         viewPager = (ViewPager) findViewById(R.id.pager);
         setupViewPager(viewPager);
-
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
@@ -109,7 +113,6 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-
             }
 
             @Override
@@ -141,8 +144,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
-        TabFragmentGeneral fragmento_ordenes = new TabFragmentGeneral();
+        adapter = new PagerAdapter(getSupportFragmentManager());
+        fragmento_ordenes = new TabFragmentGeneral();
         fragmento_ordenes.initTabFragmentGeneral(MainActivity.this);
         adapter.addFragment(fragmento_ordenes, "Ordenes");
 
@@ -150,7 +153,7 @@ public class MainActivity extends AppCompatActivity
         resumenFragment.initTabFragmentGeneral(MainActivity.this);
         adapter.addFragment(resumenFragment, "Resumen");
 
-        adapter.addFragment(new TabFragmentGeneral(), "Bolsa de Trabajo");
+//        adapter.addFragment(new TabFragmentGeneral(), "Bolsa de Trabajo");
         viewPager.setAdapter(adapter);
     }
 
@@ -160,12 +163,26 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        solicitudesAdapter.onActivityResult(requestCode, resultCode, data);
-    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        if (requestCode == 2000) {
+            if(resultCode == Activity.RESULT_OK){
+                String result=data.getStringExtra("result");
+                // Reload current fragment
+//                Fragment frg = null;
+//                frg = getSupportFragmentManager().findFragmentById();
+//                final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//                ft.detach(frg);
+//                ft.attach(frg);
+//                ft.commit();
+            }
+
+            if (resultCode == Activity.RESULT_CANCELED) {
+
+            }
+        }
+    }
 
 
     @Override

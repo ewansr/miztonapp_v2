@@ -76,7 +76,7 @@ public class TabFragmentGeneral extends Fragment {
         recyclerView.setHasFixedSize( true );
         int columnas_default = 1;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-            columnas_default = 2;
+            columnas_default = 1; //ANTES 2 COLUMNAS
 
         sgLayoutManager = new StaggeredGridLayoutManager( columnas_default, 1 );
         recyclerView.setLayoutManager( sgLayoutManager );
@@ -87,6 +87,7 @@ public class TabFragmentGeneral extends Fragment {
                 super.onScrolled( recyclerView, dx, dy );
             }
         });
+//        swipeRefreshLayout.measure(200,200);
 
         return rootView;
     }
@@ -107,8 +108,6 @@ public class TabFragmentGeneral extends Fragment {
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
-
-
         LoginModel usuario = Utils.obtener_usuario(context);
         consultar_ordenes(usuario.idpersonal, DateU.StartOfWeek(year, month, day), DateU.EndOfWeek(year, month, day), v);
     }
@@ -144,7 +143,13 @@ public class TabFragmentGeneral extends Fragment {
                                     item.getString("TipoInstalacion"),
                                     item.getString("TipoOS"),
                                     item.getString("FechaCreacion"),
-                                    item.getString("Estatus")
+                                    item.getString("Estatus"),
+                                    item.getString("Comentarios"),
+                                    item.getString("EstatusGarantia"),
+                                    item.getString("Central"),
+                                    item.getString("Distrito"),
+                                    item.getString("Terminal"),
+                                    item.getString("Puerto")
                             ) );
                         }
 
@@ -182,16 +187,20 @@ public class TabFragmentGeneral extends Fragment {
 
 
     public void ordenCargaExitosa(ArrayList<ModelOrdenesTrabajo> items, View v) {
-        OrdenesRecyclerAdapter solicitudesAdapter = new OrdenesRecyclerAdapter(items, context);
+
 
         int size = items.size();
 
         RecyclerView _recyclerView = (RecyclerView) v.findViewById(R.id.rv);
         if (_recyclerView.getAdapter() == null){
+            solicitudesAdapter = new OrdenesRecyclerAdapter(items, context);
             _recyclerView.setAdapter(solicitudesAdapter);
         }else {
-            _recyclerView.getAdapter().notifyItemInserted(items.size() );
-            _recyclerView.getAdapter().notifyItemRangeChanged(0, size);
+            solicitudesAdapter.swap(items);
+//            _recyclerView.invalidate();
+//            _recyclerView.getAdapter().notifyItemInserted(items.size());
+//            _recyclerView.getAdapter().notifyItemRangeChanged(0, size);
+//            _recyclerView.getAdapter().notifyDataSetChanged();
         }
 
         SwipeRefreshLayout _swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeRefresh);
