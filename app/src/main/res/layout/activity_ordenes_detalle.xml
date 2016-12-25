@@ -24,6 +24,211 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:elevation="17dp"
+        android:layout_margin="10dp">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:elevation="6dp"
+            app:cardCornerRadius="10dp"
+            android:layout_height="150dp">
+
+
+            <TextView
+                android:text="Direccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/map_direccion"
+                android:textStyle="normal|bold"
+                android:textColor="@color/background_accent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="10dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp">
+
+                <TextView
+                    android:text="294 145 88 55"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_telefono"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="73dp"
+                    android:layout_marginStart="73dp"
+                    android:textStyle="normal|bold"
+                    android:textSize="24sp"
+                    android:textColor="@color/background_accent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/phone"
+                    android:id="@+id/imageView2"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginStart="18dp" />
+
+                <TextView
+                    android:text="Tipo:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imageView2"
+                    android:layout_alignLeft="@+id/tv_telefono"
+                    android:layout_alignStart="@+id/tv_telefono"
+                    android:id="@+id/textView5"
+                    android:textColor="@color/background_accent" />
+
+                <TextView
+                    android:text="Miercoles 30 octubre a las 7:00"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_fecha"
+                    android:layout_below="@+id/textView7"
+                    android:layout_alignLeft="@+id/textView7"
+                    android:layout_alignStart="@+id/textView7"
+                    android:layout_marginTop="3dp"
+                    android:textColor="@color/background_accent" />
+
+                <TextView
+                    android:text="Instalación:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView7"
+                    android:layout_below="@+id/textView5"
+                    android:layout_alignLeft="@+id/textView5"
+                    android:layout_alignStart="@+id/textView5"
+                    android:layout_marginTop="3dp"
+                    android:textColor="@color/background_accent" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/textView5"
+                    android:layout_toRightOf="@+id/textView5"
+                    android:layout_toEndOf="@+id/textView5"
+                    android:id="@+id/tv_tipo"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@color/background_accent" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/tv_fecha"
+                    android:layout_toRightOf="@+id/textView7"
+                    android:layout_toEndOf="@+id/textView7"
+                    android:id="@+id/tv_tipoinstalacion"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@color/background_accent" />
+
+                <TextView
+                    android:text="2 Fotos cargadas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_cargas"
+                    android:layout_below="@+id/tv_fecha"
+                    android:layout_alignLeft="@+id/tv_fecha"
+                    android:layout_alignStart="@+id/tv_fecha"
+                    android:layout_marginTop="3dp"
+                    app:layout_anchorGravity="top|left"
+                    android:layout_gravity="bottom|right"
+                    android:textStyle="normal|bold"
+                    android:visibility="gone"
+                    android:textColor="@color/background_accent" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.github.clans.fab.FloatingActionMenu
+                    android:id="@+id/menu"
+                    android:layout_width="match_parent"
+                    fab:menu_fab_size="normal"
+                    fab:menu_showShadow="true"
+                    fab:menu_shadowColor="#66000000"
+                    fab:menu_shadowRadius="4dp"
+                    fab:menu_shadowXOffset="1dp"
+                    fab:menu_shadowYOffset="3dp"
+                    fab:menu_colorNormal="@color/colorAccent"
+                    fab:menu_colorPressed="@color/colorAccent"
+                    fab:menu_colorRipple="#99FFFFFF"
+                    fab:menu_animationDelayPerItem="50"
+                    fab:menu_icon="@drawable/image_24"
+                    fab:menu_buttonSpacing="0dp"
+                    fab:menu_labels_margin="0dp"
+                    fab:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+                    fab:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+                    fab:menu_labels_paddingTop="4dp"
+                    fab:menu_labels_paddingRight="8dp"
+                    fab:menu_labels_paddingBottom="4dp"
+                    fab:menu_labels_paddingLeft="8dp"
+                    fab:menu_labels_padding="8dp"
+                    fab:menu_labels_textColor="#FFFFFF"
+                    fab:menu_labels_textSize="14sp"
+                    fab:menu_labels_cornerRadius="3dp"
+                    fab:menu_labels_colorNormal="@color/white_semi"
+                    fab:menu_labels_colorPressed="#444444"
+                    fab:menu_labels_colorRipple="#66FFFFFF"
+                    fab:menu_labels_showShadow="true"
+                    fab:menu_labels_singleLine="false"
+                    fab:menu_labels_ellipsize="none"
+                    fab:menu_labels_maxLines="-1"
+                    fab:menu_labels_style="@style/AppTheme"
+                    fab:menu_labels_position="left"
+                    fab:menu_openDirection="up"
+                    fab:menu_backgroundColor="@color/white_semi"
+                    fab:menu_fab_label="Opciones"
+                    fab:menu_fab_show_animation="@anim/fab_scale_up"
+                    fab:menu_fab_hide_animation="@anim/fab_scale_down"
+                    android:layout_height="match_parent"
+                    menu_colorNormal="@color/colorAccent"
+                    menu_colorPressed="?attr/colorAccent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true">
+
+                    <com.github.clans.fab.FloatingActionButton
+                        android:id="@+id/menu_subir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/cloud_upload_24"
+                        fab:fab_size="mini"
+                        fab:fab_label="Subir imagen(es)" />
+                    <com.github.clans.fab.FloatingActionButton
+                        android:id="@+id/menu_detalle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/folder_multiple_image_24"
+                        fab:fab_size="mini"
+                        fab:fab_label="Ver imágenes" />
+
+                </com.github.clans.fab.FloatingActionMenu>
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="64dp">
 
@@ -37,201 +242,5 @@
             android:layout_alignParentStart="true" />
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_height="wrap_content"
-            android:elevation="17dp"
-            android:layout_margin="10dp">
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:elevation="6dp"
-                app:cardCornerRadius="10dp"
-                android:layout_height="150dp">
-
-                <TextView
-                    android:text="Direccion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/map_direccion"
-                    android:textStyle="normal|bold"
-                    android:textColor="@color/background_accent"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp">
-
-                    <TextView
-                        android:text="294 145 88 55"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_telefono"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginLeft="73dp"
-                        android:layout_marginStart="73dp"
-                        android:textStyle="normal|bold"
-                        android:textSize="24sp"
-                        android:textColor="@color/background_accent" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/phone"
-                        android:id="@+id/imageView2"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginLeft="18dp"
-                        android:layout_marginStart="18dp" />
-
-                    <TextView
-                        android:text="Tipo:"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/imageView2"
-                        android:layout_alignLeft="@+id/tv_telefono"
-                        android:layout_alignStart="@+id/tv_telefono"
-                        android:id="@+id/textView5"
-                        android:textColor="@color/background_accent" />
-
-                    <TextView
-                        android:text="Miercoles 30 octubre a las 7:00"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_fecha"
-                        android:layout_below="@+id/textView7"
-                        android:layout_alignLeft="@+id/textView7"
-                        android:layout_alignStart="@+id/textView7"
-                        android:layout_marginTop="3dp"
-                        android:textColor="@color/background_accent" />
-
-                    <TextView
-                        android:text="Instalación:"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView7"
-                        android:layout_below="@+id/textView5"
-                        android:layout_alignLeft="@+id/textView5"
-                        android:layout_alignStart="@+id/textView5"
-                        android:layout_marginTop="3dp"
-                        android:textColor="@color/background_accent" />
-
-                    <TextView
-                        android:text="TextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/textView5"
-                        android:layout_toRightOf="@+id/textView5"
-                        android:layout_toEndOf="@+id/textView5"
-                        android:id="@+id/tv_tipo"
-                        android:layout_marginLeft="3dp"
-                        android:textColor="@color/background_accent" />
-
-                    <TextView
-                        android:text="TextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/tv_fecha"
-                        android:layout_toRightOf="@+id/textView7"
-                        android:layout_toEndOf="@+id/textView7"
-                        android:id="@+id/tv_tipoinstalacion"
-                        android:layout_marginLeft="3dp"
-                        android:textColor="@color/background_accent" />
-
-                    <TextView
-                        android:text="2 Fotos cargadas"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_cargas"
-                        android:layout_below="@+id/tv_fecha"
-                        android:layout_alignLeft="@+id/tv_fecha"
-                        android:layout_alignStart="@+id/tv_fecha"
-                        android:layout_marginTop="3dp"
-                        app:layout_anchorGravity="top|left"
-                        android:layout_gravity="bottom|right"
-                        android:textStyle="normal|bold"
-                        android:visibility="gone"
-                        android:textColor="@color/background_accent" />
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
-
-        </RelativeLayout>
-
-        <com.github.clans.fab.FloatingActionMenu
-            android:id="@+id/menu"
-            android:layout_width="match_parent"
-            fab:menu_fab_size="normal"
-            fab:menu_showShadow="true"
-            fab:menu_shadowColor="#66000000"
-            fab:menu_shadowRadius="4dp"
-            fab:menu_shadowXOffset="1dp"
-            fab:menu_shadowYOffset="3dp"
-            fab:menu_colorNormal="@color/colorAccent"
-            fab:menu_colorPressed="@color/colorAccent"
-            fab:menu_colorRipple="#99FFFFFF"
-            fab:menu_animationDelayPerItem="50"
-            fab:menu_icon="@drawable/image_24"
-            fab:menu_buttonSpacing="0dp"
-            fab:menu_labels_margin="0dp"
-            fab:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
-            fab:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
-            fab:menu_labels_paddingTop="4dp"
-            fab:menu_labels_paddingRight="8dp"
-            fab:menu_labels_paddingBottom="4dp"
-            fab:menu_labels_paddingLeft="8dp"
-            fab:menu_labels_padding="8dp"
-            fab:menu_labels_textColor="#FFFFFF"
-            fab:menu_labels_textSize="14sp"
-            fab:menu_labels_cornerRadius="3dp"
-            fab:menu_labels_colorNormal="@color/white_semi"
-            fab:menu_labels_colorPressed="#444444"
-            fab:menu_labels_colorRipple="#66FFFFFF"
-            fab:menu_labels_showShadow="true"
-            fab:menu_labels_singleLine="false"
-            fab:menu_labels_ellipsize="none"
-            fab:menu_labels_maxLines="-1"
-            fab:menu_labels_style="@style/AppTheme"
-            fab:menu_labels_position="left"
-            fab:menu_openDirection="up"
-            fab:menu_backgroundColor="@color/white_semi"
-            fab:menu_fab_label="Opciones"
-            fab:menu_fab_show_animation="@anim/fab_scale_up"
-            fab:menu_fab_hide_animation="@anim/fab_scale_down"
-            android:layout_height="match_parent"
-            menu_colorNormal="@color/colorAccent"
-            menu_colorPressed="?attr/colorAccent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
-
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/menu_subir"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/cloud_upload_24"
-                fab:fab_size="mini"
-                fab:fab_label="Subir imagen(es)" />
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/menu_detalle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/folder_multiple_image_24"
-                fab:fab_size="mini"
-                fab:fab_label="Ver imágenes" />
-
-        </com.github.clans.fab.FloatingActionMenu>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
