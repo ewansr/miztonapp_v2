@@ -1,23 +1,18 @@
 package www.miztonapp.mx.adapters;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.darsh.multipleimageselect.activities.AlbumSelectActivity;
 import com.darsh.multipleimageselect.helpers.Constants;
@@ -131,7 +126,6 @@ public class GaleriaRecyclerAdapter extends RecyclerView.Adapter<GaleriaRecycler
             }
             }
         };
-
         public void abrir_galeria(){
             GaleriaActivity.nombre_original_archivo = nombre_archivo;
             Intent intent = new Intent(context, AlbumSelectActivity.class);
@@ -139,9 +133,6 @@ public class GaleriaRecyclerAdapter extends RecyclerView.Adapter<GaleriaRecycler
             ((Activity)context).startActivityForResult(intent, Constants.REQUEST_CODE);
         }
     }
-
-
-
 
     public void takePhoto() {
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");

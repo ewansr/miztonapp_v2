@@ -1,5 +1,6 @@
 package www.miztonapp.mx;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,8 +9,11 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -59,7 +63,15 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
         setContentView(R.layout.activity_ordenes_detalle);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //What to do on back clicked
+                finish();
+            }
+        });
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -70,6 +82,9 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
         _fecha = extras_datos.getString("fecha");
         _tipoinstalacion = extras_datos.getString("tipo_instalacion");
         _tipoorden = extras_datos.getString("tipo_orden");
+
+        toolbar.setTitle(_telefono);
+//        toolbar.setSubtitle(_tipoorden);
 
         TextView telefono         =(TextView) findViewById( R.id.tv_telefono );
         TextView tipo_instalacion =(TextView) findViewById( R.id.tv_tipo );
@@ -129,16 +144,31 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
         map_direccion = (TextView) findViewById(R.id.map_direccion);
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_activity_ordenes_detalle, menu);
+        return true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Take appropriate action for each action item click
         switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
+            case R.id.action_refresh:
+                // search action
                 return true;
+            case R.id.action_settings:
+                // search action
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

@@ -50,7 +50,6 @@
         </activity>
         <activity
             android:name=".activity_ordenes_detalle"
-            android:label="@string/title_activity_ordenes_detalle"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <!--
@@ -78,7 +77,8 @@
         </activity>
         <activity
             android:name=".RegistroFibraOpticaActivity"
-            android:label="Registro de órden de F.O" />
+            android:label="Registro de órden de F.O"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

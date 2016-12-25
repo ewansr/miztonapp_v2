@@ -1,15 +1,21 @@
 package www.miztonapp.mx;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.transition.Fade;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.rengwuxian.materialedittext.validation.RegexpValidator;
@@ -26,7 +32,6 @@ import www.miztonapp.mx.models.ModelTiposOrden;
 import www.miztonapp.mx.requests.RequestContratista;
 import www.miztonapp.mx.requests.RequestOrdenesTrabajo;
 import www.miztonapp.mx.requests.RequestTiposOrden;
-import www.miztonapp.mx.utilerias.FTPServerConfig;
 import www.miztonapp.mx.utilerias.Utils;
 
 public class RegistroFibraOpticaActivity extends AppCompatActivity implements View.OnClickListener {
@@ -44,6 +49,18 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_fibra);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //What to do on back clicked
+                finish();
+            }
+        });
 
         edtDistrito = (MaterialEditText) findViewById(R.id.edtDistrito);
         edtDistrito.addValidator(new RegexpValidator("Formato inválido 'ABC1234'", "[A-Z^\\s][A-Z^\\s][A-Z^\\s]\\d\\d\\d+"));
@@ -131,6 +148,15 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
 
     }
 
+    private void setupWindowAnimations() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Fade fade = null;
+            fade = new Fade();
+            fade.setDuration(2000);
+            getWindow().setEnterTransition(fade);
+
+        }
+    }
 
     @Override
     public void onClick(View view) {

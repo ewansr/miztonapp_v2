@@ -1,17 +1,14 @@
 package www.miztonapp.mx.adapters;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,9 +23,6 @@ import mehdi.sakout.fancybuttons.FancyButton;
 import www.miztonapp.mx.R;
 import www.miztonapp.mx.activity_ordenes_detalle;
 import www.miztonapp.mx.models.ModelOrdenesTrabajo;
-import www.miztonapp.mx.utilerias.Utils;
-
-import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by Saulo on 31/08/2016.
@@ -114,10 +108,12 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         TextView tv_rowcount;
         ImageView cv_image;
         FancyButton btn_detalle;
+        FancyButton btnExpand;
         String telefono;
         String fecha;
         String tipo_instalacion;
         String tipo_orden;
+        int minHeight;
 
         ordenesViewHolder(View itemView) {
             super(itemView);
@@ -132,6 +128,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
             cv_image        = ( ImageView ) itemView.findViewById( R.id.cv_image );
             tv_rowcount     = ( TextView )  itemView.findViewById( R.id.tv_rowcount );
             btn_detalle     = (FancyButton)    itemView.findViewById( R.id.btn_cambiar);
+            btnExpand       = (FancyButton)  itemView.findViewById(R.id.btn_editar);
 
             ImageButton subir_imagen = (ImageButton) itemView.findViewById(R.id.btn_subir);
             btn_detalle.setOnClickListener(clickListener);
@@ -154,12 +151,22 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
 
         public void abrir_detalle(Context context){
             Intent i = new Intent(context, activity_ordenes_detalle.class);
+
+            ProgressDialog progressDialog = new ProgressDialog( context );
+            progressDialog.setMessage( "Cargando detalles" );
+            progressDialog.show();
+
             i.putExtra("telefono", telefono);
             i.putExtra("fecha", fecha);
             i.putExtra("tipo_instalacion", tipo_instalacion);
             i.putExtra("tipo_orden", tipo_orden);
 
             context.startActivity(i);
+            ((Activity)context).overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+            if (progressDialog.isShowing()){
+                progressDialog.dismiss();
+            }
         }
 
         public void abrir_galeria(){
@@ -173,7 +180,6 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
             intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 10);
             ((Activity)context).startActivityForResult(intent, Constants.REQUEST_CODE);
         }
-
     }
 
 //    public  void onActivityResult(int requestCode, int resultCode, Intent data) {
