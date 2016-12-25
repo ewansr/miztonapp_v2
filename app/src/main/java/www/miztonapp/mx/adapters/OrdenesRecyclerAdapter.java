@@ -18,6 +18,7 @@ import com.darsh.multipleimageselect.helpers.Constants;
 import com.darsh.multipleimageselect.models.Image;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 import www.miztonapp.mx.R;
@@ -65,6 +66,13 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         holder.tipo_instalacion    = items_orden_trabajo.get(position).tipo_instalacion;
         holder.tipo_orden = items_orden_trabajo.get(position).tipo_orden;
         holder.tv_rowcount.setText( items_orden_trabajo.get(position).contador_filas );
+        holder.tv_dia.setText(items_orden_trabajo.get(position).fecha.substring(8,10));
+
+
+        String[] array = {"Ene.","Feb.","Mar.","Abr.", "May.","Jun.","Jul.","Ago.","Sep.","Oct.", "Nov.","Dic."};
+        int mes = Integer.parseInt(items_orden_trabajo.get(position).fecha.substring(5,7));
+        String nombre_mes = Arrays.asList(array).get(mes-1);
+        holder.tv_mes.setText(nombre_mes);
 
         if ( items_orden_trabajo.get(position).tipo_instalacion.equals("FO") ){
             holder.cv_image.setImageResource(R.drawable.fiber_icon_material);
@@ -106,6 +114,8 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         TextView cv_fecha;
         TextView cv_estatus;
         TextView tv_rowcount;
+        TextView tv_dia;
+        TextView tv_mes;
         ImageView cv_image;
         FancyButton btn_detalle;
         FancyButton btnExpand;
@@ -127,6 +137,9 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
             cv_estatus      = ( TextView )  itemView.findViewById( R.id.cv_estatus );
             cv_image        = ( ImageView ) itemView.findViewById( R.id.cv_image );
             tv_rowcount     = ( TextView )  itemView.findViewById( R.id.tv_rowcount );
+            tv_dia          = ( TextView ) itemView.findViewById( R.id.tvDia );
+            tv_mes          = ( TextView ) itemView.findViewById( R.id.tvMes );
+
             btn_detalle     = (FancyButton)    itemView.findViewById( R.id.btn_cambiar);
             btnExpand       = (FancyButton)  itemView.findViewById(R.id.btn_editar);
 

@@ -11,7 +11,7 @@
         android:layout_marginLeft="0dp"
         android:layout_marginTop="60dp"
         android:paddingTop="7dp"
-        android:background="@color/colorPrimaryDark" />
+        android:background="?attr/colorPrimaryDark" />
 
 
 </android.support.v4.widget.SwipeRefreshLayout>
