@@ -5,10 +5,13 @@ package www.miztonapp.mx.models;
  */
 
 public class ModelOrdenesTrabajo {
+    public String Id;
     public String contador_filas;
     public String folio_orden;
     public String telefono_orden;
     public String tipo_orden;
+    public String principal;
+    public String secundario;
     public String fecha;
     public String tipo_instalacion;
     public String estatus_orden;
@@ -19,10 +22,11 @@ public class ModelOrdenesTrabajo {
     public String terminal;
     public String puerto;
 
-    public ModelOrdenesTrabajo(String contador_filas, String folio_orden,String telefono_orden,
+    public ModelOrdenesTrabajo(String Id,String contador_filas, String folio_orden,String telefono_orden,
                                String tipo_instalacion, String tipo_orden, String fecha,
                                String estatus_orden, String comentarios, String garantia, String central,
                                String distrito, String terminal, String puerto){
+        this.Id = Id;
         this.contador_filas     = contador_filas;
         this.folio_orden        = folio_orden;
         this.telefono_orden     = telefono_orden;

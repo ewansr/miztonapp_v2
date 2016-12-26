@@ -19,7 +19,7 @@ import www.miztonapp.mx.models.ModelOrdenesUpdate;
  * Created by Saulo on 05/10/2016.
  */
 
-public abstract class RequestOrdenesTrabajo  {
+public abstract class RequestOrdenesTrabajo extends AppCompatActivity  {
     public void consultar_ordenes(int idpersonal, String inicio, String termino){
         try{
             Request request = new Request(){
@@ -44,6 +44,7 @@ public abstract class RequestOrdenesTrabajo  {
                         for ( int i = 0; i < items.length() ; i++) {
                             JSONObject item = items.getJSONObject(i);
                             lista.add(new ModelOrdenesTrabajo (
+                                    item.getString("idFolio"),
                                     item.getString("row_number"),
                                     item.getString("Folio"),
                                     item.getString("Telefono"),
@@ -146,6 +147,68 @@ public abstract class RequestOrdenesTrabajo  {
             orden_trabajo.put("puerto", Puerto);
             orden_trabajo.put("idcontratista", IdContratista);
             request.post(route, orden_trabajo);
+        }catch (Exception error){
+            ordenCargaErronea(new mException(mExceptionCode.UNKNOWN, error.getMessage()));
+        }
+    }
+
+    public void buscarOrden(String id){
+        try{
+            Request request = new Request(){
+                @Override
+                public void RequestBeforeExecute(){
+                    ordenBeforeLoad();
+                }
+
+                @Override
+                public void RequestCompleted(JSONObject response){
+                    try {
+                        JSONObject orden_response = null;
+                        int valid = response.getInt("valid");
+                        int found = response.getInt("found");
+
+
+                        if (valid != 1 || found != 1 ){
+                            throw new mException(mExceptionCode.INVALID_VALUES, response.getString("message"));
+                        }
+
+                        JSONObject item = response.getJSONObject( "data" );
+                        ArrayList<ModelOrdenesTrabajo> lista = new  ArrayList<ModelOrdenesTrabajo>();
+
+
+                            lista.add(new ModelOrdenesTrabajo (
+                                    item.getString("idFolio"),
+                                    "1",
+                                    item.getString("Folio"),
+                                    item.getString("Telefono"),
+                                    item.getString("TipoOS"),
+                                    item.getString("TipoOS"),
+                                    item.getString("FechaCreacion"),
+                                    item.getString("Estatus"),
+                                    item.getString("Comentarios"),
+                                    item.getString("EstatusGarantia"),
+                                    item.getString("Central"),
+                                    item.getString("Distrito"),
+                                    item.getString("Terminal"),
+                                    item.getString("Puerto")
+                            ) );
+                        ordenCargaExitosa(lista);
+                    }catch (Exception error) {
+                        ordenCargaErronea(new mException(mExceptionCode.UNKNOWN, error.getMessage()));
+                    }
+                }
+
+                @Override
+                public void RequestError(Exception error){
+                    ordenCargaErronea(new mException(mExceptionCode.UNKNOWN, error.getMessage()));
+                }
+            };
+
+            JSONObject orden_trabajo = new JSONObject();
+            String route = "ordenes_trabajo/buscar_orden";
+            orden_trabajo.put("id", id);
+            request.post(route, orden_trabajo);
+
         }catch (Exception error){
             ordenCargaErronea(new mException(mExceptionCode.UNKNOWN, error.getMessage()));
         }

@@ -67,7 +67,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         holder.tipo_orden = items_orden_trabajo.get(position).tipo_orden;
         holder.tv_rowcount.setText( items_orden_trabajo.get(position).contador_filas );
         holder.tv_dia.setText(items_orden_trabajo.get(position).fecha.substring(8,10));
-
+        holder.id = items_orden_trabajo.get(position).Id;
 
         String[] array = {"Ene.","Feb.","Mar.","Abr.", "May.","Jun.","Jul.","Ago.","Sep.","Oct.", "Nov.","Dic."};
         int mes = Integer.parseInt(items_orden_trabajo.get(position).fecha.substring(5,7));
@@ -123,6 +123,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         String fecha;
         String tipo_instalacion;
         String tipo_orden;
+        String id;
         int minHeight;
 
         ordenesViewHolder(View itemView) {
@@ -163,12 +164,13 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         };
 
         public void abrir_detalle(Context context){
-            Intent i = new Intent(context, activity_ordenes_detalle.class);
 
             ProgressDialog progressDialog = new ProgressDialog( context );
             progressDialog.setMessage( "Cargando detalles" );
             progressDialog.show();
 
+            Intent i = new Intent(context, activity_ordenes_detalle.class);
+            i.putExtra("id", id);
             i.putExtra("telefono", telefono);
             i.putExtra("fecha", fecha);
             i.putExtra("tipo_instalacion", tipo_instalacion);

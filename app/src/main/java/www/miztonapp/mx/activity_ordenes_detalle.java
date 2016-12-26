@@ -38,7 +38,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import www.miztonapp.mx.api.mException;
 import www.miztonapp.mx.models.LoginModel;
+import www.miztonapp.mx.models.ModelOrdenesTrabajo;
+import www.miztonapp.mx.requests.RequestOrdenesTrabajo;
 import www.miztonapp.mx.utilerias.FTPServerConfig;
 import www.miztonapp.mx.utilerias.FTPUtils;
 import www.miztonapp.mx.utilerias.Utils;
@@ -46,10 +49,21 @@ import www.miztonapp.mx.utilerias.Utils;
 public class activity_ordenes_detalle extends AppCompatActivity  implements OnMapReadyCallback{
     private GoogleMap mMap;
     private TextView map_direccion;
+    private static String _id;
     private static String _fecha;
     private static String _telefono;
     private static String _tipoinstalacion;
     private static String _tipoorden;
+    private static String _comentarios;
+    private static String _principal;
+    private static String _secundario;
+    private static String _central;
+    private static String _distrito;
+    private static String _terminal;
+    private static String _puerto;
+    private static LoginModel data_usuario;
+
+
     private static Context context;
     private static FTPFile[] lista_archivos;
 
@@ -77,32 +91,55 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        Bundle extras_datos = this.getIntent().getExtras();
-        _telefono = extras_datos.getString("telefono");
-        _fecha = extras_datos.getString("fecha");
-        _tipoinstalacion = extras_datos.getString("tipo_instalacion");
-        _tipoorden = extras_datos.getString("tipo_orden");
+        Bundle extras = getIntent().getExtras();
+        _id = extras.getString("id");
+        data_usuario = Utils.obtener_usuario(this);
 
-        toolbar.setTitle(_telefono);
-//        toolbar.setSubtitle(_tipoorden);
-
-        TextView telefono         =(TextView) findViewById( R.id.tv_telefono );
-        TextView tipo_instalacion =(TextView) findViewById( R.id.tv_tipo );
-        TextView fecha            =(TextView) findViewById( R.id.tv_fecha );
-        TextView tipo_orden       =(TextView) findViewById( R.id.tv_tipoinstalacion );
+        final TextView telefono         =(TextView) findViewById( R.id.tv_telefono );
+        final TextView tipo_instalacion =(TextView) findViewById( R.id.tv_tipo );
+        final TextView fecha            =(TextView) findViewById( R.id.tv_fecha );
+        final TextView tipo_orden       =(TextView) findViewById( R.id.tv_tipoinstalacion );
         final TextView no_cargas        =(TextView) findViewById( R.id.tv_cargas );
 
-        telefono.setText(_telefono);
-        tipo_instalacion.setText(_tipoinstalacion);
-        fecha.setText(_fecha);
-        tipo_orden.setText(_tipoorden);
+        RequestOrdenesTrabajo rBuscaOrden = new RequestOrdenesTrabajo() {
+            @Override
+            public void ordenBeforeLoad() {
 
-        no_cargas.setText("0 Fotos cargadas");
+            }
 
-        String usuario = LoginModel.nombre_completo;
-        FTPServerConfig.ruta_crear_ftp[0] = _fecha.substring(0,10);
-        FTPServerConfig.ruta_crear_ftp[2] = _telefono;
-        FTPServerConfig.ruta_crear_ftp[1] = usuario;;
+            @Override
+            public void ordenCargaExitosa(ArrayList<ModelOrdenesTrabajo> items) {
+
+                _telefono = items.get(0).telefono_orden;
+                _fecha = items.get(0).fecha;
+                _tipoinstalacion = items.get(0).tipo_instalacion;
+                _tipoorden = items.get(0).tipo_orden;
+
+                telefono.setText(_telefono);
+                tipo_instalacion.setText(_tipoinstalacion);
+                fecha.setText(_fecha);
+                tipo_orden.setText(_tipoorden);
+
+                no_cargas.setText("0 Fotos cargadas");
+
+                String usuario = data_usuario.nombre_completo;
+                FTPServerConfig.ruta_crear_ftp[0] = _fecha.substring(0,10);
+                FTPServerConfig.ruta_crear_ftp[2] = _telefono;
+                FTPServerConfig.ruta_crear_ftp[1] = usuario;
+            }
+
+            @Override
+            public void ordenCargaExitosa(String mensaje) {
+
+            }
+
+            @Override
+            public void ordenCargaErronea(mException error) {
+
+            }
+        };rBuscaOrden.buscarOrden(_id);
+
+
 
         FloatingActionMenu fam_opciones = (FloatingActionMenu) findViewById(R.id.menu);
         fam_opciones.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener(){
@@ -201,7 +238,7 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
 
     public void abrir_galeria_ftp(){
         final Intent intent = new Intent(this, GaleriaActivity.class);
-        String usuario = LoginModel.nombre_completo;
+        String usuario = data_usuario.nombre_completo;
         FTPServerConfig.ruta_crear_ftp[0] = _fecha.substring(0,10);
         FTPServerConfig.ruta_crear_ftp[2] = _telefono;
         FTPServerConfig.ruta_crear_ftp[1] = usuario;
@@ -214,7 +251,7 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
 
     public void abrir_galeria(){
         final Intent intent = new Intent(this, AlbumSelectActivity.class);
-        String usuario = LoginModel.nombre_completo;
+        String usuario = data_usuario.nombre_completo;
         FTPServerConfig.ruta_crear_ftp[0] = _fecha.substring(0,10);
         FTPServerConfig.ruta_crear_ftp[2] = _telefono;
         FTPServerConfig.ruta_crear_ftp[1] = usuario;
