@@ -5,19 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="7dp"
     android:layout_marginTop="7dp"
-    android:layout_marginRight="7dp"
-    android:layout_marginBottom="7dp">
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
 
 
     <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:id="@+id/cv"
-        app:cardElevation="0dp"
+        app:cardElevation="3dp"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@android:color/transparent"
-        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardCornerRadius="3dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -42,7 +41,9 @@
                 android:layout_height="match_parent"
                 android:id="@+id/cv_datos"
                 app:cardBackgroundColor="@color/cardview_light_background"
-                app:cardCornerRadius="7dp">
+                app:cardCornerRadius="0dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -245,27 +246,6 @@
                             android:layout_toRightOf="@+id/btn_material"
                             android:layout_toEndOf="@+id/btn_material" />
 
-                        <mehdi.sakout.fancybuttons.FancyButton
-                            android:id="@+id/btn_editar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="3dp"
-                            android:paddingLeft="5dp"
-                            android:paddingRight="5dp"
-                            android:paddingTop="3dp"
-                            fancy:fb_borderColor="#FFFFFF"
-                            fancy:fb_borderWidth="1dp"
-                            fancy:fb_defaultColor="@color/darkgreen"
-                            fancy:fb_focusColor="@color/blue"
-                            fancy:fb_fontIconResource="&#xf044;"
-                            fancy:fb_iconPosition="left"
-                            fancy:fb_radius="7dp"
-                            fancy:fb_text="Editar"
-                            fancy:fb_textColor="#FFFFFF"
-                            android:layout_alignParentTop="true"
-                            android:layout_toRightOf="@+id/btn_cambiar"
-                            android:layout_toEndOf="@+id/btn_cambiar" />
-
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -275,19 +255,6 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
                         android:layout_marginRight="10dp">
-
-                        <TextView
-                            android:text="1"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/tv_rowcount"
-                            android:textColor="@color/colorAccent"
-                            android:textStyle="normal|bold"
-                            android:textAlignment="center"
-                            android:textSize="15sp"
-                            android:layout_width="match_parent"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true" />
 
                         <TextView
                             android:text="26"
@@ -315,6 +282,19 @@
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true" />
                     </RelativeLayout>
+
+                    <TextView
+                        android:text="1"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_rowcount"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="normal|bold"
+                        android:textAlignment="center"
+                        android:textSize="15sp"
+                        android:layout_width="match_parent"
+                        android:layout_below="@+id/cv_tipo"
+                        android:layout_alignRight="@+id/cv_tipo"
+                        android:layout_alignEnd="@+id/cv_tipo" />
 
                 </RelativeLayout>
 

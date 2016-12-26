@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
@@ -61,6 +63,13 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
                 finish();
             }
         });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.orange));
+            toolbar.setBackgroundColor(getResources().getColor(R.color.orange));
+        }
 
         edtDistrito = (MaterialEditText) findViewById(R.id.edtDistrito);
         edtDistrito.addValidator(new RegexpValidator("Formato inválido 'ABC1234'", "[A-Z^\\s][A-Z^\\s][A-Z^\\s]\\d\\d\\d+"));

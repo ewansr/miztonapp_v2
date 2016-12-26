@@ -71,14 +71,14 @@
         <activity
             android:name=".ImagenActivity"
             android:theme="@style/AppThemeDialog" />
-        <activity android:name=".RegistroOrdenActivity">
-            android:label="Datos de Orden"
-            android:theme="@style/AppThemeDialog" />
-        </activity>
         <activity
             android:name=".RegistroFibraOpticaActivity"
             android:label="Registro de órden de F.O"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DetalleActivity"
+            android:label="@string/title_activity_detalle"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

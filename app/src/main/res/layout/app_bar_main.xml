@@ -107,14 +107,16 @@
             android:layout_height="wrap_content"
             android:src="@drawable/phone"
             fab:fab_size="mini"
-            fab:fab_label="Cobre" />
+            fab:fab_label="Cobre"
+            app:fab_colorNormal="@color/green"/>
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_fo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/phone"
             fab:fab_size="mini"
-            fab:fab_label="Fibra Óptica" />
+            fab:fab_label="Fibra Óptica"
+            app:fab_colorNormal="@color/orange"/>
 
     </com.github.clans.fab.FloatingActionMenu>
 

@@ -96,10 +96,10 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
         data_usuario = Utils.obtener_usuario(this);
 
         final TextView telefono         =(TextView) findViewById( R.id.tv_telefono );
-        final TextView tipo_instalacion =(TextView) findViewById( R.id.tv_tipo );
-        final TextView fecha            =(TextView) findViewById( R.id.tv_fecha );
-        final TextView tipo_orden       =(TextView) findViewById( R.id.tv_tipoinstalacion );
-        final TextView no_cargas        =(TextView) findViewById( R.id.tv_cargas );
+        final TextView tipo_instalacion =(TextView) findViewById( R.id.tv_telefono );
+        final TextView fecha            =(TextView) findViewById( R.id.tv_telefono );
+        final TextView tipo_orden       =(TextView) findViewById( R.id.tv_telefono );
+        final TextView no_cargas        =(TextView) findViewById( R.id.tv_telefono );
 
         RequestOrdenesTrabajo rBuscaOrden = new RequestOrdenesTrabajo() {
             @Override

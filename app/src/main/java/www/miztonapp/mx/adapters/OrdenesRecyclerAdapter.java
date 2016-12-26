@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import mehdi.sakout.fancybuttons.FancyButton;
+import www.miztonapp.mx.DetalleActivity;
 import www.miztonapp.mx.R;
 import www.miztonapp.mx.activity_ordenes_detalle;
 import www.miztonapp.mx.models.ModelOrdenesTrabajo;
@@ -142,7 +143,6 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
             tv_mes          = ( TextView ) itemView.findViewById( R.id.tvMes );
 
             btn_detalle     = (FancyButton)    itemView.findViewById( R.id.btn_cambiar);
-            btnExpand       = (FancyButton)  itemView.findViewById(R.id.btn_editar);
 
             ImageButton subir_imagen = (ImageButton) itemView.findViewById(R.id.btn_subir);
             btn_detalle.setOnClickListener(clickListener);
@@ -169,7 +169,8 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
             progressDialog.setMessage( "Cargando detalles" );
             progressDialog.show();
 
-            Intent i = new Intent(context, activity_ordenes_detalle.class);
+//            Intent i = new Intent(context, activity_ordenes_detalle.class);
+            Intent i = new Intent(context, DetalleActivity.class);
             i.putExtra("id", id);
             i.putExtra("telefono", telefono);
             i.putExtra("fecha", fecha);
