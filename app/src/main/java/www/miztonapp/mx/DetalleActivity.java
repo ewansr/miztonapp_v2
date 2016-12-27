@@ -172,9 +172,10 @@ public class DetalleActivity extends AppCompatActivity {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         Window window = getWindow();
                         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                        window.setStatusBarColor(getResources().getColor(R.color.darkred));
-                        toolbar.setBackgroundColor(getResources().getColor(R.color.darkred));
-                        tabLayout.setBackgroundColor(getResources().getColor(R.color.darkred));
+                        window.setStatusBarColor(getResources().getColor(R.color.red));
+                        toolbar.setBackgroundColor(getResources().getColor(R.color.red));
+                        tabLayout.setBackgroundColor(getResources().getColor(R.color.red));
+                        mViewPager.setBackgroundColor(getResources().getColor(R.color.darkred));
                     }
                 }
                 if (tab.getPosition() == 1){
@@ -194,6 +195,7 @@ public class DetalleActivity extends AppCompatActivity {
                         window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
                         toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                        mViewPager.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
                         desabilitaControles();
                     }
                 }
