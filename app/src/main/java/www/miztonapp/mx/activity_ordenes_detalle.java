@@ -95,11 +95,11 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
         _id = extras.getString("id");
         data_usuario = Utils.obtener_usuario(this);
 
-        final TextView telefono         =(TextView) findViewById( R.id.tv_telefono );
-        final TextView tipo_instalacion =(TextView) findViewById( R.id.tv_telefono );
-        final TextView fecha            =(TextView) findViewById( R.id.tv_telefono );
-        final TextView tipo_orden       =(TextView) findViewById( R.id.tv_telefono );
-        final TextView no_cargas        =(TextView) findViewById( R.id.tv_telefono );
+        final TextView telefono         =(TextView) findViewById( R.id.map_direccion );
+        final TextView tipo_instalacion =(TextView) findViewById( R.id.map_direccion );
+        final TextView fecha            =(TextView) findViewById( R.id.map_direccion );
+        final TextView tipo_orden       =(TextView) findViewById( R.id.map_direccion );
+        final TextView no_cargas        =(TextView) findViewById( R.id.map_direccion );
 
         RequestOrdenesTrabajo rBuscaOrden = new RequestOrdenesTrabajo() {
             @Override
@@ -141,42 +141,42 @@ public class activity_ordenes_detalle extends AppCompatActivity  implements OnMa
 
 
 
-        FloatingActionMenu fam_opciones = (FloatingActionMenu) findViewById(R.id.menu);
-        fam_opciones.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener(){
-            @Override
-            public void onMenuToggle(boolean opened) {
-                if (opened) {
-                    FTPUtils ftpclient = new FTPUtils(context, FTPServerConfig.ruta_crear_ftp) {
-                        @Override
-                        public void procesoExitoso(FTPFile[] archivos_imagen) {
-                            lista_archivos = archivos_imagen.clone();
-                        }
-
-                        @Override
-                        public void procesoErroneo() {
-
-                        }
-                    };
-                    ftpclient.execute();
-                }
-            }
-        });
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.menu_subir);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                abrir_galeria();
-            }
-        });
-
-        FloatingActionButton fab_galeria = (FloatingActionButton) findViewById(R.id.menu_detalle);
-        fab_galeria.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                abrir_galeria_ftp();
-            }
-        });
+//        FloatingActionMenu fam_opciones = (FloatingActionMenu) findViewById(R.id.menu);
+//        fam_opciones.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener(){
+//            @Override
+//            public void onMenuToggle(boolean opened) {
+//                if (opened) {
+//                    FTPUtils ftpclient = new FTPUtils(context, FTPServerConfig.ruta_crear_ftp) {
+//                        @Override
+//                        public void procesoExitoso(FTPFile[] archivos_imagen) {
+//                            lista_archivos = archivos_imagen.clone();
+//                        }
+//
+//                        @Override
+//                        public void procesoErroneo() {
+//
+//                        }
+//                    };
+//                    ftpclient.execute();
+//                }
+//            }
+//        });
+//
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.menu_subir);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                abrir_galeria();
+//            }
+//        });
+//
+//        FloatingActionButton fab_galeria = (FloatingActionButton) findViewById(R.id.menu_detalle);
+//        fab_galeria.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                abrir_galeria_ftp();
+//            }
+//        });
 
         map_direccion = (TextView) findViewById(R.id.map_direccion);
     }

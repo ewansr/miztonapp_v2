@@ -57,7 +57,11 @@ public abstract class RequestOrdenesTrabajo extends AppCompatActivity  {
                                     item.getString("Central"),
                                     item.getString("Distrito"),
                                     item.getString("Terminal"),
-                                    item.getString("Puerto")
+                                    item.getString("Puerto"),
+                                    item.getString("sContratista"),
+                                    item.getString("Principal"),
+                                    item.getString("Secundario")
+
                             ) );
                         }
 
@@ -190,7 +194,10 @@ public abstract class RequestOrdenesTrabajo extends AppCompatActivity  {
                                     item.getString("Central"),
                                     item.getString("Distrito"),
                                     item.getString("Terminal"),
-                                    item.getString("Puerto")
+                                    item.getString("Puerto"),
+                                    item.getString("sContratista"),
+                                    item.getString("Principal"),
+                                    item.getString("Secundario")
                             ) );
                         ordenCargaExitosa(lista);
                     }catch (Exception error) {

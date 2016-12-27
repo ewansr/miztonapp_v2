@@ -150,7 +150,10 @@ public class TabFragmentGeneral extends Fragment {
                                     item.getString("Central"),
                                     item.getString("Distrito"),
                                     item.getString("Terminal"),
-                                    item.getString("Puerto")
+                                    item.getString("Puerto"),
+                                    item.getString("sContratista"),
+                                    item.getString("Principal"),
+                                    item.getString("Secundario")
                             ) );
                         }
 

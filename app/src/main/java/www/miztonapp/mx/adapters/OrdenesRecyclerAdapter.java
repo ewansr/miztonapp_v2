@@ -172,10 +172,6 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
 //            Intent i = new Intent(context, activity_ordenes_detalle.class);
             Intent i = new Intent(context, DetalleActivity.class);
             i.putExtra("id", id);
-            i.putExtra("telefono", telefono);
-            i.putExtra("fecha", fecha);
-            i.putExtra("tipo_instalacion", tipo_instalacion);
-            i.putExtra("tipo_orden", tipo_orden);
 
             context.startActivity(i);
             ((Activity)context).overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
