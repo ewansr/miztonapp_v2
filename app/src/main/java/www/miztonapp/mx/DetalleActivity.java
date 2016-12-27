@@ -1,5 +1,6 @@
 package www.miztonapp.mx;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -63,6 +64,9 @@ public class DetalleActivity extends AppCompatActivity {
     public static MaterialEditText edtPuerto     ;
     public static MaterialEditText edtComentarios;
     private static FTPFile[] lista_archivos;
+    private RequestOrdenesTrabajo rBuscaOrden;
+    private ProgressDialog progressDialog;
+
 
 
     @Override
@@ -89,10 +93,12 @@ public class DetalleActivity extends AppCompatActivity {
         data_usuario = Utils.obtener_usuario(this);
         context = DetalleActivity.this;
 
-        RequestOrdenesTrabajo rBuscaOrden = new RequestOrdenesTrabajo() {
+        rBuscaOrden = new RequestOrdenesTrabajo() {
             @Override
             public void ordenBeforeLoad() {
-
+                progressDialog = new ProgressDialog( context );
+                progressDialog.setMessage( "Actualizando información de órden... Espere" );
+                progressDialog.show();
             }
 
             @Override
@@ -123,6 +129,9 @@ public class DetalleActivity extends AppCompatActivity {
                 FTPServerConfig.ruta_crear_ftp[0] = _fecha.substring(0,10);
                 FTPServerConfig.ruta_crear_ftp[2] = _telefono;
                 FTPServerConfig.ruta_crear_ftp[1] = usuario;
+                if (progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                }
             }
 
             @Override
@@ -277,6 +286,9 @@ public class DetalleActivity extends AppCompatActivity {
                     i.putExtra("datos", bundle);
                     startActivity(i);
                 }
+            }
+            if (id == R.id.action_refresh) {
+                rBuscaOrden.buscarOrden(_id);
             }
 
             return true;
