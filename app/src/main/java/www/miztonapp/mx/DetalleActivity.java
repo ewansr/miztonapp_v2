@@ -287,11 +287,11 @@ public class DetalleActivity extends AppCompatActivity {
                     startActivity(i);
                 }
             }
-            if (id == R.id.action_refresh) {
-                rBuscaOrden.buscarOrden(_id);
-            }
-
             return true;
+        }
+        if (id == R.id.action_refresh) {
+            rBuscaOrden.buscarOrden(_id);
+            return  true;
         }
 
         return super.onOptionsItemSelected(item);
