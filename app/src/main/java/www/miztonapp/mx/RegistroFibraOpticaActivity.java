@@ -290,6 +290,7 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
         LoginModel data_usuario;
         data_usuario = Utils.obtener_usuario(this);
 
+        String idfolio = datos.getString("id");
         String folio = edtFolio.getText().toString();
         String FolioTelmex = data_usuario.folio_telmex;
         int IdPersonal = data_usuario.idpersonal;
@@ -338,7 +339,7 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
             public void ordenCargaErronea(mException error) {
                 Utils.crear_alerta(RegistroFibraOpticaActivity.this,"Aviso",error.getMessage()).show();
             }
-        }; rOrdenTrabajo.editar_orden("0",folio,FolioTelmex,Integer.toString(IdPersonal),Telefono,
+        }; rOrdenTrabajo.editar_orden(idfolio,folio,FolioTelmex,Integer.toString(IdPersonal),Telefono,
                 Principal,Secundario,TipoOs,Distrito,Central,Comentarios,Estatus,IdTipo,Terminal,
                 Puerto,IdContratista);
     }
