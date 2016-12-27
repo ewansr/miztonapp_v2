@@ -60,8 +60,10 @@ public abstract class RequestOrdenesTrabajo extends AppCompatActivity  {
                                     item.getString("Puerto"),
                                     item.getString("sContratista"),
                                     item.getString("Principal"),
-                                    item.getString("Secundario")
-
+                                    item.getString("Secundario"),
+                                    item.getString("editable"),
+                                    item.getString("IdTipo"),
+                                    item.getString("IdContratista")
                             ) );
                         }
 
@@ -98,9 +100,9 @@ public abstract class RequestOrdenesTrabajo extends AppCompatActivity  {
 
 
     public void guardar_orden(String Id, String Folio, String FolioTelmex, String IdPersonal,
-                              String Telefono, String Principal, String Secundario, String TipoOs,
-                              String Distrito,String Central, String Comentarios, String Estutus, String IdTipo,
-                              String Terminal, String Puerto, String IdContratista){
+                                   String Telefono, String Principal, String Secundario, String TipoOs,
+                                   String Distrito,String Central, String Comentarios, String Estutus, String IdTipo,
+                                   String Terminal, String Puerto, String IdContratista){
         final String[] mensaje = {""};
         try{
             Request request = new Request(){
@@ -156,6 +158,70 @@ public abstract class RequestOrdenesTrabajo extends AppCompatActivity  {
         }
     }
 
+    //** Edición de orden de trabajo
+
+    public void editar_orden(String Id, String Folio, String FolioTelmex, String IdPersonal,
+                              String Telefono, String Principal, String Secundario, String TipoOs,
+                              String Distrito,String Central, String Comentarios, String Estutus, String IdTipo,
+                              String Terminal, String Puerto, String IdContratista){
+        final String[] mensaje = {""};
+        try{
+            Request request = new Request(){
+                @Override
+                public void RequestBeforeExecute(){
+                    ordenBeforeLoad();
+                }
+
+                @Override
+                public void RequestCompleted(JSONObject response){
+                    try {
+                        JSONObject orden_response = null;
+                        int valid = response.getInt("valid");
+                        mensaje[0] = response.getString("message").toString();
+
+                        if (valid != 1){
+                            throw new mException(mExceptionCode.INVALID_VALUES, response.getString("message"));
+                        }else{
+                            ordenCargaExitosa(mensaje[0]);
+                        }
+
+                    }catch (Exception error) {
+                        ordenCargaErronea(new mException(mExceptionCode.UNKNOWN, error.getMessage()));
+                    }
+                }
+
+                @Override
+                public void RequestError(Exception error){
+                    ordenCargaErronea(new mException(mExceptionCode.UNKNOWN, error.getMessage()));
+                }
+            };
+
+            JSONObject orden_trabajo = new JSONObject();
+            String route = "ordenes_trabajo/editar_orden";
+            orden_trabajo.put("idfolio", Id);
+            orden_trabajo.put("folio", Folio);
+            orden_trabajo.put("foliotelmex", FolioTelmex);
+            orden_trabajo.put("idpersonal", IdPersonal);
+            orden_trabajo.put("telefono", Telefono);
+            orden_trabajo.put("principal", Principal);
+            orden_trabajo.put("secundario", Secundario);
+            orden_trabajo.put("tipoos", TipoOs);
+            orden_trabajo.put("distrito", Distrito);
+            orden_trabajo.put("central", Central);
+            orden_trabajo.put("comentarios", Comentarios);
+            orden_trabajo.put("estatus", Estutus);
+            orden_trabajo.put("idtipo", IdTipo);
+            orden_trabajo.put("terminal", Terminal);
+            orden_trabajo.put("puerto", Puerto);
+            orden_trabajo.put("idcontratista", IdContratista);
+            request.post(route, orden_trabajo);
+        }catch (Exception error){
+            ordenCargaErronea(new mException(mExceptionCode.UNKNOWN, error.getMessage()));
+        }
+    }
+
+    //** Buscar una orden de trabajo por ID
+
     public void buscarOrden(String id){
         try{
             Request request = new Request(){
@@ -197,7 +263,10 @@ public abstract class RequestOrdenesTrabajo extends AppCompatActivity  {
                                     item.getString("Puerto"),
                                     item.getString("sContratista"),
                                     item.getString("Principal"),
-                                    item.getString("Secundario")
+                                    item.getString("Secundario"),
+                                    item.getString("editable"),
+                                    item.getString("IdTipo"),
+                                    item.getString("IdContratista")
                             ) );
                         ordenCargaExitosa(lista);
                     }catch (Exception error) {

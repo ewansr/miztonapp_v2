@@ -42,6 +42,7 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
     private FancyButton btnGuardar;
     private String control_nombre;
     private String idContratista, idTipoOrden;
+    private Bundle datos;
 
     private static final String[] ESTATUS = new String[] {
             "Liquidada", "Objetada", "Queja", "Retornada"
@@ -64,12 +65,9 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
             }
         });
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            Window window = getWindow();
-//            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-//            window.setStatusBarColor(getResources().getColor(R.color.orange));
-//            toolbar.setBackgroundColor(getResources().getColor(R.color.orange));
-//        }
+
+        datos = getIntent().getBundleExtra("datos");
+
 
         edtDistrito = (MaterialEditText) findViewById(R.id.edtDistrito);
         edtDistrito.addValidator(new RegexpValidator("Formato inválido 'ABC1234'", "[A-Z^\\s][A-Z^\\s][A-Z^\\s]\\d\\d\\d+"));
@@ -115,6 +113,10 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
                 spTiposOrden.setAdapter(adapter_tipo_orden);
                 spTiposOrden.setText(setItemIndex(0, spTiposOrden));
                 idTipoOrden = ((ModelTiposOrden)spTiposOrden.getAdapter().getItem(0)).Id;
+                if(datos != null) {
+                    spTiposOrden.setText(datos.getString("tipo"));
+                    idTipoOrden = datos.getString("idtipo");
+                }
             }
 
             @Override
@@ -132,7 +134,7 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
             }
         });
 
-        RequestContratista catalogo_contratista = new RequestContratista() {
+        final RequestContratista catalogo_contratista = new RequestContratista() {
             @Override
             public void BeforeLoad() {
 
@@ -145,6 +147,10 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
                 spContratistas.setAdapter(adapter_contratista);
                 spContratistas.setText(setItemIndex(0, spContratistas));
                 idContratista = ((ModelContratista)spContratistas.getAdapter().getItem(0)).Id;
+                if(datos != null) {
+                    spContratistas.setText(datos.getString("contratista"));
+                    idTipoOrden = datos.getString("idcontratista");
+                }
             }
 
             @Override
@@ -155,16 +161,18 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
 
         spEstatus.setText(setItemIndex(0, spEstatus));
 
-    }
 
-    private void setupWindowAnimations() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Fade fade = null;
-            fade = new Fade();
-            fade.setDuration(2000);
-            getWindow().setEnterTransition(fade);
-
+        // Despues de toda la configuración y desmadre
+        if(datos != null) {
+            spEstatus.setText(datos.getString("estatus"));
+            edtFolio.setText(datos.getString("folio"));
+            edtTelefono.setText(datos.getString("telefono"));
+            edtDistrito.setText(datos.getString("distrito"));
+            edtTerminal.setText(datos.getString("terminal"));
+            edtPuerto.setText(datos.getString("puerto"));
+            edtComentarios.setText(datos.getString("comentarios"));
         }
+
     }
 
     @Override
@@ -175,7 +183,10 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
                 if (validaCampos()) {
                     throw new Exception("Verifica que no tengas formatos inválidos o campos vacios en los siguientes controles: " + control_nombre);
                 }
-                guardarOrden();
+
+                if(datos != null) {
+                    editarOrden();
+                }else {guardarOrden();}
             }catch (Exception e){
                 Utils.crear_alerta(this, "Error de captura", e.getMessage()).show();
             }
@@ -270,6 +281,64 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
                 Utils.crear_alerta(RegistroFibraOpticaActivity.this,"Aviso",error.getMessage()).show();
             }
         }; rOrdenTrabajo.guardar_orden("0",folio,FolioTelmex,Integer.toString(IdPersonal),Telefono,
+                Principal,Secundario,TipoOs,Distrito,Central,Comentarios,Estatus,IdTipo,Terminal,
+                Puerto,IdContratista);
+    }
+
+    public void editarOrden(){
+
+        LoginModel data_usuario;
+        data_usuario = Utils.obtener_usuario(this);
+
+        String folio = edtFolio.getText().toString();
+        String FolioTelmex = data_usuario.folio_telmex;
+        int IdPersonal = data_usuario.idpersonal;
+        String Telefono = edtTelefono.getText().toString();
+        String Principal = null;
+        String Secundario = null;
+        String TipoOs = spTiposOrden.getText().toString();
+        String Distrito = edtDistrito.getText().toString();
+        String Central = edtDistrito.getText().toString().substring(0,3);
+        String Comentarios = edtComentarios.getText().toString();
+        String Estatus = spEstatus.getText().toString();
+        String IdTipo = idTipoOrden;
+        String Terminal = edtTerminal.getText().toString();
+        String Puerto = edtPuerto.getText().toString();
+        String IdContratista = idContratista;
+
+        RequestOrdenesTrabajo rOrdenTrabajo = new RequestOrdenesTrabajo() {
+            @Override
+            public void ordenBeforeLoad() {
+
+            }
+
+            @Override
+            public void ordenCargaExitosa(ArrayList<ModelOrdenesTrabajo> items) {
+
+            }
+
+            @Override
+            public void ordenCargaExitosa(String mensaje) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(RegistroFibraOpticaActivity.this);
+                builder.setMessage(mensaje)
+                        .setCancelable(false)
+                        .setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent returnIntent = new Intent();
+                                returnIntent.putExtra("result", "mrok");
+                                setResult(Activity.RESULT_OK,returnIntent);
+                                finish();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+
+            @Override
+            public void ordenCargaErronea(mException error) {
+                Utils.crear_alerta(RegistroFibraOpticaActivity.this,"Aviso",error.getMessage()).show();
+            }
+        }; rOrdenTrabajo.editar_orden("0",folio,FolioTelmex,Integer.toString(IdPersonal),Telefono,
                 Principal,Secundario,TipoOs,Distrito,Central,Comentarios,Estatus,IdTipo,Terminal,
                 Puerto,IdContratista);
     }

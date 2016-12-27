@@ -7,7 +7,7 @@
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorPrimaryDark"
     android:animateLayoutChanges="true">
 
     <ImageView
@@ -113,7 +113,7 @@
                     fancy:fb_borderWidth="1dp"
                     fancy:fb_defaultColor="@color/colorAccent"
                     fancy:fb_focusColor="@color/blue"
-                    fancy:fb_fontIconResource="&#xf04b;"
+                    fancy:fb_fontIconResource="&#xf2bd;"
                     fancy:fb_iconPosition="left"
                     fancy:fb_radius="15dp"
                     fancy:fb_text="Entrar"

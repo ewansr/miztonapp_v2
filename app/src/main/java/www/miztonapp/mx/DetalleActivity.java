@@ -50,6 +50,7 @@ public class DetalleActivity extends AppCompatActivity {
     private String _fecha;
     private String _tipoinstalacion;
     private String _tipoorden;
+    private String _editable;
     private LoginModel data_usuario;
     private ArrayList<ModelOrdenesTrabajo> orden;
     public static MaterialEditText edtEstatus    ;
@@ -102,7 +103,7 @@ public class DetalleActivity extends AppCompatActivity {
                 _fecha = items.get(0).fecha;
                 _tipoinstalacion = items.get(0).tipo_instalacion;
                 _tipoorden = items.get(0).tipo_orden;
-
+                _editable  = items.get(0).editable;
 
                 edtEstatus.setText(items.get(0).estatus_orden);
                 edtTipoOrden.setText(items.get(0).tipo_orden);
@@ -113,11 +114,10 @@ public class DetalleActivity extends AppCompatActivity {
                 edtTerminal.setText(items.get(0).terminal);
                 edtPuerto.setText(items.get(0).puerto);
                 edtComentarios.setText(items.get(0).comentarios);
-
                 desabilitaControles();
 
                 DetalleActivity.this.setTitle(_telefono);
-                toolbar.setSubtitle(_tipoorden);
+                toolbar.setSubtitle(items.get(0).garantia);
 
                 String usuario = data_usuario.nombre_completo;
                 FTPServerConfig.ruta_crear_ftp[0] = _fecha.substring(0,10);
@@ -243,20 +243,42 @@ public class DetalleActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_detalle, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        if (id == R.id.action_editar) {
+            if (Utils.isEquals(_editable, "NO")) {
+                Utils.crear_alerta(context, "Aviso", "El tiempo de edición ha finalizado").show();
+            }else{
+                if (orden.size() == 1){
+                    Bundle bundle = new Bundle();
+                    bundle.putString( "id", orden.get(0).Id);
+                    bundle.putString( "folio", orden.get(0).folio_orden);
+                    bundle.putString( "telefono", orden.get(0).telefono_orden);
+                    bundle.putString( "principal", orden.get(0).principal);
+                    bundle.putString( "secundario", orden.get(0).secundario);
+                    bundle.putString( "tipo", orden.get(0).tipo_orden);
+                    bundle.putString( "contratista", orden.get(0).contratista);
+                    bundle.putString( "idcontratista", orden.get(0).idcontratista);
+                    bundle.putString( "estatus", orden.get(0).estatus_orden);
+                    bundle.putString( "distrito", orden.get(0).distrito);
+                    bundle.putString( "terminal", orden.get(0).terminal);
+                    bundle.putString( "puerto", orden.get(0).puerto);
+                    bundle.putString( "comentarios", orden.get(0).comentarios);
+                    bundle.putString( "idtipo", orden.get(0).idtipo);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+
+                    Intent i = new Intent(DetalleActivity.this, RegistroFibraOpticaActivity.class);
+                    i.putExtra("modo", "edicion");
+                    i.putExtra("datos", bundle);
+                    startActivity(i);
+                }
+            }
+
             return true;
         }
 

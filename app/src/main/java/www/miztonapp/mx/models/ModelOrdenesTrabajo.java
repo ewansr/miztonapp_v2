@@ -22,12 +22,16 @@ public class ModelOrdenesTrabajo {
     public String terminal;
     public String puerto;
     public String contratista;
+    public String editable;
+    public String idtipo;
+    public String idcontratista;
 
 
     public ModelOrdenesTrabajo(String Id,String contador_filas, String folio_orden,String telefono_orden,
                                String tipo_instalacion, String tipo_orden, String fecha,
                                String estatus_orden, String comentarios, String garantia, String central,
-                               String distrito, String terminal, String puerto, String contratista, String principal, String secundario){
+                               String distrito, String terminal, String puerto, String contratista,
+                               String principal, String secundario, String editable, String idtipo, String idcontratista){
         this.Id = Id;
         this.contador_filas     = contador_filas;
         this.folio_orden        = folio_orden;
@@ -45,6 +49,9 @@ public class ModelOrdenesTrabajo {
         this.contratista        = contratista;
         this.principal          = principal;
         this.secundario         = secundario;
+        this.editable           = editable;
+        this.idtipo             = idtipo;
+        this.idcontratista      = idcontratista;
     }
 
 }
