@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.vision.text.Text;
@@ -32,7 +33,7 @@ public class MaterialAdapterListView extends ArrayAdapter<ModelMateriales> {
         }
 
         TextView tvTitulo   = (TextView) convertView.findViewById(R.id.tv_titulo);
-        TextView tvCantidad = (TextView) convertView.findViewById(R.id.tv_cantidad);
+        EditText tvCantidad = (EditText) convertView.findViewById(R.id.edtCantidad);
         TextView tvUm       = (TextView) convertView.findViewById(R.id.tv_um);
 
         tvTitulo.setText(material.Nombre );
