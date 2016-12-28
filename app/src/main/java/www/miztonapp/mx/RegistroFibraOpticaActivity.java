@@ -1,21 +1,13 @@
 package www.miztonapp.mx;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.transition.Fade;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
@@ -93,7 +85,7 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
         spEstatus = (MaterialBetterSpinner) findViewById(R.id.sp_estatus);
         spEstatus.setAdapter(adapter);
 
-        spTiposOrden = (MaterialBetterSpinner) findViewById(R.id.sp_tipo_orden);
+        spTiposOrden = (MaterialBetterSpinner) findViewById(R.id.sp_tipoorden);
         spTiposOrden.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {

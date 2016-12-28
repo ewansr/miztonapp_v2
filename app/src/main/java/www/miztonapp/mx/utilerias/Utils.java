@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.darsh.multipleimageselect.models.Image;
+import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import net.gotev.uploadservice.Placeholders;
 import net.gotev.uploadservice.UploadNotificationConfig;
@@ -406,6 +407,10 @@ public class Utils  {
         bundle.putString( "usuario_foliotelmex", usuario.folio_telmex );
 
         return bundle;
+    }
+
+    public static String setItemIndex(int i, MaterialBetterSpinner spinner){
+        return (spinner.getAdapter().getItem(i).toString());
     }
 }
 

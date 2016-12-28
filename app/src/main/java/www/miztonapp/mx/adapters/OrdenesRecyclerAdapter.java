@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import mehdi.sakout.fancybuttons.FancyButton;
+import www.miztonapp.mx.CapturaMaterialFOActivity;
 import www.miztonapp.mx.DetalleActivity;
 import www.miztonapp.mx.R;
 import www.miztonapp.mx.activity_ordenes_detalle;
@@ -119,7 +120,7 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         TextView tv_mes;
         ImageView cv_image;
         FancyButton btn_detalle;
-        FancyButton btnExpand;
+        FancyButton btn_material;
         String telefono;
         String fecha;
         String tipo_instalacion;
@@ -143,9 +144,11 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
             tv_mes          = ( TextView ) itemView.findViewById( R.id.tvMes );
 
             btn_detalle     = (FancyButton)    itemView.findViewById( R.id.btn_cambiar);
+            btn_material    = (FancyButton) itemView.findViewById(R.id.btn_material);
 
             ImageButton subir_imagen = (ImageButton) itemView.findViewById(R.id.btn_subir);
             btn_detalle.setOnClickListener(clickListener);
+            btn_material.setOnClickListener(clickListener);
             subir_imagen.setOnClickListener(clickListener);
             itemView.setOnClickListener( clickListener );
         }
@@ -157,8 +160,11 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
             if (v.getId() == R.id.btn_subir){
                 abrir_galeria();
             }
-            if (v.getId() == R.id.btn_cambiar){
+            if (v.getId() == R.id.btn_cambiar) {
                 abrir_detalle(context);
+            }
+            if(v.getId() == R.id.btn_material){
+                abrir_captura_material();
             }
             }
         };
@@ -191,6 +197,13 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
             Intent intent = new Intent(context, AlbumSelectActivity.class);
             intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 10);
             ((Activity)context).startActivityForResult(intent, Constants.REQUEST_CODE);
+        }
+
+        public void abrir_captura_material(){
+            Intent i = new Intent(context, CapturaMaterialFOActivity.class);
+            i.putExtra("id", id);
+            (context).startActivity(i);
+            ((Activity)context).overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
     }
 

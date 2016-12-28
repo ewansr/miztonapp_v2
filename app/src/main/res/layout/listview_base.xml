@@ -1,0 +1,49 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@color/background_light">
+
+    <TextView
+        android:id="@+id/tv_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Conector RJ45"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:id="@+id/tv_cantidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="15"
+        android:layout_below="@+id/tv_titulo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_um"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Piezas"
+        android:layout_alignBaseline="@+id/tv_cantidad"
+        android:layout_alignBottom="@+id/tv_cantidad"
+        android:layout_toRightOf="@+id/tv_cantidad"
+        android:layout_toEndOf="@+id/tv_cantidad"
+        android:layout_marginLeft="10dp"
+        android:textSize="16sp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/edit"
+        android:id="@+id/floatingActionButton2"
+        android:layout_alignBottom="@+id/tv_um"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
