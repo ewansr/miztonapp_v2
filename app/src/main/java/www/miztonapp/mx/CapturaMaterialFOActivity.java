@@ -7,8 +7,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
+
+import net.cachapa.expandablelayout.ExpandableLayout;
 
 import java.util.ArrayList;
 
@@ -71,6 +74,20 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
 
         spCinturones = (MaterialBetterSpinner) findViewById(R.id.sp_cinturones);
         llenarsp();
+
+
+        TextView tvExpand = (TextView) findViewById(R.id.tvExpand);
+        final ExpandableLayout expLay = (ExpandableLayout) findViewById(R.id.expandable_layout);
+        tvExpand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (expLay.isExpanded()){
+                        expLay.collapse(true);
+                }else
+                    expLay.expand(true);
+
+            }
+        });
 
     }
 
