@@ -17,7 +17,7 @@ import www.miztonapp.mx.models.ModelMateriales;
  */
 
 public abstract class RequestMateriales {
-    public void getMaterialxLinea(String idlinea){
+    public void getMaterialxLinea(String idlinea, String idfolio){
         try{
             Request request = new Request(){
                 @Override
@@ -69,6 +69,7 @@ public abstract class RequestMateriales {
             JSONObject material = new JSONObject();
             String route = "controller_materiales/material_linea";
             material.put("idlinea",idlinea);
+            material.put("idfolio",idfolio);
             request.post(route, material);
 
         }catch (Exception error){

@@ -186,7 +186,7 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             public void CargaErronea(mException error) {
                 Utils.crear_alerta(CapturaMaterialFOActivity.this,"Aviso",error.getMessage()).show();
             }
-        };rModem.getMaterialxLinea("2");//hace referencia a los modem
+        };rModem.getMaterialxLinea("2",_id);//hace referencia a los modem
 
         RequestMateriales rFibra = new RequestMateriales() {
             ProgressDialog progressDialog;
@@ -212,7 +212,7 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             public void CargaErronea(mException error) {
                 Utils.crear_alerta(CapturaMaterialFOActivity.this,"Aviso",error.getMessage()).show();
             }
-        };rFibra.getMaterialxLinea("3");//hace referencia a la fibra
+        };rFibra.getMaterialxLinea("3",_id);//hace referencia a la fibra
 
         RequestMateriales rCinturones = new RequestMateriales() {
             ProgressDialog progressDialog;
@@ -238,7 +238,7 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             public void CargaErronea(mException error) {
                 Utils.crear_alerta(CapturaMaterialFOActivity.this,"Aviso",error.getMessage()).show();
             }
-        };rCinturones.getMaterialxLinea("5");//hace referencia a los cinturones
+        };rCinturones.getMaterialxLinea("5",_id);//hace referencia a los cinturones
 
         RequestMateriales rComplementos = new RequestMateriales() {
             ProgressDialog progressDialog;
@@ -263,7 +263,7 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             public void CargaErronea(mException error) {
                 Utils.crear_alerta(CapturaMaterialFOActivity.this,"Aviso",error.getMessage()).show();
             }
-        };rComplementos.getMaterialxLinea("4");
+        };rComplementos.getMaterialxLinea("4",_id);
 
         RequestMateriales rOtros = new RequestMateriales() {
             ProgressDialog progressDialog;
@@ -288,7 +288,7 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             public void CargaErronea(mException error) {
                 Utils.crear_alerta(CapturaMaterialFOActivity.this,"Aviso",error.getMessage()).show();
             }
-        };rOtros.getMaterialxLinea("6");
+        };rOtros.getMaterialxLinea("6",_id);
     }
 
     public void cargar_orden(){
