@@ -122,11 +122,11 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/sp_cinturones"
                         android:layout_below="@+id/tv_cinturones"
-                        android:focusable="false"
                         android:layout_alignLeft="@+id/tv_cinturones"
                         android:layout_alignStart="@+id/tv_cinturones"
                         android:layout_toLeftOf="@+id/edtCantidadCinturon"
-                        android:layout_toStartOf="@+id/edtCantidadCinturon" />
+                        android:layout_toStartOf="@+id/edtCantidadCinturon"
+                        android:focusable="false" />
 
                     <EditText
                         android:layout_height="wrap_content"
@@ -136,7 +136,9 @@
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                        android:layout_width="80dp" />
+                        android:layout_width="80dp"
+                        android:text="0"
+                        android:textAlignment="center" />
                 </RelativeLayout>
 
                 <TextView
@@ -157,8 +159,8 @@
                     android:layout_below="@+id/tv_modem"
                     android:layout_alignLeft="@+id/tv_modem"
                     android:layout_alignStart="@+id/tv_modem"
-                    android:focusable="false"
-                    android:layout_marginRight="10dp" />
+                    android:layout_marginRight="10dp"
+                    android:fitsSystemWindows="true" />
 
                 <TextView
                     android:text="Fibra acometida:"
@@ -179,7 +181,6 @@
                     android:layout_below="@+id/tv_fibra"
                     android:layout_alignLeft="@+id/tv_fibra"
                     android:layout_alignStart="@+id/tv_fibra"
-                    android:focusable="false"
                     android:layout_alignRight="@+id/sp_modem"
                     android:layout_alignEnd="@+id/sp_modem" />
 
@@ -202,7 +203,6 @@
                     android:layout_below="@+id/tv_fibra_extra"
                     android:layout_alignLeft="@+id/tv_fibra_extra"
                     android:layout_alignStart="@+id/tv_fibra_extra"
-                    android:focusable="false"
                     android:layout_alignRight="@+id/sp_fibra"
                     android:layout_alignEnd="@+id/sp_fibra" />
 

@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabHost;
 
@@ -24,6 +26,9 @@ import www.miztonapp.mx.requests.RequestMateriales;
 import www.miztonapp.mx.requests.RequestOrdenesTrabajo;
 import www.miztonapp.mx.utilerias.Utils;
 
+import static www.miztonapp.mx.utilerias.Utils.crear_toast;
+import static www.miztonapp.mx.utilerias.Utils.isEquals;
+
 public class CapturaMaterialFOActivity extends AppCompatActivity {
     private String IdModem;
     private String IdFibra;
@@ -31,6 +36,7 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
     private String _id = "-1";
     Toolbar toolbar;
     MaterialBetterSpinner spModem, spFibra, spFibraExtra, spCinturones;
+    EditText edtCantidadCinturon;
     ListView listView;
     private static final String[] ESTATUS = new String[] {
             "Liquidada", "Objetada", "Queja", "Retornada"
@@ -67,16 +73,18 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
         cargar_orden();
 
         spModem = (MaterialBetterSpinner) findViewById(R.id.sp_modem);
+        spModem.setEnabled(false);
         spFibra = (MaterialBetterSpinner) findViewById(R.id.sp_fibra);
+        spFibra.setEnabled(false);
 
         ArrayAdapter<String> adapter_fibra_extra = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,  FIBRA_EXTRA);
         spFibraExtra = (MaterialBetterSpinner) findViewById(R.id.sp_fibra_extra);
         spFibraExtra.setAdapter(adapter_fibra_extra);
 
         spCinturones = (MaterialBetterSpinner) findViewById(R.id.sp_cinturones);
+        spCinturones.setEnabled(false);
+        edtCantidadCinturon = (EditText) findViewById(R.id.edtCantidadCinturon);
         llenarsp();
-
-
 
         final TabHost host = (TabHost)findViewById(R.id.tabhost);
         host.setup();
@@ -159,12 +167,69 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             }
 
             @Override
-            public void CargaExitosa(ArrayList<ModelMateriales> items) {
+            public void CargaExitosa(final ArrayList<ModelMateriales> items) {
                 ArrayAdapter<ModelMateriales> adapter = new ArrayAdapter<ModelMateriales>(CapturaMaterialFOActivity.this,
                         android.R.layout.simple_dropdown_item_1line, items );
                 spModem.setAdapter(adapter);
-//                spModem.setText(Utils.setItemIndex(0, spModem));
-                IdModem = ((ModelMateriales)spModem.getAdapter().getItem(0)).Id;
+                spModem.setEnabled(true);
+
+                // Ver si hay algo guardado en la base de datos
+                String id_modem=null;
+                String nombre_modem=null;
+                for (int i=0;i<items.size();i++){
+                    if (!isEquals(items.get(i).CantidadReal,"0")){
+                        id_modem = items.get(i).Id;
+                        nombre_modem = items.get(i).Nombre;
+                        break;
+                    }
+                }
+
+                // Si hay algo guardado usarlo sino dejarlo en blanco
+                if (id_modem ==null) {
+                    IdModem = ((ModelMateriales) spModem.getAdapter().getItem(0)).Id;
+                }else{
+                    IdModem = id_modem;
+                    spModem.setText(nombre_modem);
+                }
+
+
+                //Guardar cuando se seleccione un item
+                spModem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                        IdModem = ((ModelMateriales)spModem.getAdapter().getItem(position)).Id;
+                        RequestMateriales rCantidad = new RequestMateriales() {
+                            @Override
+                            public void BeforeLoad() {
+
+                            }
+
+                            @Override
+                            public void CargaExitosa(ArrayList<ModelMateriales> items) {
+
+                            }
+
+                            @Override
+                            public void CargaErronea(mException error) {
+                                crear_toast(CapturaMaterialFOActivity.this, error.getMessage()).show();
+                            }
+
+                            @Override
+                            public void materialCargaExitosa(String mensaje) {
+
+                            }
+                        };
+
+                        // poner todos en 0
+                        for (int i=0;i<items.size();i++){
+                            rCantidad.guardar_cantidad_material(_id,items.get(i).Id,"0");
+                        }
+
+                        //al final solo insertar el mero mero
+                        rCantidad.guardar_cantidad_material(_id, IdModem,"1");
+
+                    }
+                });
 
                 if (progressDialog.isShowing())
                     progressDialog.dismiss();
@@ -191,12 +256,69 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             }
 
             @Override
-            public void CargaExitosa(ArrayList<ModelMateriales> items) {
+            public void CargaExitosa(final ArrayList<ModelMateriales> items) {
                 ArrayAdapter<ModelMateriales> adapter = new ArrayAdapter<ModelMateriales>(CapturaMaterialFOActivity.this,
                         android.R.layout.simple_dropdown_item_1line, items );
                 spFibra.setAdapter(adapter);
-//                spModem.setText(Utils.setItemIndex(0, spModem));
-                IdFibra = ((ModelMateriales)spFibra.getAdapter().getItem(0)).Id;
+                spFibra.setEnabled(true);
+
+                // Ver si hay algo guardado en la base de datos
+                String id_fibra=null;
+                String nombre_fibra=null;
+                for (int i=0;i<items.size();i++){
+                    if (!isEquals(items.get(i).CantidadReal,"0")){
+                        id_fibra = items.get(i).Id;
+                        nombre_fibra = items.get(i).Nombre;
+                        break;
+                    }
+                }
+
+                // Si hay algo guardado usarlo sino dejarlo en blanco
+                if (id_fibra ==null) {
+                    IdFibra = ((ModelMateriales) spFibra.getAdapter().getItem(0)).Id;
+                }else{
+                    IdFibra = id_fibra;
+                    spFibra.setText(nombre_fibra);
+                }
+
+
+                //Guardar cuando se seleccione un item
+                spFibra.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                        IdFibra = ((ModelMateriales)spFibra.getAdapter().getItem(position)).Id;
+                        RequestMateriales rCantidad = new RequestMateriales() {
+                            @Override
+                            public void BeforeLoad() {
+
+                            }
+
+                            @Override
+                            public void CargaExitosa(ArrayList<ModelMateriales> items) {
+
+                            }
+
+                            @Override
+                            public void CargaErronea(mException error) {
+                                crear_toast(CapturaMaterialFOActivity.this, error.getMessage()).show();
+                            }
+
+                            @Override
+                            public void materialCargaExitosa(String mensaje) {
+
+                            }
+                        };
+
+                        // poner todos en 0
+                        for (int i=0;i<items.size();i++){
+                            rCantidad.guardar_cantidad_material(_id,items.get(i).Id,"0");
+                        }
+
+                        //al final solo insertar el mero mero
+                        rCantidad.guardar_cantidad_material(_id,IdFibra,"1");
+                    }
+                });
+
                 if (progressDialog.isShowing())
                     progressDialog.dismiss();
             }
@@ -222,12 +344,69 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             }
 
             @Override
-            public void CargaExitosa(ArrayList<ModelMateriales> items) {
+            public void CargaExitosa(final ArrayList<ModelMateriales> items) {
                 ArrayAdapter<ModelMateriales> adapter = new ArrayAdapter<ModelMateriales>(CapturaMaterialFOActivity.this,
                         android.R.layout.simple_dropdown_item_1line, items );
                 spCinturones.setAdapter(adapter);
 //                spModem.setText(Utils.setItemIndex(0, spModem));
-                IdCinturon = ((ModelMateriales)spCinturones.getAdapter().getItem(0)).Id;
+                spCinturones.setEnabled(true);
+
+                // Ver si hay algo guardado en la base de datos
+                String id_cinturon=null;
+                String nombre_cinturon=null;
+                for (int i=0;i<items.size();i++){
+                    if (!isEquals(items.get(i).CantidadReal,"0")){
+                        id_cinturon = items.get(i).Id;
+                        nombre_cinturon = items.get(i).Nombre;
+                        edtCantidadCinturon.setText(items.get(i).CantidadDefault);
+                        break;
+                    }
+                }
+
+                // Si hay algo guardado usarlo sino dejarlo en blanco
+                if (id_cinturon ==null) {
+                    IdCinturon = ((ModelMateriales) spCinturones.getAdapter().getItem(0)).Id;
+                }else{
+                    IdCinturon = id_cinturon;
+                    spCinturones.setText(nombre_cinturon);
+                }
+
+                //Guardar cuando se seleccione un item
+                spCinturones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                        IdCinturon = ((ModelMateriales)spCinturones.getAdapter().getItem(position)).Id;
+                        RequestMateriales rCantidad = new RequestMateriales() {
+                            @Override
+                            public void BeforeLoad() {
+
+                            }
+
+                            @Override
+                            public void CargaExitosa(ArrayList<ModelMateriales> items) {
+
+                            }
+
+                            @Override
+                            public void CargaErronea(mException error) {
+                                crear_toast(CapturaMaterialFOActivity.this, error.getMessage()).show();
+                            }
+
+                            @Override
+                            public void materialCargaExitosa(String mensaje) {
+
+                            }
+                        };
+
+                        // poner todos en 0
+                        for (int i=0;i<items.size();i++){
+                            rCantidad.guardar_cantidad_material(_id,items.get(i).Id,"0");
+                        }
+
+                        //al final solo insertar el mero mero
+                        rCantidad.guardar_cantidad_material(_id,IdCinturon,(isEquals(edtCantidadCinturon.getText().toString(),""))?"0":edtCantidadCinturon.getText().toString());
+                    }
+                });
                 if (progressDialog.isShowing())
                     progressDialog.dismiss();
             }

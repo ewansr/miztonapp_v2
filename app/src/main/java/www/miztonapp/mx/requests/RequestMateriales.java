@@ -48,7 +48,8 @@ public abstract class RequestMateriales {
                                     item.getString("IdLinea"),
                                     item.getString("Linea"),
                                     item.getString("Codigo"),
-                                    item.getString("CantidadDefault")
+                                    item.getString("CantidadDefault"),
+                                    item.getString("CantidadReal")
                             ) );
                         }
 

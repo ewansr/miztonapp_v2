@@ -15,8 +15,10 @@ public class ModelMateriales {
     public String Linea;
     public String Codigo;
     public String CantidadDefault;
+    public String CantidadReal;
 
-    public ModelMateriales(String Id, String Nombre, String IdMedida, String UnidadMedida, String IdLinea, String Linea, String Codigo, String CantidadDefault){
+
+    public ModelMateriales(String Id, String Nombre, String IdMedida, String UnidadMedida, String IdLinea, String Linea, String Codigo, String CantidadDefault, String CantidadReal){
         this.Id = Id;
         this.Nombre = Nombre;
         this.IdMedida = IdMedida;
@@ -25,6 +27,7 @@ public class ModelMateriales {
         this.Linea = Linea;
         this.Codigo = Codigo;
         this.CantidadDefault = CantidadDefault;
+        this.CantidadReal = CantidadReal;
     }
 
     @Override
