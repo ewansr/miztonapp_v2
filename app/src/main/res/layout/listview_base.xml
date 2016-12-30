@@ -1,19 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
-
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/circulo"
-        android:id="@+id/imageView2"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/tv_um" />
+    android:padding="10dp"
+    android:id="@+id/relative_principal">
 
     <TextView
         android:id="@+id/tv_um"
@@ -21,35 +12,32 @@
         android:layout_height="wrap_content"
         android:text="Piezas"
         android:textSize="14sp"
-        android:layout_below="@+id/edtCantidad"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/tv_titulo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/tv_titulo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:text="Conector RJ45"
-        android:textAlignment="textStart"
-        android:layout_above="@+id/tv_um"
+        android:textSize="15sp"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/imageView2"
-        android:layout_toLeftOf="@+id/edtCantidad"
-        android:layout_toStartOf="@+id/edtCantidad"
-        android:layout_marginLeft="30dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/btn_cantidad"
+        android:layout_toStartOf="@+id/btn_cantidad" />
 
-    <EditText
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/edtCantidad"
-        tools:text="15"
-        android:textAlignment="center"
-        android:inputType="numberDecimal"
-        android:textSize="14sp"
-        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_width="60dp" />
+        android:id="@+id/tv_cantidad"
+        android:textSize="18sp"
+        android:textColor="@color/darkred"
+        android:textStyle="normal|bold" />
 
 </RelativeLayout>

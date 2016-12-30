@@ -19,11 +19,11 @@
         app:el_expanded="true"
         app:el_parallax="0.5"
         android:layout_below="@+id/expandable_layout"
-        android:background="@color/darkgreen"
+        android:background="@color/colorPrimaryDark"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         app2:el_expanded="false"
-        android:layout_marginBottom="50dp">
+        android:padding="10dp">
 
 
         <android.support.v7.widget.CardView
@@ -50,11 +50,11 @@
         app:el_expanded="true"
         app:el_parallax="0.5"
         android:layout_below="@+id/expandable_principal"
-        android:background="@color/darkgreen"
+        android:background="@color/colorPrimaryDark"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         app2:el_expanded="false"
-        android:layout_marginBottom="50dp">
+        android:padding="10dp">
 
 
         <android.support.v7.widget.CardView
@@ -82,126 +82,132 @@
         app:el_parallax="0.5"
         android:layout_below="@+id/tabhost"
         app2:el_expanded="true"
-        android:layout_marginBottom="50dp">
+        android:padding="10dp"
+        android:background="@color/colorPrimaryDark">
 
-        <RelativeLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            tools:ignore="ObsoleteLayoutParam"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_height="match_parent"
-            android:id="@+id/rl_datos">
+            android:layout_height="wrap_content" >
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:id="@+id/rl_secundario"
-                android:layout_below="@+id/sp_fibra_extra"
-                android:layout_height="100dp">
+                tools:ignore="ObsoleteLayoutParam"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_height="match_parent"
+                android:id="@+id/rl_datos">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/rl_secundario"
+                    android:layout_below="@+id/sp_fibra_extra"
+                    android:layout_height="100dp">
+
+                    <TextView
+                        android:text="Cinturones:"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/sp_fibra_extra"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="0dp"
+                        android:id="@+id/tv_cinturones" />
+
+                    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/sp_cinturones"
+                        android:layout_below="@+id/tv_cinturones"
+                        android:focusable="false"
+                        android:layout_alignLeft="@+id/tv_cinturones"
+                        android:layout_alignStart="@+id/tv_cinturones"
+                        android:layout_toLeftOf="@+id/edtCantidadCinturon"
+                        android:layout_toStartOf="@+id/edtCantidadCinturon" />
+
+                    <EditText
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:ems="10"
+                        android:id="@+id/edtCantidadCinturon"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="80dp" />
+                </RelativeLayout>
 
                 <TextView
-                    android:text="Cinturones:"
+                    android:text="Modem:"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/sp_fibra_extra"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:id="@+id/tv_modem"
+                    android:layout_marginTop="3dp" />
+
+                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sp_modem"
+                    android:layout_below="@+id/tv_modem"
+                    android:layout_alignLeft="@+id/tv_modem"
+                    android:layout_alignStart="@+id/tv_modem"
+                    android:focusable="false"
+                    android:layout_marginRight="10dp" />
+
+                <TextView
+                    android:text="Fibra acometida:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/sp_modem"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_marginLeft="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="0dp"
-                    android:id="@+id/tv_cinturones" />
+                    android:id="@+id/tv_fibra" />
 
                 <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/sp_cinturones"
-                    android:layout_below="@+id/tv_cinturones"
+                    android:id="@+id/sp_fibra"
+                    android:layout_below="@+id/tv_fibra"
+                    android:layout_alignLeft="@+id/tv_fibra"
+                    android:layout_alignStart="@+id/tv_fibra"
                     android:focusable="false"
-                    android:layout_alignLeft="@+id/tv_cinturones"
-                    android:layout_alignStart="@+id/tv_cinturones"
-                    android:layout_toLeftOf="@+id/edtCantidadCinturon"
-                    android:layout_toStartOf="@+id/edtCantidadCinturon" />
+                    android:layout_alignRight="@+id/sp_modem"
+                    android:layout_alignEnd="@+id/sp_modem" />
 
-                <EditText
+                <TextView
+                    android:text="Fibra extra:"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:ems="10"
-                    android:id="@+id/edtCantidadCinturon"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_width="80dp" />
+                    android:layout_below="@+id/sp_fibra"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="0dp"
+                    android:id="@+id/tv_fibra_extra" />
+
+                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sp_fibra_extra"
+                    android:layout_below="@+id/tv_fibra_extra"
+                    android:layout_alignLeft="@+id/tv_fibra_extra"
+                    android:layout_alignStart="@+id/tv_fibra_extra"
+                    android:focusable="false"
+                    android:layout_alignRight="@+id/sp_fibra"
+                    android:layout_alignEnd="@+id/sp_fibra" />
+
             </RelativeLayout>
-
-            <TextView
-                android:text="Modem:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
-                android:id="@+id/tv_modem"
-                android:layout_marginTop="3dp" />
-
-            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/sp_modem"
-                android:layout_below="@+id/tv_modem"
-                android:layout_alignLeft="@+id/tv_modem"
-                android:layout_alignStart="@+id/tv_modem"
-                android:focusable="false"
-                android:layout_marginRight="10dp" />
-
-            <TextView
-                android:text="Fibra acometida:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/sp_modem"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="0dp"
-                android:id="@+id/tv_fibra" />
-
-            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/sp_fibra"
-                android:layout_below="@+id/tv_fibra"
-                android:layout_alignLeft="@+id/tv_fibra"
-                android:layout_alignStart="@+id/tv_fibra"
-                android:focusable="false"
-                android:layout_alignRight="@+id/sp_modem"
-                android:layout_alignEnd="@+id/sp_modem" />
-
-            <TextView
-                android:text="Fibra extra:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/sp_fibra"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="0dp"
-                android:id="@+id/tv_fibra_extra" />
-
-            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/sp_fibra_extra"
-                android:layout_below="@+id/tv_fibra_extra"
-                android:layout_alignLeft="@+id/tv_fibra_extra"
-                android:layout_alignStart="@+id/tv_fibra_extra"
-                android:focusable="false"
-                android:layout_alignRight="@+id/sp_fibra"
-                android:layout_alignEnd="@+id/sp_fibra" />
-
-        </RelativeLayout>
+        </android.support.v7.widget.CardView>
 
     </net.cachapa.expandablelayout.ExpandableLayout>
 
@@ -263,7 +269,8 @@
         android:background="@color/wallet_hint_foreground_holo_light"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:visibility="gone">
 
         <mehdi.sakout.fancybuttons.FancyButton
             android:id="@+id/btn_guardar"

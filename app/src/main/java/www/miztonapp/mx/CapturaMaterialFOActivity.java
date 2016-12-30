@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TabHost;
 
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
@@ -176,6 +177,11 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             public void CargaErronea(mException error) {
                 Utils.crear_alerta(CapturaMaterialFOActivity.this,"Aviso",error.getMessage()).show();
             }
+
+            @Override
+            public void materialCargaExitosa(String mensaje) {
+
+            }
         };rModem.getMaterialxLinea("2",_id);//hace referencia a los modem
 
         RequestMateriales rFibra = new RequestMateriales() {
@@ -201,6 +207,11 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             @Override
             public void CargaErronea(mException error) {
                 Utils.crear_alerta(CapturaMaterialFOActivity.this,"Aviso",error.getMessage()).show();
+            }
+
+            @Override
+            public void materialCargaExitosa(String mensaje) {
+
             }
         };rFibra.getMaterialxLinea("3",_id);//hace referencia a la fibra
 
@@ -228,6 +239,11 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             public void CargaErronea(mException error) {
                 Utils.crear_alerta(CapturaMaterialFOActivity.this,"Aviso",error.getMessage()).show();
             }
+
+            @Override
+            public void materialCargaExitosa(String mensaje) {
+
+            }
         };rCinturones.getMaterialxLinea("5",_id);//hace referencia a los cinturones
 
         RequestMateriales rComplementos = new RequestMateriales() {
@@ -253,6 +269,11 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             public void CargaErronea(mException error) {
                 Utils.crear_alerta(CapturaMaterialFOActivity.this,"Aviso",error.getMessage()).show();
             }
+
+            @Override
+            public void materialCargaExitosa(String mensaje) {
+
+            }
         };rComplementos.getMaterialxLinea("4",_id);
 
         RequestMateriales rOtros = new RequestMateriales() {
@@ -277,6 +298,11 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             @Override
             public void CargaErronea(mException error) {
                 Utils.crear_alerta(CapturaMaterialFOActivity.this,"Aviso",error.getMessage()).show();
+            }
+
+            @Override
+            public void materialCargaExitosa(String mensaje) {
+
             }
         };rOtros.getMaterialxLinea("6",_id);
     }
