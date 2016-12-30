@@ -79,7 +79,7 @@ public abstract class RequestMateriales {
     }
 
 
-    public void guardar_cantidad_material(String IdFolio, String IdMaterial, String Cantidad ){
+    public void guardar_cantidad_material(String IdFolio, String IdMaterial, String Cantidad, String tipo ){
         final String[] mensaje = {""};
         try{
             Request request = new Request(){
@@ -117,6 +117,7 @@ public abstract class RequestMateriales {
             orden_trabajo.put("idfolio", IdFolio);
             orden_trabajo.put("idmaterial", IdMaterial);
             orden_trabajo.put("cantidad", Cantidad);
+            orden_trabajo.put("tipo", tipo);
 
             request.post(route, orden_trabajo);
         }catch (Exception error){

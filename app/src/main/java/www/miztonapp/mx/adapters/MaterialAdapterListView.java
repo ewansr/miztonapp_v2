@@ -98,7 +98,7 @@ public class MaterialAdapterListView extends ArrayAdapter<ModelMateriales> {
                                         public void materialCargaExitosa(String mensaje) {
                                             crear_toast(context, mensaje).show();
                                         }
-                                    };rCantidades.guardar_cantidad_material(idfolio,material.Id,material.CantidadDefault);
+                                    };rCantidades.guardar_cantidad_material(idfolio,material.Id,material.CantidadDefault,"normal");
                                 }
                             }
                         });

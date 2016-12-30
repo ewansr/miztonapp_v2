@@ -1,14 +1,19 @@
 package www.miztonapp.mx;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 
@@ -18,6 +23,7 @@ import net.cachapa.expandablelayout.ExpandableLayout;
 
 import java.util.ArrayList;
 
+import mehdi.sakout.fancybuttons.FancyButton;
 import www.miztonapp.mx.adapters.MaterialAdapterListView;
 import www.miztonapp.mx.api.mException;
 import www.miztonapp.mx.models.ModelMateriales;
@@ -34,9 +40,11 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
     private String IdFibra;
     private String IdCinturon;
     private String _id = "-1";
+
+
     Toolbar toolbar;
     MaterialBetterSpinner spModem, spFibra, spFibraExtra, spCinturones;
-    EditText edtCantidadCinturon;
+    FancyButton btnCantidadCinturon;
     ListView listView;
     private static final String[] ESTATUS = new String[] {
             "Liquidada", "Objetada", "Queja", "Retornada"
@@ -48,7 +56,7 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             "50M",
             "75M",
             "125M",
-            "125M + 25m",
+            "125M + 25M",
             "125M + 50M"
     };
 
@@ -56,6 +64,8 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_captura_material_fo);
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(CapturaMaterialFOActivity.this);
+        alertDialog.setTitle("Captura");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -79,11 +89,12 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter_fibra_extra = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,  FIBRA_EXTRA);
         spFibraExtra = (MaterialBetterSpinner) findViewById(R.id.sp_fibra_extra);
+        spFibraExtra.setEnabled(false);
         spFibraExtra.setAdapter(adapter_fibra_extra);
 
         spCinturones = (MaterialBetterSpinner) findViewById(R.id.sp_cinturones);
         spCinturones.setEnabled(false);
-        edtCantidadCinturon = (EditText) findViewById(R.id.edtCantidadCinturon);
+        btnCantidadCinturon = (FancyButton) findViewById(R.id.btnCantidadCinturon);
         llenarsp();
 
         final TabHost host = (TabHost)findViewById(R.id.tabhost);
@@ -153,6 +164,142 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+        btnCantidadCinturon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final EditText input = new EditText(CapturaMaterialFOActivity.this);
+                input.setSingleLine(true);
+                input.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                alertDialog.setMessage(spCinturones.getText().toString());
+                alertDialog.setView(input);
+                alertDialog.setIcon(R.drawable.briefcase_material);
+
+                alertDialog.setPositiveButton("Añadir",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (!isEquals(input.getText().toString(),"")){
+                                    btnCantidadCinturon.setText(input.getText().toString());
+                                    RequestMateriales rCantidades = new RequestMateriales() {
+                                        @Override
+                                        public void BeforeLoad() {
+
+                                        }
+
+                                        @Override
+                                        public void CargaExitosa(ArrayList<ModelMateriales> items) {
+
+                                        }
+
+                                        @Override
+                                        public void CargaErronea(mException error) {
+                                            crear_toast(CapturaMaterialFOActivity.this,error.getMessage()).show();
+                                        }
+
+                                        @Override
+                                        public void materialCargaExitosa(String mensaje) {
+                                            crear_toast(CapturaMaterialFOActivity.this, mensaje).show();
+                                        }
+                                    };rCantidades.guardar_cantidad_material(_id,IdCinturon,btnCantidadCinturon.getText().toString(),"normal");
+                                }
+                            }
+                        });
+
+                alertDialog.setNegativeButton("Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                alertDialog.show();
+            }
+        });
+
+
+        spFibraExtra.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+                RequestMateriales rCantidad = new RequestMateriales() {
+                    @Override
+                    public void BeforeLoad() {
+
+                    }
+
+                    @Override
+                    public void CargaExitosa(ArrayList<ModelMateriales> items) {
+
+                    }
+
+                    @Override
+                    public void CargaErronea(mException error) {
+                        crear_toast(CapturaMaterialFOActivity.this, error.getMessage()).show();
+                    }
+
+                    @Override
+                    public void materialCargaExitosa(String mensaje) {
+
+                    }
+                };
+
+                // poner todos en 0
+                if (position == 0){
+                    rCantidad.guardar_cantidad_material(_id,"21","0","extra");
+                    rCantidad.guardar_cantidad_material(_id,"22","0","extra");
+                    rCantidad.guardar_cantidad_material(_id,"23","0","extra");
+                    rCantidad.guardar_cantidad_material(_id,"24","0","extra");
+                }
+
+                if (position == 1){
+                    rCantidad.guardar_cantidad_material(_id,"21","1","extra");
+                    rCantidad.guardar_cantidad_material(_id,"22","0","extra");
+                    rCantidad.guardar_cantidad_material(_id,"23","0","extra");
+                    rCantidad.guardar_cantidad_material(_id,"24","0","extra");
+                }
+
+                if (position == 2){
+                    rCantidad.guardar_cantidad_material(_id,"21","0","extra");
+                    rCantidad.guardar_cantidad_material(_id,"22","1","extra");
+                    rCantidad.guardar_cantidad_material(_id,"23","0","extra");
+                    rCantidad.guardar_cantidad_material(_id,"24","0","extra");
+                }
+
+                if (position == 3){
+                    rCantidad.guardar_cantidad_material(_id,"21","0","extra");
+                    rCantidad.guardar_cantidad_material(_id,"22","0","extra");
+                    rCantidad.guardar_cantidad_material(_id,"23","1","extra");
+                    rCantidad.guardar_cantidad_material(_id,"24","0","extra");
+                }
+
+                if (position == 4){
+                    rCantidad.guardar_cantidad_material(_id,"21","0","extra");
+                    rCantidad.guardar_cantidad_material(_id,"22","0","extra");
+                    rCantidad.guardar_cantidad_material(_id,"23","0","extra");
+                    rCantidad.guardar_cantidad_material(_id,"24","1","extra");
+                }
+
+                if (position == 5){
+                    rCantidad.guardar_cantidad_material(_id,"21","1","extra");
+                    rCantidad.guardar_cantidad_material(_id,"22","0","extra");
+                    rCantidad.guardar_cantidad_material(_id,"23","0","extra");
+                    rCantidad.guardar_cantidad_material(_id,"24","1","extra");
+                }
+
+                if (position == 6){
+                    rCantidad.guardar_cantidad_material(_id,"21","0","extra");
+                    rCantidad.guardar_cantidad_material(_id,"22","1","extra");
+                    rCantidad.guardar_cantidad_material(_id,"23","0","extra");
+                    rCantidad.guardar_cantidad_material(_id,"24","1","extra");
+                }
+            }
+        });
+
+
     }
 
     public void llenarsp(){
@@ -222,11 +369,11 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
 
                         // poner todos en 0
                         for (int i=0;i<items.size();i++){
-                            rCantidad.guardar_cantidad_material(_id,items.get(i).Id,"0");
+                            rCantidad.guardar_cantidad_material(_id,items.get(i).Id,"0","normal");
                         }
 
                         //al final solo insertar el mero mero
-                        rCantidad.guardar_cantidad_material(_id, IdModem,"1");
+                        rCantidad.guardar_cantidad_material(_id, IdModem,"1","normal");
 
                     }
                 });
@@ -311,11 +458,11 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
 
                         // poner todos en 0
                         for (int i=0;i<items.size();i++){
-                            rCantidad.guardar_cantidad_material(_id,items.get(i).Id,"0");
+                            rCantidad.guardar_cantidad_material(_id,items.get(i).Id,"0","normal");
                         }
 
                         //al final solo insertar el mero mero
-                        rCantidad.guardar_cantidad_material(_id,IdFibra,"1");
+                        rCantidad.guardar_cantidad_material(_id,IdFibra,"1","normal");
                     }
                 });
 
@@ -357,7 +504,7 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
                     if (!isEquals(items.get(i).CantidadReal,"0")){
                         id_cinturon = items.get(i).Id;
                         nombre_cinturon = items.get(i).Nombre;
-                        edtCantidadCinturon.setText(items.get(i).CantidadDefault);
+                        btnCantidadCinturon.setText(items.get(i).CantidadDefault);
                         break;
                     }
                 }
@@ -399,11 +546,11 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
 
                         // poner todos en 0
                         for (int i=0;i<items.size();i++){
-                            rCantidad.guardar_cantidad_material(_id,items.get(i).Id,"0");
+                            rCantidad.guardar_cantidad_material(_id,items.get(i).Id,"0","normal");
                         }
 
                         //al final solo insertar el mero mero
-                        rCantidad.guardar_cantidad_material(_id,IdCinturon,(isEquals(edtCantidadCinturon.getText().toString(),""))?"0":edtCantidadCinturon.getText().toString());
+                        rCantidad.guardar_cantidad_material(_id,IdCinturon,(isEquals(btnCantidadCinturon.getText().toString(),""))?"0":btnCantidadCinturon.getText().toString(),"normal");
                     }
                 });
                 if (progressDialog.isShowing())

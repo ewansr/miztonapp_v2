@@ -27,6 +27,8 @@ import www.miztonapp.mx.R;
 import www.miztonapp.mx.activity_ordenes_detalle;
 import www.miztonapp.mx.models.ModelOrdenesTrabajo;
 
+import static www.miztonapp.mx.utilerias.Utils.isEquals;
+
 /**
  * Created by Saulo on 31/08/2016.
  */
@@ -75,6 +77,12 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         int mes = Integer.parseInt(items_orden_trabajo.get(position).fecha.substring(5,7));
         String nombre_mes = Arrays.asList(array).get(mes-1);
         holder.tv_mes.setText(nombre_mes);
+
+        if (isEquals(items_orden_trabajo.get(position).estatus_orden,"Liquidada") || isEquals(items_orden_trabajo.get(position).estatus_orden,"Queja")){
+            holder.btn_material.setVisibility(View.VISIBLE);
+        }else{
+            holder.btn_material.setVisibility(View.GONE);
+        }
 
         if ( items_orden_trabajo.get(position).tipo_instalacion.equals("FO") ){
             holder.cv_image.setImageResource(R.drawable.fiber_icon_material);
