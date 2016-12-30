@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TabHost;
 
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
@@ -17,7 +16,6 @@ import net.cachapa.expandablelayout.ExpandableLayout;
 
 import java.util.ArrayList;
 
-import mehdi.sakout.fancybuttons.FancyButton;
 import www.miztonapp.mx.adapters.MaterialAdapterListView;
 import www.miztonapp.mx.api.mException;
 import www.miztonapp.mx.models.ModelMateriales;
@@ -30,7 +28,7 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
     private String IdModem;
     private String IdFibra;
     private String IdCinturon;
-    private String _id;
+    private String _id = "-1";
     Toolbar toolbar;
     MaterialBetterSpinner spModem, spFibra, spFibraExtra, spCinturones;
     ListView listView;
@@ -111,8 +109,6 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
         host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             public void onTabChanged(String tabId) {
                 Log.d("TabHost", "onTabChanged: tab number=" + host.getCurrentTab());
-//                btn_Guardar.setText("Guardar " + host.getCurrentTabTag());
-
                 switch (host.getCurrentTab()) {
                     case 0:
                         if (expLayPrincipal.isExpanded())
@@ -152,6 +148,7 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
     }
 
     public void llenarsp(){
+        final String _ìd = this._id;
         RequestMateriales rModem = new RequestMateriales() {
             ProgressDialog progressDialog;
             @Override
@@ -257,7 +254,8 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
 
             @Override
             public void CargaExitosa(ArrayList<ModelMateriales> items) {
-                MaterialAdapterListView material_adapter = new MaterialAdapterListView(CapturaMaterialFOActivity.this, items);
+
+                MaterialAdapterListView material_adapter = new MaterialAdapterListView(CapturaMaterialFOActivity.this, items,_ìd);
                 listView = (ListView) findViewById(R.id.lv_materiales);
                 listView.setAdapter(material_adapter);
 
@@ -287,7 +285,7 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
 
             @Override
             public void CargaExitosa(ArrayList<ModelMateriales> items) {
-                MaterialAdapterListView material_adapter = new MaterialAdapterListView(CapturaMaterialFOActivity.this, items);
+                MaterialAdapterListView material_adapter = new MaterialAdapterListView(CapturaMaterialFOActivity.this, items,_id);
                 listView = (ListView) findViewById(R.id.lv_materiales_otros);
                 listView.setAdapter(material_adapter);
 

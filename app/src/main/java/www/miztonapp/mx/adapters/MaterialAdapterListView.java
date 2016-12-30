@@ -17,8 +17,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import www.miztonapp.mx.R;
+import www.miztonapp.mx.api.mException;
 import www.miztonapp.mx.models.ModelMateriales;
+import www.miztonapp.mx.requests.RequestMateriales;
 
+import static www.miztonapp.mx.utilerias.Utils.crear_toast;
 import static www.miztonapp.mx.utilerias.Utils.isEquals;
 
 /**
@@ -28,9 +31,11 @@ import static www.miztonapp.mx.utilerias.Utils.isEquals;
 
 public class MaterialAdapterListView extends ArrayAdapter<ModelMateriales> {
     Context context;
-    public MaterialAdapterListView(Context context, ArrayList<ModelMateriales> materiales) {
+    String idfolio;
+    public MaterialAdapterListView(Context context, ArrayList<ModelMateriales> materiales, String idfolio) {
         super(context, 0, materiales);
         this.context = context;
+        this.idfolio = idfolio;
     }
 
     @Override
@@ -73,6 +78,27 @@ public class MaterialAdapterListView extends ArrayAdapter<ModelMateriales> {
                                 if (!isEquals(input.getText().toString(),"")){
                                     material.CantidadDefault = input.getText().toString();
                                     notifyDataSetChanged();
+                                    RequestMateriales rCantidades = new RequestMateriales() {
+                                        @Override
+                                        public void BeforeLoad() {
+
+                                        }
+
+                                        @Override
+                                        public void CargaExitosa(ArrayList<ModelMateriales> items) {
+
+                                        }
+
+                                        @Override
+                                        public void CargaErronea(mException error) {
+                                            crear_toast(context,error.getMessage()).show();
+                                        }
+
+                                        @Override
+                                        public void materialCargaExitosa(String mensaje) {
+                                            crear_toast(context, mensaje).show();
+                                        }
+                                    };rCantidades.guardar_cantidad_material(idfolio,material.Id,material.CantidadDefault);
                                 }
                             }
                         });

@@ -112,7 +112,7 @@ public abstract class RequestMateriales {
             };
 
             JSONObject orden_trabajo = new JSONObject();
-            String route = "ordenes_trabajo/inserta_material_folio";
+            String route = "controller_materiales/inserta_material_folio";
             orden_trabajo.put("idfolio", IdFolio);
             orden_trabajo.put("idmaterial", IdMaterial);
             orden_trabajo.put("cantidad", Cantidad);
