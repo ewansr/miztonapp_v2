@@ -1,19 +1,14 @@
 package www.miztonapp.mx;
 
 import android.app.ProgressDialog;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TabHost;
-import android.widget.TextView;
 
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
@@ -104,11 +99,6 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
         spec.setContent(R.id.tab3);
         spec.setIndicator("Otros");
         host.addTab(spec);
-
-
-//        host.getTabWidget().getChildAt(host.getCurrentTab()).setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark)); // selected
-//        TextView tv = (TextView) host.getCurrentTabView().findViewById(android.R.id.title); //for Selected Tab
-//        tv.setTextColor(getResources().getColor(R.color.white));
 
         final ExpandableLayout expLayPrincipal = (ExpandableLayout) findViewById(R.id.expandable_principal);
         final ExpandableLayout expLay = (ExpandableLayout) findViewById(R.id.expandable_layout);

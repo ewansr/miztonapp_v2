@@ -77,8 +77,55 @@ public abstract class RequestMateriales {
         }
     }
 
+
+    public void guardar_cantidad_material(String IdFolio, String IdMaterial, String Cantidad ){
+        final String[] mensaje = {""};
+        try{
+            Request request = new Request(){
+                @Override
+                public void RequestBeforeExecute(){
+                    BeforeLoad();
+                }
+
+                @Override
+                public void RequestCompleted(JSONObject response){
+                    try {
+                        JSONObject orden_response = null;
+                        int valid = response.getInt("valid");
+                        mensaje[0] = response.getString("message").toString();
+
+                        if (valid != 1){
+                            throw new mException(mExceptionCode.INVALID_VALUES, response.getString("message"));
+                        }else{
+                            materialCargaExitosa(mensaje[0]);
+                        }
+
+                    }catch (Exception error) {
+                        CargaErronea(new mException(mExceptionCode.UNKNOWN, error.getMessage()));
+                    }
+                }
+
+                @Override
+                public void RequestError(Exception error){
+                    CargaErronea(new mException(mExceptionCode.UNKNOWN, error.getMessage()));
+                }
+            };
+
+            JSONObject orden_trabajo = new JSONObject();
+            String route = "ordenes_trabajo/inserta_material_folio";
+            orden_trabajo.put("idfolio", IdFolio);
+            orden_trabajo.put("idmaterial", IdMaterial);
+            orden_trabajo.put("cantidad", Cantidad);
+
+            request.post(route, orden_trabajo);
+        }catch (Exception error){
+            CargaErronea(new mException(mExceptionCode.UNKNOWN, error.getMessage()));
+        }
+    }
+
     public abstract void BeforeLoad();
     public abstract void CargaExitosa(ArrayList<ModelMateriales> items);
     public abstract void CargaErronea(mException error);
+    public abstract void materialCargaExitosa(String mensaje);
 
 }
