@@ -104,14 +104,14 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
         final ExpandableLayout expLayPrincipal = (ExpandableLayout) findViewById(R.id.expandable_principal);
         final ExpandableLayout expLay = (ExpandableLayout) findViewById(R.id.expandable_layout);
         final ExpandableLayout expLayOtros = (ExpandableLayout) findViewById(R.id.expandable_layout_otros);
-        final FancyButton btn_Guardar = (FancyButton) findViewById(R.id.btn_guardar);
-        btn_Guardar.setText("Guardar " + host.getCurrentTabTag());
+//        final FancyButton btn_Guardar = (FancyButton) findViewById(R.id.btn_guardar);
+//        btn_Guardar.setText("Guardar " + host.getCurrentTabTag());
 
 
         host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             public void onTabChanged(String tabId) {
                 Log.d("TabHost", "onTabChanged: tab number=" + host.getCurrentTab());
-                btn_Guardar.setText("Guardar " + host.getCurrentTabTag());
+//                btn_Guardar.setText("Guardar " + host.getCurrentTabTag());
 
                 switch (host.getCurrentTab()) {
                     case 0:

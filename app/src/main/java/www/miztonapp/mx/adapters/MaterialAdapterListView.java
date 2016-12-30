@@ -72,6 +72,7 @@ public class MaterialAdapterListView extends ArrayAdapter<ModelMateriales> {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (!isEquals(input.getText().toString(),"")){
                                     material.CantidadDefault = input.getText().toString();
+                                    notifyDataSetChanged();
                                 }
                             }
                         });
@@ -90,7 +91,7 @@ public class MaterialAdapterListView extends ArrayAdapter<ModelMateriales> {
         });
 
 
-        notifyDataSetChanged();
+
         return convertView;
     }
 }
