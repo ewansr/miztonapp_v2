@@ -348,7 +348,6 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
                 ArrayAdapter<ModelMateriales> adapter = new ArrayAdapter<ModelMateriales>(CapturaMaterialFOActivity.this,
                         android.R.layout.simple_dropdown_item_1line, items );
                 spCinturones.setAdapter(adapter);
-//                spModem.setText(Utils.setItemIndex(0, spModem));
                 spCinturones.setEnabled(true);
 
                 // Ver si hay algo guardado en la base de datos
