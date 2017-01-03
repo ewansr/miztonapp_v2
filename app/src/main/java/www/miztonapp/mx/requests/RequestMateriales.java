@@ -125,6 +125,67 @@ public abstract class RequestMateriales {
         }
     }
 
+    public void getStrMaterialAdicional(String idfolio){
+        try{
+            Request request = new Request(){
+                @Override
+                public void RequestBeforeExecute(){
+                    BeforeLoad();
+                }
+
+                @Override
+                public void RequestCompleted(JSONObject response){
+                    try {
+                        JSONObject TMaterial = null;
+                        int valid = response.getInt("valid");
+
+                        if (valid != 1){
+                            throw new mException(mExceptionCode.INVALID_VALUES, response.getString("message"));
+                        }
+
+                        JSONArray items = response.getJSONArray("data");
+                        ArrayList<ModelMateriales> lista = new  ArrayList<ModelMateriales>();
+
+                        for ( int i = 0; i < items.length() ; i++) {
+                            JSONObject item = items.getJSONObject(i);
+                            lista.add(new ModelMateriales(
+                                    "0",
+                                    item.getString("fibra_extra"),
+                                    "0",
+                                    "0",
+                                    "0",
+                                    "0",
+                                    "0",
+                                    "0",
+                                    "0"
+                            ) );
+                        }
+
+                        CargaExitosa(lista);
+
+
+                    }catch (Exception error) {
+                        CargaErronea(new mException(mExceptionCode.UNKNOWN, error.getMessage()));
+                    }
+                }
+
+                @Override
+                public void RequestError(Exception error){
+                    CargaErronea(new mException(mExceptionCode.UNKNOWN, error.getMessage()));
+                }
+            };
+
+            JSONObject material = new JSONObject();
+            String route = "controller_materiales/material_adicional";
+            material.put("idfolio",idfolio);
+            request.post(route, material);
+
+        }catch (Exception error){
+            CargaErronea(new mException(mExceptionCode.UNKNOWN, error.getMessage()));
+        }
+    }
+
+
     public abstract void BeforeLoad();
     public abstract void CargaExitosa(ArrayList<ModelMateriales> items);
     public abstract void CargaErronea(mException error);

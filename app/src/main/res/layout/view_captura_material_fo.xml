@@ -125,9 +125,9 @@
                         android:layout_alignLeft="@+id/tv_cinturones"
                         android:layout_alignStart="@+id/tv_cinturones"
                         android:layout_toStartOf="@+id/btnCantidadCinturon"
-                        android:focusable="false"
                         android:layout_toLeftOf="@+id/btnCantidadCinturon"
-                        android:layout_marginRight="10dp" />
+                        android:layout_marginRight="10dp"
+                        android:focusable="false" />
 
                     <mehdi.sakout.fancybuttons.FancyButton
                         android:id="@+id/btnCantidadCinturon"

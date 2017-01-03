@@ -220,86 +220,6 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             }
         });
 
-
-        spFibraExtra.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-
-                RequestMateriales rCantidad = new RequestMateriales() {
-                    @Override
-                    public void BeforeLoad() {
-
-                    }
-
-                    @Override
-                    public void CargaExitosa(ArrayList<ModelMateriales> items) {
-
-                    }
-
-                    @Override
-                    public void CargaErronea(mException error) {
-                        crear_toast(CapturaMaterialFOActivity.this, error.getMessage()).show();
-                    }
-
-                    @Override
-                    public void materialCargaExitosa(String mensaje) {
-
-                    }
-                };
-
-                // poner todos en 0
-                if (position == 0){
-                    rCantidad.guardar_cantidad_material(_id,"21","0","extra");
-                    rCantidad.guardar_cantidad_material(_id,"22","0","extra");
-                    rCantidad.guardar_cantidad_material(_id,"23","0","extra");
-                    rCantidad.guardar_cantidad_material(_id,"24","0","extra");
-                }
-
-                if (position == 1){
-                    rCantidad.guardar_cantidad_material(_id,"21","1","extra");
-                    rCantidad.guardar_cantidad_material(_id,"22","0","extra");
-                    rCantidad.guardar_cantidad_material(_id,"23","0","extra");
-                    rCantidad.guardar_cantidad_material(_id,"24","0","extra");
-                }
-
-                if (position == 2){
-                    rCantidad.guardar_cantidad_material(_id,"21","0","extra");
-                    rCantidad.guardar_cantidad_material(_id,"22","1","extra");
-                    rCantidad.guardar_cantidad_material(_id,"23","0","extra");
-                    rCantidad.guardar_cantidad_material(_id,"24","0","extra");
-                }
-
-                if (position == 3){
-                    rCantidad.guardar_cantidad_material(_id,"21","0","extra");
-                    rCantidad.guardar_cantidad_material(_id,"22","0","extra");
-                    rCantidad.guardar_cantidad_material(_id,"23","1","extra");
-                    rCantidad.guardar_cantidad_material(_id,"24","0","extra");
-                }
-
-                if (position == 4){
-                    rCantidad.guardar_cantidad_material(_id,"21","0","extra");
-                    rCantidad.guardar_cantidad_material(_id,"22","0","extra");
-                    rCantidad.guardar_cantidad_material(_id,"23","0","extra");
-                    rCantidad.guardar_cantidad_material(_id,"24","1","extra");
-                }
-
-                if (position == 5){
-                    rCantidad.guardar_cantidad_material(_id,"21","1","extra");
-                    rCantidad.guardar_cantidad_material(_id,"22","0","extra");
-                    rCantidad.guardar_cantidad_material(_id,"23","0","extra");
-                    rCantidad.guardar_cantidad_material(_id,"24","1","extra");
-                }
-
-                if (position == 6){
-                    rCantidad.guardar_cantidad_material(_id,"21","0","extra");
-                    rCantidad.guardar_cantidad_material(_id,"22","1","extra");
-                    rCantidad.guardar_cantidad_material(_id,"23","0","extra");
-                    rCantidad.guardar_cantidad_material(_id,"24","1","extra");
-                }
-            }
-        });
-
-
     }
 
     public void llenarsp(){
@@ -317,6 +237,7 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             public void CargaExitosa(final ArrayList<ModelMateriales> items) {
                 ArrayAdapter<ModelMateriales> adapter = new ArrayAdapter<ModelMateriales>(CapturaMaterialFOActivity.this,
                         android.R.layout.simple_dropdown_item_1line, items );
+
                 spModem.setAdapter(adapter);
                 spModem.setEnabled(true);
 
@@ -339,6 +260,7 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
                     spModem.setText(nombre_modem);
                 }
 
+               spModem.setFocusableInTouchMode(true);
 
                 //Guardar cuando se seleccione un item
                 spModem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -406,6 +328,7 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             public void CargaExitosa(final ArrayList<ModelMateriales> items) {
                 ArrayAdapter<ModelMateriales> adapter = new ArrayAdapter<ModelMateriales>(CapturaMaterialFOActivity.this,
                         android.R.layout.simple_dropdown_item_1line, items );
+
                 spFibra.setAdapter(adapter);
                 spFibra.setEnabled(true);
 
@@ -428,6 +351,7 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
                     spFibra.setText(nombre_fibra);
                 }
 
+                spFibra.setFocusableInTouchMode(true);
 
                 //Guardar cuando se seleccione un item
                 spFibra.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -494,6 +418,7 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
             public void CargaExitosa(final ArrayList<ModelMateriales> items) {
                 ArrayAdapter<ModelMateriales> adapter = new ArrayAdapter<ModelMateriales>(CapturaMaterialFOActivity.this,
                         android.R.layout.simple_dropdown_item_1line, items );
+
                 spCinturones.setAdapter(adapter);
                 spCinturones.setEnabled(true);
 
@@ -516,6 +441,10 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
                     IdCinturon = id_cinturon;
                     spCinturones.setText(nombre_cinturon);
                 }
+
+                spCinturones.setAdapter(adapter);
+                spCinturones.setEnabled(true);
+                spCinturones.setFocusableInTouchMode(true);
 
                 //Guardar cuando se seleccione un item
                 spCinturones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -628,6 +557,130 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
 
             }
         };rOtros.getMaterialxLinea("6",_id);
+
+        RequestMateriales rFOExtra = new RequestMateriales() {
+            ProgressDialog progressDialog;
+            @Override
+            public void BeforeLoad() {
+                progressDialog = new ProgressDialog( CapturaMaterialFOActivity.this );
+                progressDialog.setMessage( "Obteniendo materiales..." );
+                progressDialog.show();
+            }
+
+            @Override
+            public void CargaExitosa(final ArrayList<ModelMateriales> items) {
+                ArrayAdapter<ModelMateriales> adapter = new ArrayAdapter<ModelMateriales>(CapturaMaterialFOActivity.this,
+                        android.R.layout.simple_dropdown_item_1line, items );
+
+                spFibraExtra.setEnabled(true);
+
+                // Ver si hay algo guardado en la base de datos
+                if(!isEquals(items.get(0).Nombre,"-1")){
+                    spFibraExtra.setText(items.get(0).Nombre);
+                }else {
+                    spFibraExtra.setText("NINGUNA");
+                }
+                ArrayAdapter<String> adapter_fibra_extra = new ArrayAdapter<String>(CapturaMaterialFOActivity.this, android.R.layout.simple_dropdown_item_1line,  FIBRA_EXTRA);
+                spFibraExtra.setAdapter(adapter_fibra_extra);
+                spFibraExtra.setFocusableInTouchMode(true);
+
+
+
+                spFibraExtra.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+                        RequestMateriales rCantidad = new RequestMateriales() {
+                            @Override
+                            public void BeforeLoad() {
+
+                            }
+
+                            @Override
+                            public void CargaExitosa(ArrayList<ModelMateriales> items) {
+
+                            }
+
+                            @Override
+                            public void CargaErronea(mException error) {
+                                crear_toast(CapturaMaterialFOActivity.this, error.getMessage()).show();
+                            }
+
+                            @Override
+                            public void materialCargaExitosa(String mensaje) {
+
+                            }
+                        };
+
+                        // poner todos en 0
+                        if (position == 0){
+                            rCantidad.guardar_cantidad_material(_id,"21","0","extra");
+                            rCantidad.guardar_cantidad_material(_id,"22","0","extra");
+                            rCantidad.guardar_cantidad_material(_id,"23","0","extra");
+                            rCantidad.guardar_cantidad_material(_id,"24","0","extra");
+                        }
+
+                        if (position == 1){
+                            rCantidad.guardar_cantidad_material(_id,"21","1","extra");
+                            rCantidad.guardar_cantidad_material(_id,"22","0","extra");
+                            rCantidad.guardar_cantidad_material(_id,"23","0","extra");
+                            rCantidad.guardar_cantidad_material(_id,"24","0","extra");
+                        }
+
+                        if (position == 2){
+                            rCantidad.guardar_cantidad_material(_id,"21","0","extra");
+                            rCantidad.guardar_cantidad_material(_id,"22","1","extra");
+                            rCantidad.guardar_cantidad_material(_id,"23","0","extra");
+                            rCantidad.guardar_cantidad_material(_id,"24","0","extra");
+                        }
+
+                        if (position == 3){
+                            rCantidad.guardar_cantidad_material(_id,"21","0","extra");
+                            rCantidad.guardar_cantidad_material(_id,"22","0","extra");
+                            rCantidad.guardar_cantidad_material(_id,"23","1","extra");
+                            rCantidad.guardar_cantidad_material(_id,"24","0","extra");
+                        }
+
+                        if (position == 4){
+                            rCantidad.guardar_cantidad_material(_id,"21","0","extra");
+                            rCantidad.guardar_cantidad_material(_id,"22","0","extra");
+                            rCantidad.guardar_cantidad_material(_id,"23","0","extra");
+                            rCantidad.guardar_cantidad_material(_id,"24","1","extra");
+                        }
+
+                        if (position == 5){
+                            rCantidad.guardar_cantidad_material(_id,"21","1","extra");
+                            rCantidad.guardar_cantidad_material(_id,"22","0","extra");
+                            rCantidad.guardar_cantidad_material(_id,"23","0","extra");
+                            rCantidad.guardar_cantidad_material(_id,"24","1","extra");
+                        }
+
+                        if (position == 6){
+                            rCantidad.guardar_cantidad_material(_id,"21","0","extra");
+                            rCantidad.guardar_cantidad_material(_id,"22","1","extra");
+                            rCantidad.guardar_cantidad_material(_id,"23","0","extra");
+                            rCantidad.guardar_cantidad_material(_id,"24","1","extra");
+                        }
+                    }
+                });
+
+
+                if (progressDialog.isShowing())
+                    progressDialog.dismiss();
+            }
+
+            @Override
+            public void CargaErronea(mException error) {
+                Utils.crear_alerta(CapturaMaterialFOActivity.this,"Aviso",error.getMessage()).show();
+            }
+
+            @Override
+            public void materialCargaExitosa(String mensaje) {
+
+            }
+        };rFOExtra.getStrMaterialAdicional(_id);
+
+
     }
 
     public void cargar_orden(){
