@@ -99,8 +99,6 @@ public class TabFragmentGeneral extends Fragment {
     }
 
 
-
-
     public void cargar_ordenes(View v){
         Date date = new Date();
         Calendar cal = Calendar.getInstance();

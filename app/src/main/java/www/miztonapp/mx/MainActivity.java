@@ -21,10 +21,12 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.bumptech.glide.util.Util;
 import com.darsh.multipleimageselect.helpers.Constants;
 import com.github.clans.fab.FloatingActionButton;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+import www.miztonapp.mx.models.LoginModel;
 import www.miztonapp.mx.utilerias.Utils;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        LoginModel data_usuario = Utils.obtener_usuario(this);
+        toolbar.setSubtitle(data_usuario.nombre_completo);
 
         ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE);
         if (ContextCompat.checkSelfPermission(this,
@@ -214,10 +218,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_camera){
-//            Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-//            startActivityForResult(intent, 0);
-        }
+
         if (id == R.id.action_session){
             Utils.limpiar_usuario(this);
             Intent intent = new Intent(this, LoginActivity.class);
