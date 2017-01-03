@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity
         resumenFragment.initTabFragmentGeneral(MainActivity.this);
         adapter.addFragment(resumenFragment, "Resumen");
 
-//        adapter.addFragment(new TabFragmentGeneral(), "Bolsa de Trabajo");
+//        adapter.addFragment(new TabFragmentGeneral(), "Bolsa de Trabajo")
         viewPager.setAdapter(adapter);
     }
 
@@ -183,13 +183,7 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == 2000) {
             if(resultCode == Activity.RESULT_OK){
                 String result=data.getStringExtra("result");
-                // Reload current fragment
-//                Fragment frg = null;
-//                frg = getSupportFragmentManager().findFragmentById();
-//                final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//                ft.detach(frg);
-//                ft.attach(frg);
-//                ft.commit();
+                fragmento_ordenes.refresh_data_fragment();
             }
 
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -224,6 +218,10 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
+        }
+
+        if (id == R.id.action_refresh){
+            fragmento_ordenes.refresh_data_fragment();
         }
 
         return super.onOptionsItemSelected(item);

@@ -41,6 +41,7 @@ public class TabFragmentGeneral extends Fragment {
     private ProgressDialog progressDialog;
     private static Boolean yaCargado = false;
     OrdenesRecyclerAdapter solicitudesAdapter;
+    public  View actual_view;
 
     public void initTabFragmentGeneral(Context context){
         this.context = context;
@@ -48,6 +49,10 @@ public class TabFragmentGeneral extends Fragment {
 
     public TabFragmentGeneral(){
 
+    }
+
+    public void refresh_data_fragment(){
+        cargar_ordenes(actual_view);
     }
 
     @Override
@@ -59,6 +64,7 @@ public class TabFragmentGeneral extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate( R.layout.reciclerview, container, false );
 
+        actual_view = rootView;
         yaCargado = false;
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefresh);
         swipeRefreshLayout.setColorSchemeResources(
@@ -116,6 +122,7 @@ public class TabFragmentGeneral extends Fragment {
             Request request = new Request(){
                 @Override
                 public void RequestBeforeExecute(){
+
                     ordenBeforeLoad();
                 }
 
@@ -195,6 +202,10 @@ public class TabFragmentGeneral extends Fragment {
 
 
         int size = items.size();
+        SwipeRefreshLayout _swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeRefresh);
+        if (!_swipeRefreshLayout.isRefreshing()) {
+            _swipeRefreshLayout.setRefreshing(true);
+        }
 
         RecyclerView _recyclerView = (RecyclerView) v.findViewById(R.id.rv);
         if (_recyclerView.getAdapter() == null){
@@ -208,7 +219,7 @@ public class TabFragmentGeneral extends Fragment {
 //            _recyclerView.getAdapter().notifyDataSetChanged();
         }
 
-        SwipeRefreshLayout _swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeRefresh);
+
         if (_swipeRefreshLayout.isRefreshing()) {
             _swipeRefreshLayout.setRefreshing(false);
         }
