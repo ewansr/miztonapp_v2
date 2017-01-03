@@ -343,11 +343,12 @@ public class DetalleActivity extends AppCompatActivity {
             }else
             if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
                 rootView = inflater.inflate(R.layout.activity_ordenes_detalle, container, false);
-            }else
-            if (getArguments().getInt(ARG_SECTION_NUMBER) == 3) {
-                rootView = inflater.inflate(R.layout.fragment_detalle, container, false);
-            }
+            }//else
+//            if (getArguments().getInt(ARG_SECTION_NUMBER) == 3) {
+//                rootView = inflater.inflate(R.layout.fragment_detalle, container, false);
+//            }
             return rootView;
+
         }
     }
 
@@ -370,7 +371,7 @@ public class DetalleActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 2;
         }
 
         @Override
@@ -380,8 +381,8 @@ public class DetalleActivity extends AppCompatActivity {
                     return "INFORMACIÓN DE ORDEN";
                 case 1:
                     return "UBICAR";
-                case 2:
-                    return "MATERIALES";
+//                case 2:
+//                    return "MATERIALES";
 
             }
             return null;

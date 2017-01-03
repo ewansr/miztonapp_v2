@@ -57,9 +57,7 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
             }
         });
 
-
         datos = getIntent().getBundleExtra("datos");
-
 
         edtDistrito = (MaterialEditText) findViewById(R.id.edtDistrito);
         edtDistrito.addValidator(new RegexpValidator("Formato inválido 'ABC1234'", "[A-Z^\\s][A-Z^\\s][A-Z^\\s]\\d\\d\\d+"));
@@ -141,7 +139,7 @@ public class RegistroFibraOpticaActivity extends AppCompatActivity implements Vi
                 idContratista = ((ModelContratista)spContratistas.getAdapter().getItem(0)).Id;
                 if(datos != null) {
                     spContratistas.setText(datos.getString("contratista"));
-                    idTipoOrden = datos.getString("idcontratista");
+                    idContratista = datos.getString("idcontratista");
                 }
             }
 
