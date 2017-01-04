@@ -83,7 +83,9 @@
             android:name=".CapturaMaterialFOActivity"
             android:label="Captura Material"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".RegistroCobreActivity"></activity>
+        <activity android:name=".RegistroCobreActivity"
+            android:label="Registro de órden de Cobre"
+            android:theme="@style/AppTheme.NoActionBar" ></activity>
     </application>
 
 </manifest>

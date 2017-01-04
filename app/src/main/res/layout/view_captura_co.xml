@@ -37,7 +37,8 @@
             android:layout_marginRight="10dp"
             android:layout_alignLeft="@+id/tv_estatus"
             android:layout_alignStart="@+id/tv_estatus"
-            android:hint="Selecciona Estatus" />
+            android:hint="Selecciona Estatus"
+            android:focusable="false" />
 
         <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
             android:layout_width="match_parent"
@@ -48,7 +49,8 @@
             android:id="@+id/sp_tipoorden_co"
             android:layout_alignRight="@+id/sp_estatus_co"
             android:layout_alignEnd="@+id/sp_estatus_co"
-            android:hint="Selecciona Tipo de Orden" />
+            android:hint="Selecciona Tipo de Orden"
+            android:focusable="false" />
 
 
         <com.rengwuxian.materialedittext.MaterialEditText
@@ -102,40 +104,6 @@
             android:textAllCaps="true"
             app:met_iconLeft="@drawable/phone" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="26dp"
-            android:layout_below="@+id/edtComentarios_co"
-            android:background="@color/wallet_hint_foreground_holo_light"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
-
-            <mehdi.sakout.fancybuttons.FancyButton
-                android:id="@+id/btn_guardar_co"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="3dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:paddingTop="3dp"
-                fancy:fb_borderColor="#FFFFFF"
-                fancy:fb_borderWidth="1dp"
-                fancy:fb_defaultColor="@color/darkred"
-                fancy:fb_focusColor="@color/blue"
-                fancy:fb_fontIconResource="&#xf0c7;"
-                fancy:fb_iconPosition="left"
-                fancy:fb_radius="7dp"
-                fancy:fb_text="Guardar"
-                fancy:fb_textColor="#FFFFFF"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true">
-
-            </mehdi.sakout.fancybuttons.FancyButton>
-        </RelativeLayout>
-
         <TextView
             android:text="Tipo de Órden:"
             android:layout_width="wrap_content"
@@ -173,13 +141,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ejemplo 100/205"
-            app:met_maxCharacters="2"
+            app:met_maxCharacters="7"
             app:met_helperText="Solo números"
             app:met_floatingLabel="normal"
             app:met_floatingLabelText="Principal:"
             android:singleLine="true"
             android:id="@+id/edtTerminal_co"
-            android:maxLength="2"
+            android:maxLength="7"
             app:met_autoValidate="false"
             app:met_validateOnFocusLost="true"
             app:met_floatingLabelAlwaysShown="true"
@@ -196,14 +164,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ejemplo A1/10"
-            app:met_maxCharacters="1"
+            app:met_maxCharacters="6"
             app:met_helperText="Solo números"
             app:met_floatingLabel="normal"
             app:met_floatingLabelText="Terminal / Secundario:"
-            android:inputType="number"
+            android:inputType="text|textCapCharacters"
             android:singleLine="true"
             android:id="@+id/edtPuerto_co"
-            android:maxLength="1"
+            android:maxLength="6"
             app:met_autoValidate="false"
             app:met_validateOnFocusLost="true"
             app:met_floatingLabelAlwaysShown="true"
@@ -237,6 +205,40 @@
             android:layout_below="@+id/edtTelefono_co"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="52dp"
+            android:background="@color/wallet_hint_foreground_holo_light"
+            android:layout_below="@+id/edtComentarios_co"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/btn_guardar_co"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="3dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="3dp"
+                fancy:fb_borderColor="#FFFFFF"
+                fancy:fb_borderWidth="1dp"
+                fancy:fb_defaultColor="@color/darkred"
+                fancy:fb_focusColor="@color/blue"
+                fancy:fb_fontIconResource="&#xf0c7;"
+                fancy:fb_iconPosition="left"
+                fancy:fb_radius="7dp"
+                fancy:fb_text="Guardar"
+                fancy:fb_textColor="#FFFFFF"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
+            </mehdi.sakout.fancybuttons.FancyButton>
+        </RelativeLayout>
 
 
     </RelativeLayout>

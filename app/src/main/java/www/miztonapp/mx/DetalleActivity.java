@@ -31,6 +31,7 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.apache.commons.net.ftp.FTPFile;
+import org.apache.commons.net.io.Util;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,9 @@ import www.miztonapp.mx.requests.RequestOrdenesTrabajo;
 import www.miztonapp.mx.utilerias.FTPServerConfig;
 import www.miztonapp.mx.utilerias.FTPUtils;
 import www.miztonapp.mx.utilerias.Utils;
+
+import static www.miztonapp.mx.utilerias.Utils.crear_alerta;
+import static www.miztonapp.mx.utilerias.Utils.isEquals;
 
 public class DetalleActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -63,6 +67,8 @@ public class DetalleActivity extends AppCompatActivity {
     public static MaterialEditText edtTerminal   ;
     public static MaterialEditText edtPuerto     ;
     public static MaterialEditText edtComentarios;
+    public static MaterialEditText edtPrincipal  ;
+    public static MaterialEditText edtSecundario ;
     private static FTPFile[] lista_archivos;
     private RequestOrdenesTrabajo rBuscaOrden;
     private ProgressDialog progressDialog;
@@ -90,6 +96,7 @@ public class DetalleActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         _id = extras.getString("id");
+        _tipoinstalacion = extras.getString("tipo_instalacion");
         data_usuario = Utils.obtener_usuario(this);
         context = DetalleActivity.this;
 
@@ -120,6 +127,8 @@ public class DetalleActivity extends AppCompatActivity {
                 edtTerminal.setText(items.get(0).terminal);
                 edtPuerto.setText(items.get(0).puerto);
                 edtComentarios.setText(items.get(0).comentarios);
+                edtPrincipal.setText(items.get(0).principal);
+                edtSecundario.setText(items.get(0).secundario);
                 desabilitaControles();
 
                 DetalleActivity.this.setTitle(_telefono);
@@ -141,7 +150,7 @@ public class DetalleActivity extends AppCompatActivity {
 
             @Override
             public void ordenCargaErronea(mException error) {
-
+                Utils.crear_alerta(DetalleActivity.this, "Error",error.getMessage().toString()).show();
             }
         };rBuscaOrden.buscarOrden(_id);
 
@@ -262,7 +271,7 @@ public class DetalleActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_editar) {
-            if (Utils.isEquals(_editable, "NO")) {
+            if (isEquals(_editable, "NO")) {
                 Utils.crear_alerta(context, "Aviso", "El tiempo de edición ha finalizado").show();
             }else{
                 if (orden.size() == 1){
@@ -282,8 +291,12 @@ public class DetalleActivity extends AppCompatActivity {
                     bundle.putString( "comentarios", orden.get(0).comentarios);
                     bundle.putString( "idtipo", orden.get(0).idtipo);
 
-
-                    Intent i = new Intent(DetalleActivity.this, RegistroFibraOpticaActivity.class);
+                    Intent i;
+                    if (isEquals(_tipoinstalacion,"FO")){
+                        i = new Intent(DetalleActivity.this, RegistroFibraOpticaActivity.class);
+                    }else{
+                        i = new Intent(DetalleActivity.this, RegistroCobreActivity.class);
+                    }
                     i.putExtra("modo", "edicion");
                     i.putExtra("datos", bundle);
                     startActivity(i);
@@ -340,6 +353,8 @@ public class DetalleActivity extends AppCompatActivity {
                 edtTerminal    = (MaterialEditText) rootView.findViewById(R.id.edtTerminal);
                 edtPuerto      = (MaterialEditText) rootView.findViewById(R.id.edtPuerto);
                 edtComentarios = (MaterialEditText) rootView.findViewById(R.id.edtComentarios);
+                edtPrincipal = (MaterialEditText) rootView.findViewById(R.id.edtTerminal_co);
+                edtSecundario = (MaterialEditText) rootView.findViewById(R.id.edtPuerto_co);
             }else
             if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
                 rootView = inflater.inflate(R.layout.activity_ordenes_detalle, container, false);
@@ -399,6 +414,16 @@ public class DetalleActivity extends AppCompatActivity {
         edtTerminal.setEnabled(false);
         edtPuerto.setEnabled(false);
         edtComentarios.setEnabled(false);
+        edtSecundario.setEnabled(false);
+        edtPrincipal.setEnabled(false);
+        if (isEquals(_tipoinstalacion,"FO")){
+            edtPrincipal.setVisibility(View.GONE);
+            edtSecundario.setVisibility(View.GONE);
+        }else{
+            edtTerminal.setVisibility(View.GONE);
+            edtPuerto.setVisibility(View.GONE);
+            edtContratista.setVisibility(View.GONE);
+        }
     }
 
 

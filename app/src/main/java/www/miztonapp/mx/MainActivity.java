@@ -1,9 +1,7 @@
 package www.miztonapp.mx;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -21,7 +19,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.bumptech.glide.util.Util;
 import com.darsh.multipleimageselect.helpers.Constants;
 import com.github.clans.fab.FloatingActionButton;
 
@@ -68,11 +65,21 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.menu_fo);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab_fo = (FloatingActionButton) findViewById(R.id.menu_fo);
+        fab_fo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, RegistroFibraOpticaActivity.class);
+                startActivityForResult(i, Constants.REQUEST_CODE);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            }
+        });
+
+        FloatingActionButton fab_co = (FloatingActionButton) findViewById(R.id.menu_cobre);
+        fab_co.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, RegistroCobreActivity.class);
                 startActivityForResult(i, Constants.REQUEST_CODE);
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
             }
@@ -181,14 +188,14 @@ public class MainActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == 2000) {
-            if(resultCode == Activity.RESULT_OK){
-                String result=data.getStringExtra("result");
+//            if(resultCode == Activity.RESULT_OK){
+//                String result=data.getStringExtra("result");
                 fragmento_ordenes.refresh_data_fragment();
-            }
+//            }
 
-            if (resultCode == Activity.RESULT_CANCELED) {
-
-            }
+//            if (resultCode == Activity.RESULT_CANCELED) {
+//
+//            }
         }
     }
 
