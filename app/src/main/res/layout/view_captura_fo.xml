@@ -97,7 +97,7 @@
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"
-            android:hint="Comentarios"
+            android:hint="Alfanumerico/Direccion/Etc..."
             app:met_maxCharacters="255"
             app:met_helperText="Texto"
             app:met_floatingLabel="normal"
@@ -149,7 +149,7 @@
         <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Terminal"
+            android:hint="Ejemplo A1"
             app:met_maxCharacters="2"
             app:met_helperText="Solo números"
             app:met_floatingLabel="normal"
@@ -174,7 +174,7 @@
         <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Central / Distrito"
+            android:hint="Ejemplo MOA001 o VGS2008"
             app:met_maxCharacters="7"
             app:met_helperText="Letras y números"
             app:met_floatingLabel="normal"

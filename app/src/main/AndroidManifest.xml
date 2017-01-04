@@ -79,9 +79,11 @@
             android:name=".DetalleActivity"
             android:label="@string/title_activity_detalle"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".CapturaMaterialFOActivity"
+        <activity
+            android:name=".CapturaMaterialFOActivity"
             android:label="Captura Material"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".RegistroCobreActivity"></activity>
     </application>
 
 </manifest>

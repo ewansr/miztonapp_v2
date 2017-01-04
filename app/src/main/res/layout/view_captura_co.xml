@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollView"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_above="@+id/btnGuardar"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout    android:layout_width="match_parent"
+        tools:ignore="ObsoleteLayoutParam"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:text="Estatus:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_titulo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="21dp"
+            android:id="@+id/tv_estatus" />
+
+        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sp_estatus_co"
+            android:layout_below="@+id/tv_estatus"
+            android:layout_marginRight="10dp"
+            android:layout_alignLeft="@+id/tv_estatus"
+            android:layout_alignStart="@+id/tv_estatus"
+            android:hint="Selecciona Estatus" />
+
+        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_tipo_orden"
+            android:layout_alignLeft="@+id/tv_tipo_orden"
+            android:layout_alignStart="@+id/tv_tipo_orden"
+            android:id="@+id/sp_tipoorden_co"
+            android:layout_alignRight="@+id/sp_estatus_co"
+            android:layout_alignEnd="@+id/sp_estatus_co"
+            android:hint="Selecciona Tipo de Orden" />
+
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:hint="Coordenadas/Puertos de Internet/Direccion/Etc..."
+            app:met_maxCharacters="255"
+            app:met_helperText="Texto"
+            app:met_floatingLabel="normal"
+            app:met_floatingLabelText="Comentarios:"
+            android:inputType="text|textCapCharacters"
+            android:singleLine="false"
+            android:id="@+id/edtComentarios_co"
+            android:layout_below="@+id/edtPuerto_co"
+            android:layout_alignLeft="@+id/edtPuerto_co"
+            android:layout_alignStart="@+id/edtPuerto_co"
+            android:layout_alignRight="@+id/edtPuerto_co"
+            android:layout_alignEnd="@+id/edtPuerto_co"
+            android:maxLength="255"
+            app:met_autoValidate="false"
+            app:met_validateOnFocusLost="true"
+            app:met_floatingLabelAlwaysShown="true"
+            app:met_floatingLabelAnimating="true"
+            app:met_clearButton="true"
+            android:textAllCaps="true"
+            app:met_iconLeft="@drawable/comentarios"
+            android:lines="3"
+            android:layout_height="200dp" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Teléfono a 10 digitos"
+            app:met_maxCharacters="10"
+            app:met_helperText="Solo números"
+            app:met_floatingLabel="normal"
+            app:met_floatingLabelText="Teléfono:"
+            android:inputType="number"
+            android:singleLine="true"
+            android:id="@+id/edtTelefono_co"
+            android:layout_below="@+id/edtFolio_co"
+            android:layout_alignLeft="@+id/edtFolio_co"
+            android:layout_alignStart="@+id/edtFolio_co"
+            android:layout_alignRight="@+id/edtFolio_co"
+            android:layout_alignEnd="@+id/edtFolio_co"
+            android:maxLength="10"
+            app:met_autoValidate="false"
+            app:met_validateOnFocusLost="true"
+            app:met_floatingLabelAlwaysShown="true"
+            app:met_floatingLabelAnimating="true"
+            app:met_clearButton="true"
+            android:textAllCaps="true"
+            app:met_iconLeft="@drawable/phone" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="26dp"
+            android:layout_below="@+id/edtComentarios_co"
+            android:background="@color/wallet_hint_foreground_holo_light"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/btn_guardar_co"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="3dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="3dp"
+                fancy:fb_borderColor="#FFFFFF"
+                fancy:fb_borderWidth="1dp"
+                fancy:fb_defaultColor="@color/darkred"
+                fancy:fb_focusColor="@color/blue"
+                fancy:fb_fontIconResource="&#xf0c7;"
+                fancy:fb_iconPosition="left"
+                fancy:fb_radius="7dp"
+                fancy:fb_text="Guardar"
+                fancy:fb_textColor="#FFFFFF"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
+            </mehdi.sakout.fancybuttons.FancyButton>
+        </RelativeLayout>
+
+        <TextView
+            android:text="Tipo de Órden:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_tipo_orden"
+            android:layout_below="@+id/sp_estatus_co"
+            android:layout_alignLeft="@+id/sp_estatus_co"
+            android:layout_alignStart="@+id/sp_estatus_co" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="No. Folio de órden"
+            app:met_maxCharacters="9"
+            app:met_helperText="Solo números"
+            app:met_floatingLabel="normal"
+            app:met_floatingLabelText="No. Folio:"
+            android:inputType="number"
+            android:singleLine="true"
+            android:id="@+id/edtFolio_co"
+            app:met_autoValidate="false"
+            app:met_validateOnFocusLost="true"
+            android:maxLength="9"
+            app:met_floatingLabelAlwaysShown="true"
+            app:met_floatingLabelAnimating="true"
+            app:met_clearButton="true"
+            android:textAllCaps="true"
+            app:met_iconLeft="@drawable/folder_multiple_image_24"
+            android:layout_marginTop="23dp"
+            android:layout_below="@+id/sp_tipoorden_co"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ejemplo 100/205"
+            app:met_maxCharacters="2"
+            app:met_helperText="Solo números"
+            app:met_floatingLabel="normal"
+            app:met_floatingLabelText="Principal:"
+            android:singleLine="true"
+            android:id="@+id/edtTerminal_co"
+            android:maxLength="2"
+            app:met_autoValidate="false"
+            app:met_validateOnFocusLost="true"
+            app:met_floatingLabelAlwaysShown="true"
+            app:met_floatingLabelAnimating="true"
+            app:met_clearButton="true"
+            android:textAllCaps="true"
+            app:met_iconLeft="@drawable/terminal"
+            android:inputType="text|textCapCharacters"
+            android:layout_below="@+id/edtDistrito_co"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ejemplo A1/10"
+            app:met_maxCharacters="1"
+            app:met_helperText="Solo números"
+            app:met_floatingLabel="normal"
+            app:met_floatingLabelText="Terminal / Secundario:"
+            android:inputType="number"
+            android:singleLine="true"
+            android:id="@+id/edtPuerto_co"
+            android:maxLength="1"
+            app:met_autoValidate="false"
+            app:met_validateOnFocusLost="true"
+            app:met_floatingLabelAlwaysShown="true"
+            app:met_floatingLabelAnimating="true"
+            app:met_clearButton="true"
+            android:textAllCaps="true"
+            app:met_iconLeft="@drawable/puerto"
+            android:layout_below="@+id/edtTerminal_co"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ejemplo MOA001 o VGS2008"
+            app:met_maxCharacters="7"
+            app:met_helperText="Letras y números"
+            app:met_floatingLabel="normal"
+            app:met_floatingLabelText="Central / Distrito:"
+            android:inputType="text|textCapCharacters"
+            android:singleLine="true"
+            android:id="@+id/edtDistrito_co"
+            android:maxLength="7"
+            app:met_autoValidate="false"
+            app:met_validateOnFocusLost="true"
+            app:met_floatingLabelAlwaysShown="true"
+            app:met_floatingLabelAnimating="true"
+            app:met_clearButton="true"
+            android:textAllCaps="true"
+            app:met_iconLeft="@drawable/central"
+            android:layout_below="@+id/edtTelefono_co"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+
+    </RelativeLayout>
+</ScrollView>
