@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app2="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    tools:ignore="ObsoleteLayoutParam"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_height="match_parent">
+
+
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:id="@+id/expandable_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:el_duration="1000"
+        app:el_expanded="true"
+        app:el_parallax="0.5"
+        android:layout_below="@+id/expandable_principal"
+        android:background="@color/colorPrimaryDark"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        app2:el_expanded="false"
+        android:padding="10dp">
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="2dp">
+
+            <ListView
+                android:layout_width="match_parent"
+                android:id="@+id/lv_materiales"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_height="wrap_content" />
+        </android.support.v7.widget.CardView>
+
+    </net.cachapa.expandablelayout.ExpandableLayout>
+
+
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:id="@+id/expandable_principal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:el_duration="1000"
+        app:el_expanded="true"
+        app:el_parallax="0.5"
+        android:layout_below="@+id/tabhost"
+        app2:el_expanded="true"
+        android:padding="10dp"
+        android:background="@color/colorPrimaryDark">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                tools:ignore="ObsoleteLayoutParam"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_height="match_parent"
+                android:id="@+id/rl_datos">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/rl_modem"
+                    android:layout_height="100dp">
+
+                    <TextView
+                        android:text="Modem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="0dp"
+                        android:id="@+id/tv_modem_co" />
+
+                    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/sp_modem_co"
+                        android:layout_below="@+id/tv_modem_co"
+                        android:focusable="false"
+                        android:layout_alignLeft="@+id/tv_modem_co"
+                        android:layout_alignStart="@+id/tv_modem_co"
+                        android:layout_toLeftOf="@+id/btn_cantidad_modem"
+                        android:layout_toStartOf="@+id/btn_cantidad_modem" />
+
+                    <mehdi.sakout.fancybuttons.FancyButton
+                        android:id="@+id/btn_cantidad_modem"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="3dp"
+                        fancy:fb_borderColor="#FFFFFF"
+                        fancy:fb_borderWidth="1dp"
+                        fancy:fb_defaultColor="@color/darkred"
+                        fancy:fb_focusColor="@color/blue"
+                        fancy:fb_fontIconResource="&#xf055;"
+                        fancy:fb_iconPosition="left"
+                        fancy:fb_radius="7dp"
+                        fancy:fb_text="Guardar"
+                        fancy:fb_textColor="#FFFFFF"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_alignBottom="@+id/sp_modem_co"
+                        android:layout_alignTop="@+id/sp_modem_co">
+
+                    </mehdi.sakout.fancybuttons.FancyButton>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/rl_paralelo"
+                    android:layout_below="@id/rl_modem"
+                    android:layout_height="100dp">
+
+                    <TextView
+                        android:text="Paralelo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="0dp"
+                        android:id="@+id/tv_paralelo_co" />
+
+                    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/sp_paralelo_co"
+                        android:layout_below="@+id/tv_paralelo_co"
+                        android:focusable="false"
+                        android:layout_alignLeft="@+id/tv_paralelo_co"
+                        android:layout_alignStart="@+id/tv_paralelo_co"
+                        android:layout_toLeftOf="@+id/btn_cantidad_paralelo"
+                        android:layout_toStartOf="@+id/btn_cantidad_paralelo" />
+
+                    <mehdi.sakout.fancybuttons.FancyButton
+                        android:id="@+id/btn_cantidad_paralelo"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="3dp"
+                        fancy:fb_borderColor="#FFFFFF"
+                        fancy:fb_borderWidth="1dp"
+                        fancy:fb_defaultColor="@color/darkred"
+                        fancy:fb_focusColor="@color/blue"
+                        fancy:fb_fontIconResource="&#xf055;"
+                        fancy:fb_iconPosition="left"
+                        fancy:fb_radius="7dp"
+                        fancy:fb_text="Guardar"
+                        fancy:fb_textColor="#FFFFFF"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_alignBottom="@+id/sp_paralelo_co"
+                        android:layout_alignTop="@+id/sp_paralelo_co">
+
+                    </mehdi.sakout.fancybuttons.FancyButton>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/rl_dit"
+                    android:layout_below="@id/rl_paralelo"
+                    android:layout_height="100dp">
+
+                    <TextView
+                        android:text="Paralelo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="0dp"
+                        android:id="@+id/tv_paralelo_co" />
+
+                    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/sp_paralelo_co"
+                        android:layout_below="@+id/tv_paralelo_co"
+                        android:focusable="false"
+                        android:layout_alignLeft="@+id/tv_paralelo_co"
+                        android:layout_alignStart="@+id/tv_paralelo_co"
+                        android:layout_toLeftOf="@+id/btn_cantidad_paralelo"
+                        android:layout_toStartOf="@+id/btn_cantidad_paralelo" />
+
+                    <mehdi.sakout.fancybuttons.FancyButton
+                        android:id="@+id/btn_cantidad_paralelo"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="3dp"
+                        fancy:fb_borderColor="#FFFFFF"
+                        fancy:fb_borderWidth="1dp"
+                        fancy:fb_defaultColor="@color/darkred"
+                        fancy:fb_focusColor="@color/blue"
+                        fancy:fb_fontIconResource="&#xf055;"
+                        fancy:fb_iconPosition="left"
+                        fancy:fb_radius="7dp"
+                        fancy:fb_text="Guardar"
+                        fancy:fb_textColor="#FFFFFF"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_alignBottom="@+id/sp_paralelo_co"
+                        android:layout_alignTop="@+id/sp_paralelo_co">
+
+                    </mehdi.sakout.fancybuttons.FancyButton>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+    </net.cachapa.expandablelayout.ExpandableLayout>
+
+    <TabHost
+        android:layout_width="200dip"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:id="@+id/tabhost"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/tab1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+
+</RelativeLayout>

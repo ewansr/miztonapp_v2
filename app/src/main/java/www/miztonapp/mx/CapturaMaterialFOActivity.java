@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -82,7 +81,7 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
         _id = extras.getString("id");
         cargar_orden();
 
-        spModem = (MaterialBetterSpinner) findViewById(R.id.sp_modem);
+        spModem = (MaterialBetterSpinner) findViewById(R.id.sp_modem_co);
         spModem.setEnabled(false);
         spFibra = (MaterialBetterSpinner) findViewById(R.id.sp_fibra);
         spFibra.setEnabled(false);

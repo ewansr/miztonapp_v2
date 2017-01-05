@@ -170,7 +170,7 @@
                 <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/sp_modem"
+                    android:id="@+id/sp_modem_co"
                     android:layout_below="@+id/tv_modem"
                     android:layout_alignLeft="@+id/tv_modem"
                     android:layout_alignStart="@+id/tv_modem"
@@ -182,7 +182,7 @@
                     android:text="Fibra acometida:"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/sp_modem"
+                    android:layout_below="@+id/sp_modem_co"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_marginLeft="16dp"
@@ -197,8 +197,8 @@
                     android:layout_below="@+id/tv_fibra"
                     android:layout_alignLeft="@+id/tv_fibra"
                     android:layout_alignStart="@+id/tv_fibra"
-                    android:layout_alignRight="@+id/sp_modem"
-                    android:layout_alignEnd="@+id/sp_modem"
+                    android:layout_alignRight="@+id/sp_modem_co"
+                    android:layout_alignEnd="@+id/sp_modem_co"
                     android:focusable="false" />
 
                 <TextView
