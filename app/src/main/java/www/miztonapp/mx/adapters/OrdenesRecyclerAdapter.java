@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import mehdi.sakout.fancybuttons.FancyButton;
+import www.miztonapp.mx.CapturaMaterialCOActivity;
 import www.miztonapp.mx.CapturaMaterialFOActivity;
 import www.miztonapp.mx.DetalleActivity;
 import www.miztonapp.mx.R;
@@ -165,15 +166,15 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
         public View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick( View v ) {
-            if (v.getId() == R.id.btn_subir){
-                abrir_galeria();
-            }
-            if (v.getId() == R.id.btn_cambiar) {
-                abrir_detalle(context);
-            }
-            if(v.getId() == R.id.btn_material){
-                abrir_captura_material();
-            }
+                if (v.getId() == R.id.btn_subir){
+                    abrir_galeria();
+                }
+                if (v.getId() == R.id.btn_cambiar) {
+                    abrir_detalle(context);
+                }
+                if(v.getId() == R.id.btn_material){
+                    abrir_captura_material(tipo_instalacion);
+                }
             }
         };
 
@@ -208,8 +209,13 @@ public class OrdenesRecyclerAdapter extends RecyclerView.Adapter<OrdenesRecycler
             ((Activity)context).startActivityForResult(intent, Constants.REQUEST_CODE);
         }
 
-        public void abrir_captura_material(){
-            Intent i = new Intent(context, CapturaMaterialFOActivity.class);
+        public void abrir_captura_material(String tipo_orden){
+            Intent i;
+            if (isEquals(tipo_orden,"FO")){
+                i = new Intent(context, CapturaMaterialFOActivity.class);
+            }else{
+                i = new Intent(context, CapturaMaterialCOActivity.class);
+            }
             i.putExtra("id", id);
             (context).startActivity(i);
             ((Activity)context).overridePendingTransition(R.anim.slide_in, R.anim.slide_out);

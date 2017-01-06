@@ -102,19 +102,19 @@ public class CapturaMaterialFOActivity extends AppCompatActivity {
         //Tab 1
         TabHost.TabSpec spec = host.newTabSpec("Principal");
         spec.setContent(R.id.tab1);
-        spec.setIndicator("Princ.");
+        spec.setIndicator("Básico");
         host.addTab(spec);
 
         //Tab 2
         spec = host.newTabSpec("Complementos");
         spec.setContent(R.id.tab2);
-        spec.setIndicator("Comp.");
+        spec.setIndicator("Otros");
         host.addTab(spec);
 
         //Tab 3
         spec = host.newTabSpec("Otros");
         spec.setContent(R.id.tab3);
-        spec.setIndicator("Otros");
+        spec.setIndicator("Ver más");
         host.addTab(spec);
 
         final ExpandableLayout expLayPrincipal = (ExpandableLayout) findViewById(R.id.expandable_principal);
